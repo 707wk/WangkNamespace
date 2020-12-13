@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("")>
 <Assembly: AssemblyCompany("GT-Soft Studio")>
 <Assembly: AssemblyProduct("Wangk.Hash")>
-<Assembly: AssemblyCopyright("Copyright © GT-soft studio")>
+<Assembly: AssemblyCopyright("Copyright © GT-Soft Studio")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
