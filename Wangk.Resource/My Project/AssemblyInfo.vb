@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("")>
 <Assembly: AssemblyCompany("GT-Soft Studio")>
 <Assembly: AssemblyProduct("Wangk.Resource")>
-<Assembly: AssemblyCopyright("Copyright ©  2020 GT-soft studio All Rights Reserved")>
+<Assembly: AssemblyCopyright("Copyright © GT-soft studio")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
@@ -32,4 +32,4 @@ Imports System.Runtime.InteropServices
 ' <Assembly: AssemblyVersion("1.0.*")>
 
 <Assembly: AssemblyVersion("1.0.0.0")>
-<Assembly: AssemblyFileVersion("1.0.2020.1211")>
+<Assembly: AssemblyFileVersion("1.0.2020.1213")>
