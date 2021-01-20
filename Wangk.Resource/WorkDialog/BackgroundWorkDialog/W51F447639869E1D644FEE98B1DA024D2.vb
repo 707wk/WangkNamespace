@@ -186,8 +186,6 @@ Public Class W51F447639869E1D644FEE98B1DA024D2
 
         BackgroundWorkAction(Me)
 
-        'Threading.Thread.Sleep(500)
-
     End Sub
 
     Private Sub BackgroundWorker1_RunWorkerCompleted(sender As Object, e As RunWorkerCompletedEventArgs) Handles BackgroundWorker1.RunWorkerCompleted
@@ -199,15 +197,6 @@ Public Class W51F447639869E1D644FEE98B1DA024D2
 
     End Sub
 
-    '''' <summary>
-    '''' 不转移焦点
-    '''' </summary>
-    'Protected Overrides ReadOnly Property ShowWithoutActivation As Boolean
-    '    Get
-    '        Return True
-    '    End Get
-    'End Property
-
     Public Sub New()
 
         ' 此调用是设计器所必需的。
@@ -218,17 +207,6 @@ Public Class W51F447639869E1D644FEE98B1DA024D2
         Me.Height -= InfoText.Height
 
     End Sub
-
-    'Private Shared BorderPen = New Pen(Color.FromArgb(148, 148, 148), 1)
-    'Private Sub W51F447639869E1D644FEE98B1DA024D2_Paint(sender As Object, e As PaintEventArgs) Handles Me.Paint
-    '    e.Graphics.DrawRectangle(BorderPen, 0, 0, Me.Width - 1, Me.Height - 1)
-    'End Sub
-
-    'Private Sub CloseLabel_Click(sender As Object, e As EventArgs) Handles CloseLabel.Click
-    '    If BackgroundWorker1.IsBusy Then
-    '        IsCancel = True
-    '    End If
-    'End Sub
 
     Private Sub CancelButton_Click(sender As Object, e As EventArgs) Handles CancelButton.Click
         If BackgroundWorker1.IsBusy Then

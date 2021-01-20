@@ -30,51 +30,12 @@ Public Class BackgroundWorkDialog
         End Set
     End Property
 
-    '''' <summary>
-    '''' 进度条是否显示为百分比
-    '''' </summary>
-    'Public Property IsPercent As Boolean
-    '    Get
-    '        Return ShowDialog.ProgressBar1.Style = Windows.Forms.ProgressBarStyle.Continuous
-    '    End Get
-    '    Set(ByVal value As Boolean)
-    '        If value Then
-    '            ShowDialog.ProgressBar1.Style = Windows.Forms.ProgressBarStyle.Continuous
-    '            ShowDialog.Label1.Visible = True
-
-    '        Else
-    '            ShowDialog.ProgressBar1.Style = Windows.Forms.ProgressBarStyle.Marquee
-    '            ShowDialog.Label1.Visible = False
-
-    '        End If
-
-    '    End Set
-
-    'End Property
-
-    '''' <summary>
-    '''' 进度条样式,更新为IsPercent属性
-    '''' </summary>
-    '<Obsolete>
-    'Public Property ProgressBarStyle As Windows.Forms.ProgressBarStyle
-    '    Get
-    '        Return ShowDialog.ProgressBar1.Style
-    '    End Get
-    '    Set
-    '        ShowDialog.ProgressBar1.Style = Value
-
-    '        ShowDialog.Label1.Visible = Value = Windows.Forms.ProgressBarStyle.Continuous
-
-    '    End Set
-    'End Property
-
     Private ShowDialog As W51F447639869E1D644FEE98B1DA024D2
 
     Public Sub New()
         ShowDialog = New W51F447639869E1D644FEE98B1DA024D2 With {
             .ShowIcon = False
         }
-        'Me.IsPercent = True
 
     End Sub
 
