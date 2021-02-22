@@ -111,12 +111,16 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Modules\ModuleBIN.vb" />
-    <Compile Include="Modules\ModuleCRC.vb" />
-    <Compile Include="Modules\ModuleDES.vb" />
-    <Compile Include="Modules\ModuleMD5.vb" />
-    <Compile Include="Modules\ModuleRSA.vb" />
-    <Compile Include="Modules\ModuleSHA.vb" />
+    <Compile Include="BINHelper.vb" />
+    <Compile Include="CRCHelper.vb" />
+    <Compile Include="DESHelper.vb" />
+    <Compile Include="MD5Helper.vb" />
+    <Compile Include="ModulesOld\ModuleBIN.vb" />
+    <Compile Include="ModulesOld\ModuleCRC.vb" />
+    <Compile Include="ModulesOld\ModuleDES.vb" />
+    <Compile Include="ModulesOld\ModuleMD5.vb" />
+    <Compile Include="ModulesOld\ModuleRSA.vb" />
+    <Compile Include="ModulesOld\ModuleSHA.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -132,6 +136,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="RSAHelper.vb" />
+    <Compile Include="SHAHelper.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">

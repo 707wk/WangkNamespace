@@ -1,7 +1,8 @@
 ﻿Imports System.Security.Cryptography
 Imports System.Text
 
-Public Module ModuleRSA
+Public Class RSAHelper
+
 #Region "RSA加密"
     ''' <summary>
     ''' RSA加密
@@ -9,7 +10,7 @@ Public Module ModuleRSA
     ''' <param name="Data">加密字符串</param>
     ''' <param name="PublicKey">公钥</param>
     ''' <returns></returns>
-    Public Function RSAEncrypt(Data As String, PublicKey As String) As String
+    Public Shared Function RSAEncrypt(Data As String, PublicKey As String) As String
         Dim tmpRSA As New RSACryptoServiceProvider
         '导入公钥
         tmpRSA.FromXmlString(PublicKey)
@@ -27,7 +28,7 @@ Public Module ModuleRSA
     ''' <param name="Data">解密字符串</param>
     ''' <param name="PrivateKey">私钥</param>
     ''' <returns></returns>
-    Public Function RSADecrypt(Data As String, PrivateKey As String) As String
+    Public Shared Function RSADecrypt(Data As String, PrivateKey As String) As String
         Dim tmpRSA As New RSACryptoServiceProvider
         '导入私钥
         tmpRSA.FromXmlString(PrivateKey)
@@ -37,4 +38,5 @@ Public Module ModuleRSA
         Return Encoding.UTF8.GetString(decryptData)
     End Function
 #End Region
-End Module
+
+End Class

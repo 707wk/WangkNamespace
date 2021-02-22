@@ -22,6 +22,97 @@ Wangk.Hash
   重写当前线程的 CurrentUICulture 属性。
 </summary>
 </member>
+<member name="M:Wangk.Hash.BINHelper.Hex2Bin(System.String)">
+ <summary>
+ 十六进制转二进制
+ </summary>
+</member>
+<member name="M:Wangk.Hash.BINHelper.Bin2Hex(System.Byte[])">
+ <summary>
+ 二进制转十六进制字符串
+ </summary>
+</member>
+<member name="M:Wangk.Hash.BINHelper.Bin2Hex(System.Byte[],System.Int32)">
+ <summary>
+ 二进制转十六进制字符串
+ </summary>
+</member>
+<member name="F:Wangk.Hash.CRCHelper.CRC16TABLE_HI">
+ <summary>
+ CRC16查找表高字节
+ </summary>
+</member>
+<member name="F:Wangk.Hash.CRCHelper.CRC16TABLE_LO">
+ <summary>
+ CRC16查找表低字节
+ </summary>
+</member>
+<member name="M:Wangk.Hash.CRCHelper.GetCRC16ModbusOld(System.Byte[],System.Int32)">
+ <summary>
+ 获取字节数组的CRC16校验[旧]
+ </summary>
+</member>
+<member name="M:Wangk.Hash.CRCHelper.GetCRC16ModbusOld(System.Byte[])">
+ <summary>
+ 获取字节数组的CRC16校验[旧]
+ </summary>
+</member>
+<member name="M:Wangk.Hash.CRCHelper.GetCRC16Modbus(System.Byte[],System.Int32)">
+ <summary>
+ 获取字节数组的CRC16校验
+ </summary>
+</member>
+<member name="M:Wangk.Hash.CRCHelper.GetCRC16Modbus(System.Byte[])">
+ <summary>
+ 获取字节数组的CRC16校验
+ </summary>
+</member>
+<member name="M:Wangk.Hash.DESHelper.EncryptDES(System.String,System.String,System.String)">
+ <summary>
+ DES加密
+ </summary>
+ <param name="SourceStr"></param>
+ <param name="myKey">8个字符</param>
+ <param name="myIV">8个字符</param>
+ <returns></returns>
+</member>
+<member name="M:Wangk.Hash.DESHelper.DecryptDES(System.String,System.String,System.String)">
+ <summary>
+ DES解密
+ </summary>
+ <param name="SourceStr"></param>
+ <param name="myKey">8个字符</param>
+ <param name="myIV">8个字符</param>
+ <returns></returns>
+</member>
+<member name="M:Wangk.Hash.DESHelper.EncryptTripleDES(System.String,System.String,System.String)">
+ <summary>
+ TripleDES加密
+ </summary>
+ <param name="SourceStr"></param>
+ <param name="myKey">24个字符</param>
+ <param name="myIV">24个字符</param>
+ <returns></returns>
+</member>
+<member name="M:Wangk.Hash.DESHelper.DecryptTripleDES(System.String,System.String,System.String)">
+ <summary>
+ TripleDES解密
+ </summary>
+ <param name="SourceStr"></param>
+ <param name="myKey">24个字符</param>
+ <param name="myIV">24个字符</param>
+ <returns></returns>
+</member>
+<member name="M:Wangk.Hash.MD5Helper.GetStr128MD5(System.String)">
+ <summary>
+ 获取字符串128位MD5值
+ </summary>
+</member>
+<member name="M:Wangk.Hash.MD5Helper.GetFile128MD5(System.String)">
+ <summary>
+ 获取文件128位MD5值
+ </summary>
+</member>
 <member name="M:Wangk.Hash.ModuleBIN.Hex2Bin(System.String)">
  <summary>
  十六进制转二进制
@@ -35,16 +126,6 @@ Wangk.Hash
 <member name="M:Wangk.Hash.ModuleBIN.Bin2Hex(System.Byte[],System.Int32)">
  <summary>
  二进制转十六进制字符串
- </summary>
-</member>
-<member name="F:Wangk.Hash.ModuleCRC.CRC16TABLE_HI">
- <summary>
- CRC16查找表高字节
- </summary>
-</member>
-<member name="F:Wangk.Hash.ModuleCRC.CRC16TABLE_LO">
- <summary>
- CRC16查找表低字节
  </summary>
 </member>
 <member name="M:Wangk.Hash.ModuleCRC.GetCRC16ModbusOld(System.Byte[],System.Int32)">
@@ -71,37 +152,21 @@ Wangk.Hash
  <summary>
  DES加密
  </summary>
- <param name="SourceStr"></param>
- <param name="myKey">8个字符</param>
- <param name="myIV">8个字符</param>
- <returns></returns>
 </member>
 <member name="M:Wangk.Hash.ModuleDES.DecryptDES(System.String,System.String,System.String)">
  <summary>
  DES解密
  </summary>
- <param name="SourceStr"></param>
- <param name="myKey">8个字符</param>
- <param name="myIV">8个字符</param>
- <returns></returns>
 </member>
 <member name="M:Wangk.Hash.ModuleDES.EncryptTripleDES(System.String,System.String,System.String)">
  <summary>
  TripleDES加密
  </summary>
- <param name="SourceStr"></param>
- <param name="myKey">24个字符</param>
- <param name="myIV">24个字符</param>
- <returns></returns>
 </member>
 <member name="M:Wangk.Hash.ModuleDES.DecryptTripleDES(System.String,System.String,System.String)">
  <summary>
  TripleDES解密
  </summary>
- <param name="SourceStr"></param>
- <param name="myKey">24个字符</param>
- <param name="myIV">24个字符</param>
- <returns></returns>
 </member>
 <member name="M:Wangk.Hash.ModuleMD5.GetStr128MD5(System.String)">
  <summary>
@@ -117,11 +182,31 @@ Wangk.Hash
  <summary>
  RSA加密
  </summary>
+</member>
+<member name="M:Wangk.Hash.ModuleRSA.RSADecrypt(System.String,System.String)">
+ <summary>
+ RSA解密
+ </summary>
+</member>
+<member name="M:Wangk.Hash.ModuleSHA.GetStrSHA512(System.String)">
+ <summary>
+ 获取字符串512位SHA值
+ </summary>
+</member>
+<member name="M:Wangk.Hash.ModuleSHA.GetFileSHA512(System.String)">
+ <summary>
+ 获取文件512位SHA值
+ </summary>
+</member>
+<member name="M:Wangk.Hash.RSAHelper.RSAEncrypt(System.String,System.String)">
+ <summary>
+ RSA加密
+ </summary>
  <param name="Data">加密字符串</param>
  <param name="PublicKey">公钥</param>
  <returns></returns>
 </member>
-<member name="M:Wangk.Hash.ModuleRSA.RSADecrypt(System.String,System.String)">
+<member name="M:Wangk.Hash.RSAHelper.RSADecrypt(System.String,System.String)">
  <summary>
  RSA解密
  </summary>
@@ -129,9 +214,14 @@ Wangk.Hash
  <param name="PrivateKey">私钥</param>
  <returns></returns>
 </member>
-<member name="M:Wangk.Hash.ModuleSHA.GetStrSHA512(System.String)">
+<member name="M:Wangk.Hash.SHAHelper.GetStrSHA512(System.String)">
  <summary>
  获取字符串512位SHA值
+ </summary>
+</member>
+<member name="M:Wangk.Hash.SHAHelper.GetFileSHA512(System.String)">
+ <summary>
+ 获取文件512位SHA值
  </summary>
 </member>
 </members>

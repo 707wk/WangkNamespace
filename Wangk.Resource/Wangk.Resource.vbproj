@@ -92,9 +92,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -117,13 +114,6 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppUpdateInfo\AppUpdateInfo.vb" />
-    <Compile Include="AppUpdateInfo\AppUpdateInfoForm.Designer.vb">
-      <DependentUpon>AppUpdateInfoForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="AppUpdateInfo\AppUpdateInfoForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="CheckBoxDataGridView.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -184,9 +174,6 @@
     <Compile Include="WorkDialog\WorkEventArgs.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="AppUpdateInfo\AppUpdateInfoForm.resx">
-      <DependentUpon>AppUpdateInfoForm.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="WorkDialog\BackgroundWorkDialog\W51F447639869E1D644FEE98B1DA024D2.resx">
       <DependentUpon>W51F447639869E1D644FEE98B1DA024D2.vb</DependentUpon>
     </EmbeddedResource>
@@ -216,9 +203,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{94E38DFF-614B-4CBD-B67C-F211BB35CE8B}" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="res\" />

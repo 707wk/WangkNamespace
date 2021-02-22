@@ -1,4 +1,5 @@
-﻿Public Module ModuleDES
+﻿Public Class DESHelper
+
 #Region "DES"
     ''' <summary>
     ''' DES加密
@@ -7,7 +8,7 @@
     ''' <param name="myKey">8个字符</param>
     ''' <param name="myIV">8个字符</param>
     ''' <returns></returns>
-    Public Function EncryptDES(ByVal SourceStr As String,
+    Public Shared Function EncryptDES(ByVal SourceStr As String,
                                ByVal myKey As String,
                                Optional ByVal myIV As String = "00000000") As String
         Dim des As New System.Security.Cryptography.DESCryptoServiceProvider 'DES算法
@@ -32,7 +33,7 @@
     ''' <param name="myKey">8个字符</param>
     ''' <param name="myIV">8个字符</param>
     ''' <returns></returns>
-    Public Function DecryptDES(ByVal SourceStr As String,
+    Public Shared Function DecryptDES(ByVal SourceStr As String,
                                ByVal myKey As String,
                                Optional ByVal myIV As String = "00000000") As String
         Dim des As New System.Security.Cryptography.DESCryptoServiceProvider 'DES算法
@@ -54,7 +55,7 @@
     ''' <param name="myKey">24个字符</param>
     ''' <param name="myIV">24个字符</param>
     ''' <returns></returns>
-    Public Function EncryptTripleDES(ByVal SourceStr As String,
+    Public Shared Function EncryptTripleDES(ByVal SourceStr As String,
                                      Optional ByVal myKey As String = "",
                                      Optional ByVal myIV As String = "00000000000000000000000000000000") As String
         Dim DES As New System.Security.Cryptography.TripleDESCryptoServiceProvider 'TripleDES算法
@@ -79,7 +80,7 @@
     ''' <param name="myKey">24个字符</param>
     ''' <param name="myIV">24个字符</param>
     ''' <returns></returns>
-    Public Function DecryptTripleDES(ByVal SourceStr As String,
+    Public Shared Function DecryptTripleDES(ByVal SourceStr As String,
                                      Optional ByVal myKey As String = "",
                                      Optional ByVal myIV As String = "00000000000000000000000000000000") As String
         Dim DES As New System.Security.Cryptography.TripleDESCryptoServiceProvider 'TripleDES算法
@@ -93,4 +94,4 @@
     End Function
 #End Region
 
-End Module
+End Class

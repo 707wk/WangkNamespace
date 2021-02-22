@@ -22,41 +22,6 @@ Wangk.Resource
   使用此强类型资源类的所有资源查找执行重写。
 </summary>
 </member>
-<member name="T:Wangk.Resource.AppUpdateInfo">
- <summary>
- 软件更新信息
- </summary>
-</member>
-<member name="F:Wangk.Resource.AppUpdateInfo.Version">
- <summary>
- 版本号(格式: 1.0.0.0)
- </summary>
-</member>
-<member name="F:Wangk.Resource.AppUpdateInfo.UpdateInfo">
- <summary>
- 更新说明
- </summary>
-</member>
-<member name="F:Wangk.Resource.AppUpdateInfo.DownloadPath">
- <summary>
- 下载地址
- </summary>
-</member>
-<member name="F:Wangk.Resource.AppUpdateInfo.MustUpdate">
- <summary>
- 是否必须更新
- </summary>
-</member>
-<member name="F:Wangk.Resource.AppUpdateInfoForm.OldVersion">
- <summary>
- 当前版本号(格式: 1.0.0.0)
- </summary>
-</member>
-<member name="F:Wangk.Resource.AppUpdateInfoForm.AppUpdateInfoPath">
- <summary>
- 更新检测地址
- </summary>
-</member>
 <member name="T:Wangk.Resource.CheckBoxDataGridView">
  <summary>
  带多选的DataGridView控件

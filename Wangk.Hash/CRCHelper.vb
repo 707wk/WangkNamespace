@@ -1,8 +1,9 @@
-﻿Public Module ModuleCRC
+﻿Public Class CRCHelper
+
     ''' <summary>
     ''' CRC16查找表高字节
     ''' </summary>
-    Private ReadOnly CRC16TABLE_HI() As Byte = {
+    Private Shared ReadOnly CRC16TABLE_HI() As Byte = {
         &H0, &HC1, &H81, &H40, &H1, &HC0, &H80, &H41, &H1, &HC0, &H80, &H41, &H0, &HC1, &H81, &H40,
         &H1, &HC0, &H80, &H41, &H0, &HC1, &H81, &H40, &H0, &HC1, &H81, &H40, &H1, &HC0, &H80, &H41,
         &H1, &HC0, &H80, &H41, &H0, &HC1, &H81, &H40, &H0, &HC1, &H81, &H40, &H1, &HC0, &H80, &H41,
@@ -23,7 +24,7 @@
     ''' <summary>
     ''' CRC16查找表低字节
     ''' </summary>
-    Private ReadOnly CRC16TABLE_LO() As Byte = {
+    Private Shared ReadOnly CRC16TABLE_LO() As Byte = {
         &H0, &HC0, &HC1, &H1, &HC3, &H3, &H2, &HC2, &HC6, &H6, &H7, &HC7, &H5, &HC5, &HC4, &H4,
         &HCC, &HC, &HD, &HCD, &HF, &HCF, &HCE, &HE, &HA, &HCA, &HCB, &HB, &HC9, &H9, &H8, &HC8,
         &HD8, &H18, &H19, &HD9, &H1B, &HDB, &HDA, &H1A, &H1E, &HDE, &HDF, &H1F, &HDD, &H1D, &H1C, &HDC,
@@ -44,7 +45,7 @@
     ''' <summary>
     ''' 获取字节数组的CRC16校验[旧]
     ''' </summary>
-    Public Function GetCRC16ModbusOld(ByVal array As Byte(), ByVal length As Integer) As UShort
+    Public Shared Function GetCRC16ModbusOld(ByVal array As Byte(), ByVal length As Integer) As UShort
         Dim crc As UShort = &HFFFF
         For i As Integer = 0 To length - 1
             crc = crc Xor array(i)
@@ -63,7 +64,7 @@
     ''' <summary>
     ''' 获取字节数组的CRC16校验[旧]
     ''' </summary>
-    Public Function GetCRC16ModbusOld(ByVal array As Byte()) As UShort
+    Public Shared Function GetCRC16ModbusOld(ByVal array As Byte()) As UShort
         Dim crc As UShort = &HFFFF
         For i As Integer = 0 To array.Length - 1
             crc = crc Xor array(i)
@@ -82,7 +83,7 @@
     ''' <summary>
     ''' 获取字节数组的CRC16校验
     ''' </summary>
-    Public Function GetCRC16Modbus(ByVal array As Byte(), ByVal length As Integer) As UShort
+    Public Shared Function GetCRC16Modbus(ByVal array As Byte(), ByVal length As Integer) As UShort
         Dim hight As UShort = &HFF
         Dim low As UShort = &HFF
 
@@ -98,7 +99,7 @@
     ''' <summary>
     ''' 获取字节数组的CRC16校验
     ''' </summary>
-    Public Function GetCRC16Modbus(ByVal array As Byte()) As UShort
+    Public Shared Function GetCRC16Modbus(ByVal array As Byte()) As UShort
         Dim hight As UShort = &HFF
         Dim low As UShort = &HFF
 
@@ -110,4 +111,5 @@
 
         Return hight << 8 Or low
     End Function
-End Module
+
+End Class
