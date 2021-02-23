@@ -9,8 +9,9 @@
     ''' <param name="myIV">8个字符</param>
     ''' <returns></returns>
     Public Shared Function EncryptDES(ByVal SourceStr As String,
-                               ByVal myKey As String,
-                               Optional ByVal myIV As String = "00000000") As String
+                                      ByVal myKey As String,
+                                      Optional ByVal myIV As String = "00000000") As String
+
         Dim des As New System.Security.Cryptography.DESCryptoServiceProvider 'DES算法
         Dim inputByteArray As Byte()
         inputByteArray = System.Text.Encoding.Default.GetBytes(SourceStr)
@@ -23,7 +24,9 @@
         sw.Flush()
         cs.FlushFinalBlock()
         ms.Flush()
+
         Return Convert.ToBase64String(ms.GetBuffer(), 0, ms.Length)
+
     End Function
 
     ''' <summary>
@@ -34,8 +37,9 @@
     ''' <param name="myIV">8个字符</param>
     ''' <returns></returns>
     Public Shared Function DecryptDES(ByVal SourceStr As String,
-                               ByVal myKey As String,
-                               Optional ByVal myIV As String = "00000000") As String
+                                      ByVal myKey As String,
+                                      Optional ByVal myIV As String = "00000000") As String
+
         Dim des As New System.Security.Cryptography.DESCryptoServiceProvider 'DES算法
         des.Key = System.Text.Encoding.UTF8.GetBytes(myKey) 'myKey DES用8个字符，TripleDES要24个字符
         des.IV = System.Text.Encoding.UTF8.GetBytes(myIV) 'myIV DES用8个字符，TripleDES要24个字符
@@ -43,7 +47,9 @@
         Dim ms As New System.IO.MemoryStream(buffer)
         Dim cs As New System.Security.Cryptography.CryptoStream(ms, des.CreateDecryptor(), System.Security.Cryptography.CryptoStreamMode.Read)
         Dim sr As New System.IO.StreamReader(cs)
+
         Return sr.ReadToEnd()
+
     End Function
 #End Region
 
@@ -56,8 +62,9 @@
     ''' <param name="myIV">24个字符</param>
     ''' <returns></returns>
     Public Shared Function EncryptTripleDES(ByVal SourceStr As String,
-                                     Optional ByVal myKey As String = "",
-                                     Optional ByVal myIV As String = "00000000000000000000000000000000") As String
+                                            Optional ByVal myKey As String = "",
+                                            Optional ByVal myIV As String = "00000000000000000000000000000000") As String
+
         Dim DES As New System.Security.Cryptography.TripleDESCryptoServiceProvider 'TripleDES算法
         Dim inputByteArray As Byte()
         inputByteArray = System.Text.Encoding.Default.GetBytes(SourceStr)
@@ -70,7 +77,9 @@
         sw.Flush()
         cs.FlushFinalBlock()
         ms.Flush()
+
         Return Convert.ToBase64String(ms.GetBuffer(), 0, ms.Length)
+
     End Function
 
     ''' <summary>
@@ -81,8 +90,9 @@
     ''' <param name="myIV">24个字符</param>
     ''' <returns></returns>
     Public Shared Function DecryptTripleDES(ByVal SourceStr As String,
-                                     Optional ByVal myKey As String = "",
-                                     Optional ByVal myIV As String = "00000000000000000000000000000000") As String
+                                            Optional ByVal myKey As String = "",
+                                            Optional ByVal myIV As String = "00000000000000000000000000000000") As String
+
         Dim DES As New System.Security.Cryptography.TripleDESCryptoServiceProvider 'TripleDES算法
         DES.Key = System.Text.Encoding.UTF8.GetBytes(myKey) 'myKey DES用8个字符，TripleDES要24个字符
         DES.IV = System.Text.Encoding.UTF8.GetBytes(myIV) 'myIV DES用8个字符，TripleDES要24个字符
@@ -90,7 +100,9 @@
         Dim ms As New System.IO.MemoryStream(buffer)
         Dim cs As New System.Security.Cryptography.CryptoStream(ms, DES.CreateDecryptor(), System.Security.Cryptography.CryptoStreamMode.Read)
         Dim sr As New System.IO.StreamReader(cs)
+
         Return sr.ReadToEnd()
+
     End Function
 #End Region
 

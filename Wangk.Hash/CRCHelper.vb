@@ -46,6 +46,7 @@
     ''' 获取字节数组的CRC16校验[旧]
     ''' </summary>
     Public Shared Function GetCRC16ModbusOld(ByVal array As Byte(), ByVal length As Integer) As UShort
+
         Dim crc As UShort = &HFFFF
         For i As Integer = 0 To length - 1
             crc = crc Xor array(i)
@@ -58,13 +59,16 @@
                 End If
             Next j
         Next i
+
         Return crc
+
     End Function
 
     ''' <summary>
     ''' 获取字节数组的CRC16校验[旧]
     ''' </summary>
     Public Shared Function GetCRC16ModbusOld(ByVal array As Byte()) As UShort
+
         Dim crc As UShort = &HFFFF
         For i As Integer = 0 To array.Length - 1
             crc = crc Xor array(i)
@@ -77,13 +81,16 @@
                 End If
             Next j
         Next i
+
         Return crc
+
     End Function
 
     ''' <summary>
     ''' 获取字节数组的CRC16校验
     ''' </summary>
     Public Shared Function GetCRC16Modbus(ByVal array As Byte(), ByVal length As Integer) As UShort
+
         Dim hight As UShort = &HFF
         Dim low As UShort = &HFF
 
@@ -94,12 +101,14 @@
         Next
 
         Return hight << 8 Or low
+
     End Function
 
     ''' <summary>
     ''' 获取字节数组的CRC16校验
     ''' </summary>
     Public Shared Function GetCRC16Modbus(ByVal array As Byte()) As UShort
+
         Dim hight As UShort = &HFF
         Dim low As UShort = &HFF
 
@@ -110,6 +119,7 @@
         Next
 
         Return hight << 8 Or low
+
     End Function
 
 End Class
