@@ -54,16 +54,6 @@ Wangk.Resource
  关闭终端
  </summary>
 </member>
-<member name="T:Wangk.Resource.IDHelper">
- <summary>
- ID辅助类
- </summary>
-</member>
-<member name="P:Wangk.Resource.IDHelper.NewID">
- <summary>
- 创建192位ID
- </summary>
-</member>
 <member name="P:Wangk.Resource.InputTextDialog.Text">
  <summary>
  窗口标题

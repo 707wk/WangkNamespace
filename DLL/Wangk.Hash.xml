@@ -103,6 +103,16 @@ Wangk.Hash
  <param name="myIV">24个字符</param>
  <returns></returns>
 </member>
+<member name="T:Wangk.Hash.IDHelper">
+ <summary>
+ ID辅助类
+ </summary>
+</member>
+<member name="P:Wangk.Hash.IDHelper.NewID">
+ <summary>
+ 创建192位ID
+ </summary>
+</member>
 <member name="M:Wangk.Hash.MD5Helper.GetStr128MD5(System.String)">
  <summary>
  获取字符串128位MD5值
@@ -111,91 +121,6 @@ Wangk.Hash
 <member name="M:Wangk.Hash.MD5Helper.GetFile128MD5(System.String)">
  <summary>
  获取文件128位MD5值
- </summary>
-</member>
-<member name="M:Wangk.Hash.ModuleBIN.Hex2Bin(System.String)">
- <summary>
- 十六进制转二进制
- </summary>
-</member>
-<member name="M:Wangk.Hash.ModuleBIN.Bin2Hex(System.Byte[])">
- <summary>
- 二进制转十六进制字符串
- </summary>
-</member>
-<member name="M:Wangk.Hash.ModuleBIN.Bin2Hex(System.Byte[],System.Int32)">
- <summary>
- 二进制转十六进制字符串
- </summary>
-</member>
-<member name="M:Wangk.Hash.ModuleCRC.GetCRC16ModbusOld(System.Byte[],System.Int32)">
- <summary>
- 获取字节数组的CRC16校验[旧]
- </summary>
-</member>
-<member name="M:Wangk.Hash.ModuleCRC.GetCRC16ModbusOld(System.Byte[])">
- <summary>
- 获取字节数组的CRC16校验[旧]
- </summary>
-</member>
-<member name="M:Wangk.Hash.ModuleCRC.GetCRC16Modbus(System.Byte[],System.Int32)">
- <summary>
- 获取字节数组的CRC16校验
- </summary>
-</member>
-<member name="M:Wangk.Hash.ModuleCRC.GetCRC16Modbus(System.Byte[])">
- <summary>
- 获取字节数组的CRC16校验
- </summary>
-</member>
-<member name="M:Wangk.Hash.ModuleDES.EncryptDES(System.String,System.String,System.String)">
- <summary>
- DES加密
- </summary>
-</member>
-<member name="M:Wangk.Hash.ModuleDES.DecryptDES(System.String,System.String,System.String)">
- <summary>
- DES解密
- </summary>
-</member>
-<member name="M:Wangk.Hash.ModuleDES.EncryptTripleDES(System.String,System.String,System.String)">
- <summary>
- TripleDES加密
- </summary>
-</member>
-<member name="M:Wangk.Hash.ModuleDES.DecryptTripleDES(System.String,System.String,System.String)">
- <summary>
- TripleDES解密
- </summary>
-</member>
-<member name="M:Wangk.Hash.ModuleMD5.GetStr128MD5(System.String)">
- <summary>
- 获取字符串128位MD5值
- </summary>
-</member>
-<member name="M:Wangk.Hash.ModuleMD5.GetFile128MD5(System.String)">
- <summary>
- 获取文件128位MD5值
- </summary>
-</member>
-<member name="M:Wangk.Hash.ModuleRSA.RSAEncrypt(System.String,System.String)">
- <summary>
- RSA加密
- </summary>
-</member>
-<member name="M:Wangk.Hash.ModuleRSA.RSADecrypt(System.String,System.String)">
- <summary>
- RSA解密
- </summary>
-</member>
-<member name="M:Wangk.Hash.ModuleSHA.GetStrSHA512(System.String)">
- <summary>
- 获取字符串512位SHA值
- </summary>
-</member>
-<member name="M:Wangk.Hash.ModuleSHA.GetFileSHA512(System.String)">
- <summary>
- 获取文件512位SHA值
  </summary>
 </member>
 <member name="M:Wangk.Hash.RSAHelper.RSAEncrypt(System.String,System.String)">

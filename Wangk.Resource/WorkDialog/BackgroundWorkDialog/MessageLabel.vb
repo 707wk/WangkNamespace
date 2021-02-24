@@ -36,7 +36,7 @@ Public Class MessageLabel
 
         If sender IsNot Nothing Then
             StrLen += 1
-            StrLen = StrLen Mod 7
+            StrLen = StrLen Mod 4
         End If
 
     End Sub

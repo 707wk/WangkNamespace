@@ -118,7 +118,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="ConsoleDebug.vb" />
-    <Compile Include="IDHelper.vb" />
     <Compile Include="InputBox\InputTextDialog.vb" />
     <Compile Include="MultiLanguage\MultiLanguageHelper.vb" />
     <Compile Include="Result\ResultMsg.vb" />
