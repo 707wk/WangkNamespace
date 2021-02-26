@@ -54,6 +54,7 @@ Public Class BackgroundWorkDialog
     ''' <param name="args">传入的参数</param>
     Public Sub Start(backgroundWorkAction As Action(Of BackgroundWorkEventArgs),
                      Optional args As Object = Nothing)
+
         ShowDialog.Args = args
         ShowDialog.Start(backgroundWorkAction)
     End Sub
