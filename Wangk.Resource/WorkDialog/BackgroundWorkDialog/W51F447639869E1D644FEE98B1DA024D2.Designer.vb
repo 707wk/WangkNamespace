@@ -25,8 +25,8 @@ Partial Class W51F447639869E1D644FEE98B1DA024D2
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.MessageLabel1 = New Wangk.Resource.MessageLabel()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.InfoText = New System.Windows.Forms.TextBox()
         Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.CancelButton = New System.Windows.Forms.Button()
@@ -66,6 +66,18 @@ Partial Class W51F447639869E1D644FEE98B1DA024D2
         Me.ProgressBar1.Step = 0
         Me.ProgressBar1.TabIndex = 5
         '
+        'MessageLabel1
+        '
+        Me.MessageLabel1.AutoSize = True
+        Me.MessageLabel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.MessageLabel1.Location = New System.Drawing.Point(3, 0)
+        Me.MessageLabel1.Name = "MessageLabel1"
+        Me.MessageLabel1.Size = New System.Drawing.Size(524, 78)
+        Me.MessageLabel1.SourceText = Nothing
+        Me.MessageLabel1.TabIndex = 7
+        Me.MessageLabel1.Text = " .."
+        Me.MessageLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
         'Label1
         '
         Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -78,18 +90,6 @@ Partial Class W51F447639869E1D644FEE98B1DA024D2
         Me.Label1.TabIndex = 6
         Me.Label1.Text = "0%"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'MessageLabel1
-        '
-        Me.MessageLabel1.AutoSize = True
-        Me.MessageLabel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.MessageLabel1.Location = New System.Drawing.Point(3, 0)
-        Me.MessageLabel1.Name = "MessageLabel1"
-        Me.MessageLabel1.Size = New System.Drawing.Size(524, 78)
-        Me.MessageLabel1.SourceText = Nothing
-        Me.MessageLabel1.TabIndex = 7
-        Me.MessageLabel1.Text = " ....."
-        Me.MessageLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'InfoText
         '

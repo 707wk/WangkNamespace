@@ -261,6 +261,52 @@ Public Class CheckBoxDataGridView
     End Sub
 #End Region
 
+    Private Sub CheckBoxDataGridView_CellPainting(sender As Object, e As DataGridViewCellPaintingEventArgs) Handles Me.CellPainting
+
+        If e.RowIndex < 0 OrElse
+            e.ColumnIndex < 0 Then
+            Exit Sub
+        End If
+
+        If TypeOf Me.Columns(e.ColumnIndex) IsNot CheckBoxDataGridViewButtonColumn Then
+            Exit Sub
+        End If
+
+        Dim tmpCheckBoxDataGridViewButtonColumn As CheckBoxDataGridViewButtonColumn = Me.Columns(e.ColumnIndex)
+
+        If e.RowIndex Mod 2 Then
+            e.Graphics.FillRectangle(New SolidBrush(Me.AlternatingRowsDefaultCellStyle.BackColor), e.CellBounds)
+        Else
+            e.Graphics.FillRectangle(New SolidBrush(Me.DefaultCellStyle.BackColor), e.CellBounds)
+        End If
+
+        If e.Value IsNot Nothing Then
+            Dim tmpFontSize = e.Graphics.MeasureString("品号", Me.Font)
+
+            '背景描边
+            'e.Graphics.DrawRectangle(tmpCheckBoxDataGridViewButtonColumn.BorderColorPen,
+            '                         New Rectangle(e.CellBounds.X + 2,
+            '                                       e.CellBounds.Y + (e.CellBounds.Height - tmpFontSize.Height - 4) / 2,
+            '                                       e.CellBounds.Width - 4,
+            '                                       tmpFontSize.Height + 4))
+
+            '背景填充
+            e.Graphics.FillRectangle(tmpCheckBoxDataGridViewButtonColumn.BackColorBrush,
+                                     New Rectangle(e.CellBounds.X + 2,
+                                                   e.CellBounds.Y + (e.CellBounds.Height - tmpFontSize.Height - 6) / 2,
+                                                   e.CellBounds.Width - 4,
+                                                   tmpFontSize.Height + 6))
+            e.Graphics.DrawString(e.Value,
+                                  Me.Font,
+                                  tmpCheckBoxDataGridViewButtonColumn.ForeColorBrush,
+                                  e.CellBounds,
+                                  tmpCheckBoxDataGridViewButtonColumn.ValueStringFormat)
+        End If
+
+        e.Handled = True
+
+    End Sub
+
     ''' <summary>
     ''' 获取或设置一个值，该值指示是否显示包含行标题的列
     ''' 重新声明以解决表头多选框位置不动的问题

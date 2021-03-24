@@ -122,9 +122,10 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CheckBoxDataGridView.vb">
+    <Compile Include="CheckBoxDataGridView\CheckBoxDataGridView.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="CheckBoxDataGridView\CheckBoxDataGridViewButtonColumn.vb" />
     <Compile Include="ConsoleDebug.vb" />
     <Compile Include="InputBox\InputTextDialog.vb" />
     <Compile Include="MultiLanguage\MultiLanguageHelper.vb" />

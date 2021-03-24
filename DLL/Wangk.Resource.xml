@@ -34,6 +34,26 @@ Wangk.Resource
  </summary>
  <returns></returns>
 </member>
+<member name="P:Wangk.Resource.CheckBoxDataGridViewButtonColumn.ForeColor">
+ <summary>
+ 字体颜色
+ </summary>
+</member>
+<member name="P:Wangk.Resource.CheckBoxDataGridViewButtonColumn.ForeColorBrush">
+ <summary>
+ 字体颜色画刷
+ </summary>
+</member>
+<member name="P:Wangk.Resource.CheckBoxDataGridViewButtonColumn.BackColorBrush">
+ <summary>
+ 背景颜色画刷
+ </summary>
+</member>
+<member name="P:Wangk.Resource.CheckBoxDataGridViewButtonColumn.BorderColorPen">
+ <summary>
+ 颜色画笔
+ </summary>
+</member>
 <member name="T:Wangk.Resource.ConsoleDebug">
  <summary>
  终端调试
@@ -67,6 +87,11 @@ Wangk.Resource
 <member name="P:Wangk.Resource.InputTextDialog.PasswordChar">
  <summary>
  是否输入密码
+ </summary>
+</member>
+<member name="P:Wangk.Resource.InputTextDialog.MaxLength">
+ <summary>
+ 输入的最大字符数
  </summary>
 </member>
 <member name="P:Wangk.Resource.InputTextDialog.Value">
@@ -297,6 +322,17 @@ Wangk.Resource
  <summary>
  是否执行完毕
  </summary>
+</member>
+<member name="M:Wangk.Resource.TopPanel.Write(System.String)">
+ <summary>
+ 输出提示
+ </summary>
+</member>
+<member name="M:Wangk.Resource.Wlp32chfkxQcoOeynhOr200aiM2YUx137.Write(System.String)">
+ <summary>
+ 输出提示
+ </summary>
+ <param name="msg">输出信息</param>
 </member>
 <member name="T:Wangk.Resource.UIWorkDialog">
  <summary>

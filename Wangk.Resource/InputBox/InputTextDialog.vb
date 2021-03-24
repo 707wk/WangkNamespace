@@ -39,6 +39,23 @@
     End Property
 
     ''' <summary>
+    ''' 输入的最大字符数
+    ''' </summary>
+    Public Property MaxLength As Integer
+        Get
+            Return _ShowDialog.TextBox1.MaxLength
+        End Get
+        Set(ByVal value As Integer)
+
+            If value > 0 AndAlso
+                value < Integer.MaxValue Then
+                _ShowDialog.TextBox1.MaxLength = value
+            End If
+
+        End Set
+    End Property
+
+    ''' <summary>
     ''' 输入的字符串
     ''' </summary>
     Public ReadOnly Property Value As String
@@ -54,11 +71,16 @@
         _ShowDialog.ShowIcon = False
     End Sub
 
-    Public Function ShowDialog(Optional OKButtonText As String = "OK",
-                               Optional CancelButtonText As String = "Cancel") As Windows.Forms.DialogResult
+    Public Function ShowDialog(Optional OKButtonText As String = Nothing,
+                               Optional CancelButtonText As String = Nothing) As Windows.Forms.DialogResult
         _ShowDialog.TextBox1.Clear()
-        _ShowDialog.Button1.Text = OKButtonText
-        _ShowDialog.Button2.Text = CancelButtonText
+
+        If Not String.IsNullOrWhiteSpace(OKButtonText) Then
+            _ShowDialog.Button1.Text = OKButtonText
+        End If
+        If Not String.IsNullOrWhiteSpace(CancelButtonText) Then
+            _ShowDialog.Button2.Text = CancelButtonText
+        End If
 
         Return _ShowDialog.ShowDialog
     End Function

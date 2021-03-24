@@ -27,8 +27,8 @@ Public Class TopPanel
 
     Public Sub New()
         ShowControl = New Label
-        ShowControl.AutoSize = True
-        'ShowControl.Size = New Size(240, 32)
+        ShowControl.AutoSize = False
+        ShowControl.Size = New Size(400, 60)
 
         ShowPanel = New Wlp32chfkxQcoOeynhOr200aiM2YUx137
         ShowPanel.Dock = DockStyle.Fill
@@ -38,7 +38,8 @@ Public Class TopPanel
         ShowControl.BackColor = Color.FromArgb(71, 71, 71)
         ShowControl.ForeColor = Color.White
         ShowControl.BorderStyle = BorderStyle.FixedSingle
-        'ShowControl.TextAlign = ContentAlignment.MiddleLeft
+        ShowControl.TextAlign = ContentAlignment.MiddleLeft
+        ShowControl.AutoEllipsis = True
         ShowControl.Dock = DockStyle.None
         ShowControl.Anchor = AnchorStyles.None
         'ShowControl.Location = New Point(0, 0)
@@ -67,12 +68,12 @@ Public Class TopPanel
 
     End Sub
 
-    '''' <summary>
-    '''' 输出提示
-    '''' </summary>
-    'Public Sub Write(msg As String)
-    '    ShowPanel.Write(msg)
-    'End Sub
+    ''' <summary>
+    ''' 输出提示
+    ''' </summary>
+    Public Sub Write(msg As String)
+        ShowPanel.Write(msg)
+    End Sub
 
     Public Sub Dispose() Implements IDisposable.Dispose
 
