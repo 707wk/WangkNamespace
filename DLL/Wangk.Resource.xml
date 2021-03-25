@@ -27,6 +27,11 @@ Wangk.Resource
  带多选的DataGridView控件
  </summary>
 </member>
+<member name="F:Wangk.Resource.CheckBoxDataGridView.RectangleRadius">
+ <summary>
+ 圆角半径(像素)
+ </summary>
+</member>
 <member name="P:Wangk.Resource.CheckBoxDataGridView.RowHeadersVisible">
  <summary>
  获取或设置一个值，该值指示是否显示包含行标题的列

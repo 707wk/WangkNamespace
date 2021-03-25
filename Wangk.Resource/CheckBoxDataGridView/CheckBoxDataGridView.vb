@@ -1,4 +1,5 @@
 ﻿Imports System.Drawing
+Imports System.Drawing.Drawing2D
 Imports System.Windows.Forms
 
 ''' <summary>
@@ -261,6 +262,11 @@ Public Class CheckBoxDataGridView
     End Sub
 #End Region
 
+    ''' <summary>
+    ''' 圆角半径(像素)
+    ''' </summary>
+    Private Const RectangleRadius = 2
+
     Private Sub CheckBoxDataGridView_CellPainting(sender As Object, e As DataGridViewCellPaintingEventArgs) Handles Me.CellPainting
 
         If e.RowIndex < 0 OrElse
@@ -283,24 +289,42 @@ Public Class CheckBoxDataGridView
         If e.Value IsNot Nothing Then
             Dim tmpFontSize = e.Graphics.MeasureString("品号", Me.Font)
 
-            '背景描边
-            'e.Graphics.DrawRectangle(tmpCheckBoxDataGridViewButtonColumn.BorderColorPen,
-            '                         New Rectangle(e.CellBounds.X + 2,
-            '                                       e.CellBounds.Y + (e.CellBounds.Height - tmpFontSize.Height - 4) / 2,
-            '                                       e.CellBounds.Width - 4,
-            '                                       tmpFontSize.Height + 4))
+            Dim tmpRectangle = New Rectangle(e.CellBounds.X + 2,
+                                            e.CellBounds.Y + (e.CellBounds.Height - tmpFontSize.Height - 6) / 2,
+                                            e.CellBounds.Width - 4,
+                                            tmpFontSize.Height + 6)
 
-            '背景填充
-            e.Graphics.FillRectangle(tmpCheckBoxDataGridViewButtonColumn.BackColorBrush,
-                                     New Rectangle(e.CellBounds.X + 2,
-                                                   e.CellBounds.Y + (e.CellBounds.Height - tmpFontSize.Height - 6) / 2,
-                                                   e.CellBounds.Width - 4,
-                                                   tmpFontSize.Height + 6))
+            ''背景描边
+            'e.Graphics.DrawRectangle(tmpCheckBoxDataGridViewButtonColumn.BorderColorPen, tmpRectangle)
+
+            ''背景填充
+            'e.Graphics.FillRectangle(tmpCheckBoxDataGridViewButtonColumn.BackColorBrush, tmpRectangle)
+
+            '圆角矩形
+            Dim myPath = New GraphicsPath()
+            myPath.StartFigure()
+            myPath.AddArc(New Rectangle(New Point(tmpRectangle.X, tmpRectangle.Y), New Size(2 * RectangleRadius, 2 * RectangleRadius)), 180, 90)
+            myPath.AddLine(New Point(tmpRectangle.X + RectangleRadius, tmpRectangle.Y), New Point(tmpRectangle.Right - RectangleRadius, tmpRectangle.Y))
+            myPath.AddArc(New Rectangle(New Point(tmpRectangle.Right - 2 * RectangleRadius, tmpRectangle.Y), New Size(2 * RectangleRadius, 2 * RectangleRadius)), 270, 90)
+            myPath.AddLine(New Point(tmpRectangle.Right, tmpRectangle.Y + RectangleRadius), New Point(tmpRectangle.Right, tmpRectangle.Bottom - RectangleRadius))
+            myPath.AddArc(New Rectangle(New Point(tmpRectangle.Right - 2 * RectangleRadius, tmpRectangle.Bottom - 2 * RectangleRadius), New Size(2 * RectangleRadius, 2 * RectangleRadius)), 0, 90)
+            myPath.AddLine(New Point(tmpRectangle.Right - RectangleRadius, tmpRectangle.Bottom), New Point(tmpRectangle.X + RectangleRadius, tmpRectangle.Bottom))
+            myPath.AddArc(New Rectangle(New Point(tmpRectangle.X, tmpRectangle.Bottom - 2 * RectangleRadius), New Size(2 * RectangleRadius, 2 * RectangleRadius)), 90, 90)
+            myPath.AddLine(New Point(tmpRectangle.X, tmpRectangle.Bottom - RectangleRadius), New Point(tmpRectangle.X, tmpRectangle.Y + RectangleRadius))
+            myPath.CloseFigure()
+            '开启抗锯齿
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias
+
+            e.Graphics.FillPath(tmpCheckBoxDataGridViewButtonColumn.BackColorBrush, myPath)
+
             e.Graphics.DrawString(e.Value,
                                   Me.Font,
                                   tmpCheckBoxDataGridViewButtonColumn.ForeColorBrush,
                                   e.CellBounds,
                                   tmpCheckBoxDataGridViewButtonColumn.ValueStringFormat)
+            '关闭抗锯齿
+            e.Graphics.SmoothingMode = SmoothingMode.Default
+
         End If
 
         e.Handled = True
