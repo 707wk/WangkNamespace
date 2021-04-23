@@ -265,7 +265,7 @@ Public Class CheckBoxDataGridView
     ''' <summary>
     ''' 圆角半径(像素)
     ''' </summary>
-    Private Const RectangleRadius = 2
+    Private Const RectangleRadius = 1
 
     Private Sub CheckBoxDataGridView_CellPainting(sender As Object, e As DataGridViewCellPaintingEventArgs) Handles Me.CellPainting
 
@@ -287,12 +287,12 @@ Public Class CheckBoxDataGridView
         End If
 
         If e.Value IsNot Nothing Then
-            Dim tmpFontSize = e.Graphics.MeasureString("品号", Me.Font)
+            'Dim tmpFontSize = e.Graphics.MeasureString(e.Value, Me.Font)
 
             Dim tmpRectangle = New Rectangle(e.CellBounds.X + 2,
-                                            e.CellBounds.Y + (e.CellBounds.Height - tmpFontSize.Height - 6) / 2,
-                                            e.CellBounds.Width - 4,
-                                            tmpFontSize.Height + 6)
+                                             e.CellBounds.Y + 3,
+                                             e.CellBounds.Width - 4 - 1,
+                                             e.CellBounds.Height - 6 - 1)
 
             ''背景描边
             'e.Graphics.DrawRectangle(tmpCheckBoxDataGridViewButtonColumn.BorderColorPen, tmpRectangle)
@@ -320,7 +320,7 @@ Public Class CheckBoxDataGridView
             e.Graphics.DrawString(e.Value,
                                   Me.Font,
                                   tmpCheckBoxDataGridViewButtonColumn.ForeColorBrush,
-                                  e.CellBounds,
+                                  tmpRectangle,
                                   tmpCheckBoxDataGridViewButtonColumn.ValueStringFormat)
             '关闭抗锯齿
             e.Graphics.SmoothingMode = SmoothingMode.Default

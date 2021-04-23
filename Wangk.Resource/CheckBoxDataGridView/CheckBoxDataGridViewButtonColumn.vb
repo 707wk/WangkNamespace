@@ -2,7 +2,7 @@
 Imports System.Windows.Forms
 
 Public Class CheckBoxDataGridViewButtonColumn
-    Inherits DataGridViewLinkColumn
+    Inherits DataGridViewButtonColumn
 
 
     Private _ForeColor As Color
@@ -60,6 +60,9 @@ Public Class CheckBoxDataGridViewButtonColumn
         Me.ReadOnly = True
         DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         DefaultCellStyle.WrapMode = DataGridViewTriState.False
+        DefaultCellStyle.Padding = New Padding(2, 3, 2, 3)
+        FlatStyle = FlatStyle.Flat
+
         SortMode = DataGridViewColumnSortMode.Automatic
         AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
 

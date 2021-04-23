@@ -75,7 +75,7 @@ Partial Class W51F447639869E1D644FEE98B1DA024D2
         Me.MessageLabel1.Size = New System.Drawing.Size(524, 78)
         Me.MessageLabel1.SourceText = Nothing
         Me.MessageLabel1.TabIndex = 7
-        Me.MessageLabel1.Text = " .."
+        Me.MessageLabel1.Text = " "
         Me.MessageLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Label1
