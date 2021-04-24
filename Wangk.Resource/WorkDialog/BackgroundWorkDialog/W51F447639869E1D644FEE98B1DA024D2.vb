@@ -1,9 +1,5 @@
 ﻿Imports System.ComponentModel
-Imports System.Drawing
 Imports System.Windows.Forms
-Imports Microsoft.WindowsAPICodePack
-Imports Microsoft.WindowsAPICodePack.Taskbar
-Imports Wangk.Resource
 
 Public Class W51F447639869E1D644FEE98B1DA024D2
     Implements BackgroundWorkEventArgs
@@ -70,8 +66,6 @@ Public Class W51F447639869E1D644FEE98B1DA024D2
     End Property
 #End Region
 
-    Private tmpTaskbarManager As TaskbarManager
-
     Private Sub W51F447639869E1D644FEE98B1DA024D2_Load(sender As Object, e As EventArgs) Handles Me.Load
 
         ''自动换行
@@ -79,8 +73,6 @@ Public Class W51F447639869E1D644FEE98B1DA024D2
         '窗体透明度
         'Me.Opacity = 0.95
         ProgressBar1.Step = 1
-
-        tmpTaskbarManager = TaskbarManager.Instance
 
     End Sub
 
@@ -99,8 +91,6 @@ Public Class W51F447639869E1D644FEE98B1DA024D2
     Private Sub W51F447639869E1D644FEE98B1DA024D2_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         MessageLabel1.SourceText = Me.Text
         Me.Refresh()
-
-        tmpTaskbarManager.SetProgressState(TaskbarProgressBarState.Indeterminate)
 
         BackgroundWorker1.RunWorkerAsync()
 
@@ -156,8 +146,6 @@ Public Class W51F447639869E1D644FEE98B1DA024D2
 
             ProgressBar1.Value = percentProgress
 
-            tmpTaskbarManager.SetProgressValue(percentProgress, ProgressBar1.Maximum)
-
             Label1.Text = $"{percentProgress}%"
 
             ProgressBar1.Update()
@@ -196,8 +184,6 @@ Public Class W51F447639869E1D644FEE98B1DA024D2
 
     Private Sub BackgroundWorker1_DoWork(sender As Object, e As DoWorkEventArgs) Handles BackgroundWorker1.DoWork
 
-        tmpTaskbarManager.SetProgressState(TaskbarProgressBarState.Normal)
-
         BackgroundWorkAction(Me)
 
     End Sub
@@ -205,7 +191,6 @@ Public Class W51F447639869E1D644FEE98B1DA024D2
     Private Sub BackgroundWorker1_RunWorkerCompleted(sender As Object, e As RunWorkerCompletedEventArgs) Handles BackgroundWorker1.RunWorkerCompleted
         If e.Error IsNot Nothing Then
             _Error = e.Error
-            tmpTaskbarManager.SetProgressState(TaskbarProgressBarState.Error)
         End If
 
         Me.Close()
@@ -233,10 +218,6 @@ Public Class W51F447639869E1D644FEE98B1DA024D2
         Me.Height += InfoText.Height
         InfoText.Show()
         LinkLabel1.Hide()
-    End Sub
-
-    Private Sub W51F447639869E1D644FEE98B1DA024D2_Disposed(sender As Object, e As EventArgs) Handles Me.Disposed
-        tmpTaskbarManager.SetProgressState(TaskbarProgressBarState.NoProgress)
     End Sub
 
 End Class
