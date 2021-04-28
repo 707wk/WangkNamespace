@@ -12,19 +12,11 @@
         End Set
     End Property
 
-    Public Property Owner As Window
-        Get
-            Return ShowWindow.Owner
-        End Get
-        Set(value As Window)
-            ShowWindow.Owner = value
-        End Set
-    End Property
-
     Private ShowWindow As BackgroundWorkWindow
 
-    Public Sub New()
+    Public Sub New(parent As Window)
         ShowWindow = New BackgroundWorkWindow
+        ShowWindow.Owner = parent
     End Sub
 
     ''' <summary>

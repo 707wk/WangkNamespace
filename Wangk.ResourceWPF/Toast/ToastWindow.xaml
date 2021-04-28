@@ -15,6 +15,7 @@
         AllowsTransparency="True"
         OpacityMask="White"
         FontFamily="微软雅黑"
+        Opacity="0.95"
         MouseDown="Window_MouseDown">
 
     <Window.Resources>
