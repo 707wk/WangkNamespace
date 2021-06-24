@@ -1,8 +1,8 @@
 ﻿Imports System
-Imports System.Reflection
-Imports System.Runtime.InteropServices
 Imports System.Globalization
+Imports System.Reflection
 Imports System.Resources
+Imports System.Runtime.InteropServices
 Imports System.Windows
 
 ' 有关程序集的一般信息由以下
@@ -11,12 +11,12 @@ Imports System.Windows
 
 '查看程序集特性的值
 
-<Assembly: AssemblyTitle("Wangk.ResourceWPF")>
+<Assembly: AssemblyTitle("下载更新")>
 <Assembly: AssemblyDescription("")>
 <Assembly: AssemblyCompany("GT-Soft Studio")>
-<Assembly: AssemblyProduct("Wangk.ResourceWPF")>
+<Assembly: AssemblyProduct("DownloadUpdate")>
 <Assembly: AssemblyCopyright("Copyright © GT-Soft Studio")>
-<Assembly: AssemblyTrademark("")> 
+<Assembly: AssemblyTrademark("")>
 <Assembly: ComVisible(false)>
 
 '若要开始生成可本地化的应用程序，请设置
@@ -42,7 +42,7 @@ Imports System.Windows
 
 
 '如果此项目向 COM 公开，则下列 GUID 用于 typelib 的 ID
-<Assembly: Guid("dc316e13-8193-4562-8a32-2219aa0288b7")> 
+<Assembly: Guid("d30ea6b3-3e7e-4fb0-b89f-f0d649909f68")>
 
 ' 程序集的版本信息由下列四个值组成: 
 '
@@ -56,4 +56,4 @@ Imports System.Windows
 ' <Assembly: AssemblyVersion("1.0.*")>
 
 <Assembly: AssemblyVersion("1.0.0.0")>
-<Assembly: AssemblyFileVersion("1.0.2106.10")>
+<Assembly: AssemblyFileVersion("1.0.2106.3")>

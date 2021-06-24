@@ -9,6 +9,8 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Wangk.Hash", "Wangk.Hash\Wa
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Wangk.ResourceWPF", "Wangk.ResourceWPF\Wangk.ResourceWPF.vbproj", "{7D4CE795-D8E9-426F-80B6-D3399E5D8D9A}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DownloadUpdate", "DownloadUpdate\DownloadUpdate.vbproj", "{8C3B485E-B3D9-4286-939A-13B68FFD8F27}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,14 @@ Global
 		{7D4CE795-D8E9-426F-80B6-D3399E5D8D9A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7D4CE795-D8E9-426F-80B6-D3399E5D8D9A}.Release|x86.ActiveCfg = Release|x86
 		{7D4CE795-D8E9-426F-80B6-D3399E5D8D9A}.Release|x86.Build.0 = Release|x86
+		{8C3B485E-B3D9-4286-939A-13B68FFD8F27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C3B485E-B3D9-4286-939A-13B68FFD8F27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C3B485E-B3D9-4286-939A-13B68FFD8F27}.Debug|x86.ActiveCfg = Debug|x86
+		{8C3B485E-B3D9-4286-939A-13B68FFD8F27}.Debug|x86.Build.0 = Debug|x86
+		{8C3B485E-B3D9-4286-939A-13B68FFD8F27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C3B485E-B3D9-4286-939A-13B68FFD8F27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C3B485E-B3D9-4286-939A-13B68FFD8F27}.Release|x86.ActiveCfg = Release|x86
+		{8C3B485E-B3D9-4286-939A-13B68FFD8F27}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

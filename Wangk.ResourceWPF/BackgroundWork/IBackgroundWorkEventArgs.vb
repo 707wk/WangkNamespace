@@ -25,7 +25,7 @@
     ''' 输出提示
     ''' </summary>
     ''' <param name="msg">输出信息</param>
-    ''' <param name="percentProgress">当前进度 0-1</param>
+    ''' <param name="percentProgress">当前进度 0-100</param>
     Overloads Sub Write(msg As String, percentProgress As Integer)
 
     ''' <summary>
