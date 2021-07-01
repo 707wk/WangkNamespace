@@ -149,6 +149,26 @@ ucSpinnerDotCircle
 InitializeComponent
 </summary>
 </member>
+<member name="T:Wangk.ResourceWPF.ConsoleDebug">
+ <summary>
+ 终端调试
+ </summary>
+</member>
+<member name="M:Wangk.ResourceWPF.ConsoleDebug.FreeConsole">
+ <summary>
+ 释放控制台窗口
+ </summary>
+</member>
+<member name="M:Wangk.ResourceWPF.ConsoleDebug.Open">
+ <summary>
+ 打开终端
+ </summary>
+</member>
+<member name="M:Wangk.ResourceWPF.ConsoleDebug.Close">
+ <summary>
+ 关闭终端
+ </summary>
+</member>
 <member name="T:Wangk.ResourceWPF.ToastWindow">
 <summary>
 ToastWindow

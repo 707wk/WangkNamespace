@@ -108,6 +108,7 @@
     <Compile Include="BackgroundWork\ucSpinnerDotCircle.xaml.vb">
       <DependentUpon>ucSpinnerDotCircle.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ConsoleDebug.vb" />
     <Compile Include="My Project\AssemblyInfo.vb">
       <SubType>Code</SubType>
     </Compile>
