@@ -10,6 +10,8 @@ Class MainWindow
 
     Private EXEPath As String = System.Reflection.Assembly.GetExecutingAssembly().Location
 
+    Private RunEXEPath As String
+
     ''' <summary>
     ''' 是否取消
     ''' </summary>
@@ -30,6 +32,10 @@ Class MainWindow
             DownloadUrl = tmpCommandLineArgs(1)
         Else
             End
+        End If
+
+        If tmpCommandLineArgs.Count > 2 Then
+            RunEXEPath = tmpCommandLineArgs(2)
         End If
 
         Try
@@ -130,6 +136,16 @@ Class MainWindow
 #End Region
 
         Threading.Thread.Sleep(1000)
+
+        ' 更新后运行程序
+        If Not String.IsNullOrWhiteSpace(RunEXEPath) Then
+            Try
+                Process.Start(RunEXEPath)
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Critical, "启动出错")
+            End Try
+
+        End If
 
     End Sub
 
