@@ -21,7 +21,7 @@
         WindowStyle="None">
 
     <Border Background="#FF3D3D3D" BorderThickness="1"
-            BorderBrush="#FF707070" CornerRadius="4" Padding="4">
+            BorderBrush="#FF707070" CornerRadius="4">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="80" />
@@ -67,6 +67,14 @@
                         Click="CancelButton_Click" />
             </Grid>
 
+            <!--<Button Grid.Row="3"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Right"
+                    Content="取消(Cancel)"
+                    Margin="8"
+                    Padding="20,5,20,5"
+                    Click="CancelButton_Click" />-->
+            
         </Grid>
     </Border>
 
