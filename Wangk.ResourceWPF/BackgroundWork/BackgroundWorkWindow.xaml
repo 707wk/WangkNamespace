@@ -6,62 +6,68 @@
         xmlns:local="clr-namespace:Wangk.ResourceWPF"
         mc:Ignorable="d"
         Title="BackgroundWorkWindow"
-        Height="210"
+        Height="180"
         Width="600"
         ShowInTaskbar="False"
         WindowStartupLocation="CenterOwner"
         FontFamily="微软雅黑"
         ResizeMode="NoResize"
-        Background="#FF3D3D3D"
+        Background="Transparent"
         Foreground="White"
+        AllowsTransparency="True"
         IsVisibleChanged="Window_IsVisibleChanged"
-        Closing="Window_Closing">
+        Closing="Window_Closing"
+        ShowActivated="False"
+        WindowStyle="None">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="80" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="auto" />
-        </Grid.RowDefinitions>
-
+    <Border Background="#FF3D3D3D" BorderThickness="1"
+            BorderBrush="#FF707070" CornerRadius="4" Padding="4">
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto" />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
 
-            <local:ucSpinnerDotCircle Margin="15,0,10,0" />
-            <TextBlock x:Name="MessageText"
-                       Grid.Column="1"
-                       TextWrapping="Wrap"
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <local:ucSpinnerDotCircle Margin="15,0,10,0" />
+                <TextBlock x:Name="MessageText"
+                           Grid.Column="1"
+                           TextWrapping="Wrap"
+                           VerticalAlignment="Center"
+                           Text="提示信息" />
+            </Grid>
+
+            <ProgressBar x:Name="MessageProgressBar"
+                         Grid.Row="1"
+                         Margin="10,10,10,10"
+                         Height="20"
+                         Minimum="0"
+                         Maximum="100" />
+            <TextBlock x:Name="MessageProgressText"
+                       Grid.Row="1"
                        VerticalAlignment="Center"
-                       Text="提示信息" />
+                       HorizontalAlignment="Center"
+                       Text="0%"
+                       Foreground="Black" />
+
+            <Grid Grid.Row="3"
+                  Background="#575757">
+                <Button VerticalAlignment="Center"
+                        HorizontalAlignment="Right"
+                        Content="取消(Cancel)"
+                        Margin="8"
+                        Padding="20,5,20,5"
+                        Click="CancelButton_Click" />
+            </Grid>
+
         </Grid>
-
-        <ProgressBar x:Name="MessageProgressBar"
-                     Grid.Row="1"
-                     Margin="10,10,10,10"
-                     Height="20"
-                     Minimum="0"
-                     Maximum="100" />
-        <TextBlock x:Name="MessageProgressText"
-                   Grid.Row="1"
-                   VerticalAlignment="Center"
-                   HorizontalAlignment="Center"
-                   Text="0%"
-                   Foreground="Black" />
-
-        <Grid Grid.Row="3"
-              Background="#575757">
-            <Button VerticalAlignment="Center"
-                    HorizontalAlignment="Right"
-                    Content="取消(Cancel)"
-                    Margin="8"
-                    Padding="20,5,20,5"
-                    Click="CancelButton_Click" />
-        </Grid>
-
-    </Grid>
+    </Border>
 
 </Window>
