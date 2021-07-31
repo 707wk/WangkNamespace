@@ -20,17 +20,20 @@
         ShowActivated="False"
         WindowStyle="None">
 
-    <Border Background="#FF3D3D3D" BorderThickness="1"
-            BorderBrush="#FF707070" CornerRadius="4">
+    <Border Background="#FF3D3D3D"
+            BorderThickness="1"
+            BorderBrush="#FF707070"
+            CornerRadius="4">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="80" />
+                <RowDefinition Height="10" />
+                <RowDefinition />
                 <RowDefinition Height="auto" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="15" />
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
 
-            <Grid>
+            <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto" />
                     <ColumnDefinition />
@@ -45,19 +48,19 @@
             </Grid>
 
             <ProgressBar x:Name="MessageProgressBar"
-                         Grid.Row="1"
-                         Margin="10,10,10,10"
+                         Grid.Row="2"
+                         Margin="10,0,10,0"
                          Height="20"
                          Minimum="0"
                          Maximum="100" />
             <TextBlock x:Name="MessageProgressText"
-                       Grid.Row="1"
+                       Grid.Row="2"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
                        Text="0%"
                        Foreground="Black" />
 
-            <Grid Grid.Row="3"
+            <Grid Grid.Row="4"
                   Background="#575757">
                 <Button VerticalAlignment="Center"
                         HorizontalAlignment="Right"
@@ -74,7 +77,7 @@
                     Margin="8"
                     Padding="20,5,20,5"
                     Click="CancelButton_Click" />-->
-            
+
         </Grid>
     </Border>
 
