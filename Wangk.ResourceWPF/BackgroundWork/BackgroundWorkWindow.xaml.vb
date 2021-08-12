@@ -87,6 +87,13 @@ Public Class BackgroundWorkWindow
 
         MessageText.Text = Me.Title
 
+        If Me.Owner.TaskbarItemInfo Is Nothing Then
+            Me.Owner.TaskbarItemInfo = New Shell.TaskbarItemInfo
+        End If
+
+        Me.Owner.TaskbarItemInfo.ProgressState = Shell.TaskbarItemProgressState.Normal
+        Me.Owner.TaskbarItemInfo.ProgressValue = 0
+
         Try
             Await Task.Run(Sub()
                                BackgroundWorkAction(Me)
@@ -94,6 +101,8 @@ Public Class BackgroundWorkWindow
         Catch ex As Exception
             _Error = ex
         End Try
+
+        Me.Owner.TaskbarItemInfo.ProgressState = Shell.TaskbarItemProgressState.None
 
         IsRunWorkerCompleted = True
         Me.Close()
@@ -128,6 +137,8 @@ Public Class BackgroundWorkWindow
                                        MessageProgressBar.Value = percentProgress
 
                                        MessageProgressText.Text = $"{percentProgress}%"
+
+                                       Me.Owner.TaskbarItemInfo.ProgressValue = percentProgress / 100
 
                                    End If
                                End Sub)
