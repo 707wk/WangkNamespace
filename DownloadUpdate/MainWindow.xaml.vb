@@ -1,4 +1,5 @@
-﻿Imports System.IO
+﻿Imports System.Configuration
+Imports System.IO
 Imports System.IO.Compression
 Imports System.Net.Http
 
@@ -107,10 +108,33 @@ Class MainWindow
                              End Sub)
 
 #Region "删除文件/文件夹"
+        ' 获取忽略文件夹
+        Dim IgnoreFolderItems As New HashSet(Of String)
+        Dim IgnoreFoldersStr = ConfigurationManager.AppSettings.Get("IgnoreFolders")
+        For Each item In IgnoreFoldersStr.Split(";")
+            If String.IsNullOrWhiteSpace(item) Then
+                Continue For
+            End If
+
+            If IgnoreFolderItems.Contains(item.ToLower) Then
+                Continue For
+            End If
+
+            IgnoreFolderItems.Add(item.ToLower)
+
+        Next
+
+        ' 删除文件夹
         For Each item In IO.Directory.GetDirectories(IO.Path.GetDirectoryName(EXEPath))
+            ' 跳过忽略的文件夹
+            If IgnoreFolderItems.Contains(IO.Path.GetFileName(item).ToLower) Then
+                Continue For
+            End If
+
             IO.Directory.Delete(item, True)
         Next
 
+        ' 删除文件
         For Each item In IO.Directory.GetFiles(IO.Path.GetDirectoryName(EXEPath))
 
             If IO.Path.GetFileName(item) = IO.Path.GetFileName(EXEPath) Then
