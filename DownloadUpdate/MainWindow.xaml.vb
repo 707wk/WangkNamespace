@@ -7,7 +7,7 @@ Class MainWindow
 
     Private DownloadUrl As String
 
-    Private TempFile As String = IO.Path.GetTempFileName
+    Private TempFile As String = $"{Date.Now:yyyyMMddHHmmssff}{Guid.NewGuid().ToString().Replace("-", "")}"
 
     Private EXEPath As String = System.Reflection.Assembly.GetExecutingAssembly().Location
 
