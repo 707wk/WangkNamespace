@@ -134,6 +134,9 @@ Public Class BackgroundWorkWindow
                                    If 0 <= percentProgress AndAlso
                                    percentProgress <= 100 Then
 
+                                       MessageProgressBar.IsIndeterminate = False
+                                       MessageProgressText.Visibility = Visibility.Visible
+
                                        MessageProgressBar.Value = percentProgress
 
                                        MessageProgressText.Text = $"{percentProgress}%"

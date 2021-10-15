@@ -52,31 +52,42 @@
                          Margin="10,0,10,0"
                          Height="20"
                          Minimum="0"
-                         Maximum="100" />
+                         Maximum="100"
+                         IsIndeterminate="True" />
             <TextBlock x:Name="MessageProgressText"
                        Grid.Row="2"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
                        Text="0%"
-                       Foreground="Black" />
+                       Foreground="Black"
+                       Visibility="Hidden" />
 
             <Grid Grid.Row="4"
                   Background="#575757">
                 <Button VerticalAlignment="Center"
                         HorizontalAlignment="Right"
-                        Content="取消(Cancel)"
                         Margin="8"
-                        Padding="20,5,20,5"
-                        Click="CancelButton_Click" />
-            </Grid>
+                        Padding="15,5,15,5"
+                        Click="CancelButton_Click"
+                        Background="LightGray"
+                        BorderThickness="0">
 
-            <!--<Button Grid.Row="3"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Right"
-                    Content="取消(Cancel)"
-                    Margin="8"
-                    Padding="20,5,20,5"
-                    Click="CancelButton_Click" />-->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Image Source="/Wangk.ResourceWPF;component/Resources/no_16px.png"
+                               Stretch="None" />
+
+                        <TextBlock Text="取消(Cancel)"
+                                   Grid.Column="1"
+                                   Margin="3,0,0,0" />
+                    </Grid>
+
+                </Button>
+            </Grid>
 
         </Grid>
     </Border>

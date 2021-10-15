@@ -22,6 +22,11 @@ Wangk.ResourceWPF
   使用此强类型资源类的所有资源查找执行重写。
 </summary>
 </member>
+<member name="P:Wangk.ResourceWPF.My.Resources.Resources.no_16px">
+<summary>
+  查找 System.Drawing.Bitmap 类型的本地化资源。
+</summary>
+</member>
 <member name="P:Wangk.ResourceWPF.My.Resources.Resources.toastFail_32px">
 <summary>
   查找 System.Drawing.Bitmap 类型的本地化资源。
