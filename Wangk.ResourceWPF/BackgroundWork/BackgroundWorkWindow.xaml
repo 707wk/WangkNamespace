@@ -67,9 +67,9 @@
                 <Button VerticalAlignment="Center"
                         HorizontalAlignment="Right"
                         Margin="8"
-                        Padding="15,5,15,5"
+                        Padding="5"
                         Click="CancelButton_Click"
-                        Background="LightGray"
+                        Background="Transparent"
                         BorderThickness="0">
 
                     <Grid>
@@ -81,7 +81,7 @@
                         <Image Source="/Wangk.ResourceWPF;component/Resources/no_16px.png"
                                Stretch="None" />
 
-                        <TextBlock Text="取消(Cancel)"
+                        <TextBlock Text="取消(Cancel)" Foreground="White"
                                    Grid.Column="1"
                                    Margin="3,0,0,0" />
                     </Grid>
