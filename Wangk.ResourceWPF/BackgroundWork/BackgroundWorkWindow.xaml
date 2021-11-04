@@ -23,7 +23,7 @@
     <Border Background="#FF3D3D3D"
             BorderThickness="1"
             BorderBrush="#FF707070"
-            CornerRadius="4">
+            CornerRadius="8">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="10" />
