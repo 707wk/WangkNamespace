@@ -1,6 +1,7 @@
 ﻿Imports System.Configuration
 Imports System.IO
 Imports System.IO.Compression
+Imports System.Net
 Imports System.Net.Http
 
 Class MainWindow
@@ -42,7 +43,9 @@ Class MainWindow
         Try
             Await Task.Run(AddressOf DownloadFile)
         Catch ex As Exception
-            MsgBox(ex.Message, MsgBoxStyle.Critical, "下载出错")
+            If MsgBox("程序下载失败,是否手动下载更新?", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "下载出错") = MsgBoxResult.Yes Then
+                FileHelper.Open(DownloadUrl)
+            End If
 
         Finally
             IsDownloaded = True
