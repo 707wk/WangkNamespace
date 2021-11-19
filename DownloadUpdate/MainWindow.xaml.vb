@@ -43,9 +43,7 @@ Class MainWindow
         Try
             Await Task.Run(AddressOf DownloadFile)
         Catch ex As Exception
-            If MsgBox("程序下载失败,是否手动下载更新?", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "下载出错") = MsgBoxResult.Yes Then
-                FileHelper.Open(DownloadUrl)
-            End If
+            MsgBox("程序下载失败,请到程序下载页面手动下载最新版本", MsgBoxStyle.Question, "下载出错")
 
         Finally
             IsDownloaded = True

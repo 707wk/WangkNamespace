@@ -62,8 +62,9 @@
                        Foreground="Black"
                        Visibility="Hidden" />
 
-            <Grid Grid.Row="4"
-                  Background="#575757">
+            <Border Grid.Row="4"
+                    CornerRadius="0,0,8,8"
+                    Background="#575757">
                 <Button VerticalAlignment="Center"
                         HorizontalAlignment="Right"
                         Margin="8"
@@ -81,13 +82,14 @@
                         <Image Source="/Wangk.ResourceWPF;component/Resources/no_16px.png"
                                Stretch="None" />
 
-                        <TextBlock Text="取消(Cancel)" Foreground="White"
+                        <TextBlock Text="取消(Cancel)"
+                                   Foreground="White"
                                    Grid.Column="1"
                                    Margin="3,0,0,0" />
                     </Grid>
 
                 </Button>
-            </Grid>
+            </Border>
 
         </Grid>
     </Border>
