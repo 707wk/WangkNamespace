@@ -154,6 +154,11 @@ ucSpinnerDotCircle
 InitializeComponent
 </summary>
 </member>
+<member name="M:Wangk.ResourceWPF.CodeHelper.GetLocation(System.String,System.String)">
+ <summary>
+ 获取代码位置
+ </summary>
+</member>
 <member name="T:Wangk.ResourceWPF.ConsoleDebug">
  <summary>
  终端调试

@@ -7,10 +7,11 @@
     <RootNamespace>Wangk.ResourceWPF</RootNamespace>
     <AssemblyName>Wangk.ResourceWPF</AssemblyName>
     <OutputType>Library</OutputType>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <MyType>Custom</MyType>
     <Deterministic>true</Deterministic>
     <ProjectGuid>{7D4CE795-D8E9-426F-80B6-D3399E5D8D9A}</ProjectGuid>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -108,6 +109,7 @@
     <Compile Include="BackgroundWork\ucSpinnerDotCircle.xaml.vb">
       <DependentUpon>ucSpinnerDotCircle.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CodeHelper.vb" />
     <Compile Include="ConsoleDebug.vb" />
     <Compile Include="My Project\AssemblyInfo.vb">
       <SubType>Code</SubType>

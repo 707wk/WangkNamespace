@@ -59,6 +59,11 @@ Wangk.Resource
  颜色画笔
  </summary>
 </member>
+<member name="M:Wangk.Resource.CodeHelper.GetLocation(System.String,System.String)">
+ <summary>
+ 获取代码位置
+ </summary>
+</member>
 <member name="T:Wangk.Resource.ConsoleDebug">
  <summary>
  终端调试
