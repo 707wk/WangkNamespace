@@ -186,6 +186,10 @@ Public Class CheckBoxDataGridView
 
     Private Sub CheckBoxDataGridView_DragDrop(sender As Object, e As DragEventArgs) Handles Me.DragDrop
 
+        If NowDragDropRowID < 0 Then
+            Exit Sub
+        End If
+
         Dim tmp = NowDragDropRowID
         NowDragDropRowID = -1
         Me.InvalidateRow(tmp)
@@ -220,6 +224,7 @@ Public Class CheckBoxDataGridView
     End Sub
 
     Private Sub CheckBoxDataGridView_DragOver(sender As Object, e As DragEventArgs) Handles Me.DragOver
+
         Dim clientPoint = Me.PointToClient(New Point(e.X, e.Y))
         Dim tmpHit = Me.HitTest(clientPoint.X, clientPoint.Y)
         If NowDragDropRowID = tmpHit.RowIndex Then
@@ -235,6 +240,10 @@ Public Class CheckBoxDataGridView
         End If
 
         NowDragDropRowID = tmpHit.RowIndex
+
+        If NowDragDropRowID < 0 Then
+            Exit Sub
+        End If
 
         If FirstDragDropRowID = NowDragDropRowID Then
             e.Effect = DragDropEffects.None
