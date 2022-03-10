@@ -1,8 +1,16 @@
 ﻿Public Class Toast
 
+    Public Shared Sub ShowInfo(parent As DependencyObject,
+                               message As String,
+                               Optional timeoutInterval As Integer = 1500)
+
+        ShowInfo(Window.GetWindow(parent), message, timeoutInterval)
+
+    End Sub
+
     Public Shared Async Sub ShowInfo(parent As Window,
-                                 message As String,
-                                 Optional timeoutInterval As Integer = 1500)
+                                     message As String,
+                                     Optional timeoutInterval As Integer = 1500)
 
         Dim tmpWindow As New ToastWindow With {
             .Owner = parent,
@@ -23,9 +31,17 @@
 
     End Sub
 
+    Public Shared Sub ShowSuccess(parent As DependencyObject,
+                               message As String,
+                               Optional timeoutInterval As Integer = 1500)
+
+        ShowSuccess(Window.GetWindow(parent), message, timeoutInterval)
+
+    End Sub
+
     Public Shared Async Sub ShowSuccess(parent As Window,
-                                    message As String,
-                                    Optional timeoutInterval As Integer = 1500)
+                                        message As String,
+                                        Optional timeoutInterval As Integer = 1500)
 
         Dim tmpWindow As New ToastWindow With {
             .Owner = parent,
@@ -47,9 +63,17 @@
 
     End Sub
 
+    Public Shared Sub ShowWarning(parent As DependencyObject,
+                                  message As String,
+                                  Optional timeoutInterval As Integer = 1500)
+
+        ShowWarning(Window.GetWindow(parent), message, timeoutInterval)
+
+    End Sub
+
     Public Shared Async Sub ShowWarning(parent As Window,
-                                    message As String,
-                                    Optional timeoutInterval As Integer = 1500)
+                                        message As String,
+                                        Optional timeoutInterval As Integer = 1500)
 
         Dim tmpWindow As New ToastWindow With {
             .Owner = parent,
@@ -68,6 +92,14 @@
                        End Sub)
 
         tmpWindow.Close()
+
+    End Sub
+
+    Public Shared Sub ShowError(parent As DependencyObject,
+                                message As String,
+                                Optional timeoutInterval As Integer = 1500)
+
+        ShowError(Window.GetWindow(parent), message, timeoutInterval)
 
     End Sub
 

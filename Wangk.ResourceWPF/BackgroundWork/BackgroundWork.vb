@@ -19,6 +19,11 @@
         ShowWindow.Owner = parent
     End Sub
 
+    Public Sub New(parent As DependencyObject)
+        ShowWindow = New BackgroundWorkWindow
+        ShowWindow.Owner = Window.GetWindow(parent)
+    End Sub
+
     ''' <summary>
     ''' 开始执行后台事件
     ''' </summary>
