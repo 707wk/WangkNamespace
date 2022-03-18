@@ -44,7 +44,7 @@
                            Grid.Column="1"
                            TextWrapping="Wrap"
                            VerticalAlignment="Center"
-                           Text="提示信息" />
+                           Text="加载中" />
             </Grid>
 
             <ProgressBar x:Name="MessageProgressBar"

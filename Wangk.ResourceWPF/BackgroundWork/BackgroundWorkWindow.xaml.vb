@@ -65,6 +65,15 @@ Public Class BackgroundWorkWindow
     End Property
 #End Region
 
+#Region "输出的信息"
+    Private _Msg As String
+    Public ReadOnly Property Msg As String Implements IBackgroundWorkEventArgs.Msg
+        Get
+            Return _Msg
+        End Get
+    End Property
+#End Region
+
     ''' <summary>
     ''' 开始执行后台事件
     ''' </summary>
@@ -85,6 +94,7 @@ Public Class BackgroundWorkWindow
         End If
         IsFirstShow = True
 
+        _Msg = Me.Title
         MessageText.Text = Me.Title
 
         If Me.Owner.TaskbarItemInfo Is Nothing Then
@@ -110,6 +120,8 @@ Public Class BackgroundWorkWindow
     End Sub
 
     Public Sub Write(msg As String) Implements IBackgroundWorkEventArgs.Write
+
+        _Msg = msg
 
         Dispatcher.BeginInvoke(Threading.DispatcherPriority.Normal,
                                Sub()

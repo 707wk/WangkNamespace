@@ -34,4 +34,9 @@
     ''' <param name="percentProgress">当前进度 0-100</param>
     Overloads Sub Write(percentProgress As Integer)
 
+    ''' <summary>
+    ''' 输出的信息
+    ''' </summary>
+    ReadOnly Property Msg As String
+
 End Interface
