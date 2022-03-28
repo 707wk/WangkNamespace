@@ -13,7 +13,7 @@ Public NotInheritable Class ConsoleDebug
     '''' <summary>
     '''' 释放控制台窗口
     '''' </summary>
-    '<DllImport(”kernel32.dll”)>
+    '<DllImport("kernel32.dll")>
     'Public Shared Function FreeConsole() As Boolean
     'End Function
     ''' <summary>
