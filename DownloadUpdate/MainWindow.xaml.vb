@@ -25,6 +25,12 @@ Class MainWindow
 
     Private Async Sub Window_Loaded(sender As Object, e As RoutedEventArgs)
 
+        ' win7系统使用
+        ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 Or
+            SecurityProtocolType.Tls Or
+            SecurityProtocolType.Tls11 Or
+            SecurityProtocolType.Tls12
+
         Dim assemblyLocation = System.Reflection.Assembly.GetExecutingAssembly().Location
         Me.Title = $"{My.Application.Info.Title} V{System.Diagnostics.FileVersionInfo.GetVersionInfo(assemblyLocation).ProductVersion}"
 
@@ -43,7 +49,8 @@ Class MainWindow
         Try
             Await Task.Run(AddressOf DownloadFile)
         Catch ex As Exception
-            MsgBox("程序下载失败,请到程序下载页面手动下载最新版本", MsgBoxStyle.Question, "下载出错")
+            Debug.WriteLine(ex)
+            MsgBox($"程序下载失败,请到程序下载页面手动下载最新版本", MsgBoxStyle.Question, "下载出错")
 
         Finally
             IsDownloaded = True
@@ -60,8 +67,7 @@ Class MainWindow
 
 #Region "下载文件"
         Dim tmpHttpClient As New HttpClient
-        Dim tmpHttpResponseMessage As HttpResponseMessage = tmpHttpClient.GetAsync(DownloadUrl,
-                                                                                   HttpCompletionOption.ResponseHeadersRead).GetAwaiter.GetResult
+        Dim tmpHttpResponseMessage As HttpResponseMessage = tmpHttpClient.GetAsync(DownloadUrl, HttpCompletionOption.ResponseHeadersRead).GetAwaiter.GetResult
 
         Dim fileSize As Long = tmpHttpResponseMessage.Content.Headers.ContentLength
 
