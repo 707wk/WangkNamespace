@@ -13,9 +13,15 @@
                                      Optional timeoutInterval As Integer = 1500)
 
         Dim tmpWindow As New ToastWindow With {
-            .Owner = parent,
             .ShowActivated = False
         }
+
+        If parent Is Nothing Then
+            tmpWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen
+        Else
+            tmpWindow.Owner = parent
+        End If
+
         tmpWindow.ToastText.Text = message
 
         tmpWindow.ToastBorder.Style = tmpWindow.FindResource("NormalBorderStyle")
@@ -44,9 +50,14 @@
                                         Optional timeoutInterval As Integer = 1500)
 
         Dim tmpWindow As New ToastWindow With {
-            .Owner = parent,
             .ShowActivated = False
         }
+
+        If parent Is Nothing Then
+            tmpWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen
+        Else
+            tmpWindow.Owner = parent
+        End If
 
         tmpWindow.ToastText.Text = message
 
@@ -76,9 +87,14 @@
                                         Optional timeoutInterval As Integer = 1500)
 
         Dim tmpWindow As New ToastWindow With {
-            .Owner = parent,
             .ShowActivated = False
         }
+
+        If parent Is Nothing Then
+            tmpWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen
+        Else
+            tmpWindow.Owner = parent
+        End If
 
         tmpWindow.ToastText.Text = message
 
@@ -108,9 +124,14 @@
                                   Optional timeoutInterval As Integer = 1500)
 
         Dim tmpWindow As New ToastWindow With {
-            .Owner = parent,
             .ShowActivated = False
         }
+
+        If parent Is Nothing Then
+            tmpWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen
+        Else
+            tmpWindow.Owner = parent
+        End If
 
         tmpWindow.ToastText.Text = message
 

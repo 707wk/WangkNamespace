@@ -97,12 +97,15 @@ Public Class BackgroundWorkWindow
         _Msg = Me.Title
         MessageText.Text = Me.Title
 
-        If Me.Owner.TaskbarItemInfo Is Nothing Then
-            Me.Owner.TaskbarItemInfo = New Shell.TaskbarItemInfo
-        End If
+        ' 适配 VSTO
+        If Me.Owner IsNot Nothing Then
+            If Me.Owner.TaskbarItemInfo Is Nothing Then
+                Me.Owner.TaskbarItemInfo = New Shell.TaskbarItemInfo
+            End If
 
-        Me.Owner.TaskbarItemInfo.ProgressState = Shell.TaskbarItemProgressState.Normal
-        Me.Owner.TaskbarItemInfo.ProgressValue = 0
+            Me.Owner.TaskbarItemInfo.ProgressState = Shell.TaskbarItemProgressState.Normal
+            Me.Owner.TaskbarItemInfo.ProgressValue = 0
+        End If
 
         Try
             Await Task.Run(Sub()
@@ -112,10 +115,20 @@ Public Class BackgroundWorkWindow
             _Error = ex
         End Try
 
-        Me.Owner.TaskbarItemInfo.ProgressState = Shell.TaskbarItemProgressState.None
-
+        ' 在窗口关闭前设置
         IsRunWorkerCompleted = True
-        Me.Close()
+
+        ' 适配 VSTO
+        Dispatcher.Invoke(Threading.DispatcherPriority.Normal,
+                               Sub()
+
+                                   If Me.Owner IsNot Nothing Then
+                                       Me.Owner.TaskbarItemInfo.ProgressState = Shell.TaskbarItemProgressState.None
+                                   End If
+
+                                   Me.Close()
+
+                               End Sub)
 
     End Sub
 
@@ -153,7 +166,10 @@ Public Class BackgroundWorkWindow
 
                                        MessageProgressText.Text = $"{percentProgress}%"
 
-                                       Me.Owner.TaskbarItemInfo.ProgressValue = percentProgress / 100
+                                       ' 适配 VSTO
+                                       If Me.Owner IsNot Nothing Then
+                                           Me.Owner.TaskbarItemInfo.ProgressValue = percentProgress / 100
+                                       End If
 
                                    End If
                                End Sub)

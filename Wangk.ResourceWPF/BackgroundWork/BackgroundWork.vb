@@ -22,6 +22,11 @@
     Public Sub New(parent As DependencyObject)
         ShowWindow = New BackgroundWorkWindow
         ShowWindow.Owner = Window.GetWindow(parent)
+
+        If ShowWindow.Owner Is Nothing Then
+            ShowWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen
+        End If
+
     End Sub
 
     ''' <summary>
