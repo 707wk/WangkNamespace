@@ -1,4 +1,6 @@
-﻿Public Class Toast
+﻿Imports System.Windows.Threading
+
+Public Class Toast
 
     Public Shared Sub ShowInfo(parent As DependencyObject,
                                message As String,
@@ -33,13 +35,17 @@
                            Threading.Thread.Sleep(timeoutInterval)
                        End Sub)
 
-        tmpWindow.Close()
+        tmpWindow.Dispatcher.Invoke(Threading.DispatcherPriority.Normal,
+                                    Sub()
+                                        tmpWindow.Close()
+                                    End Sub)
+
 
     End Sub
 
     Public Shared Sub ShowSuccess(parent As DependencyObject,
-                               message As String,
-                               Optional timeoutInterval As Integer = 1500)
+                                  message As String,
+                                  Optional timeoutInterval As Integer = 1500)
 
         ShowSuccess(Window.GetWindow(parent), message, timeoutInterval)
 
@@ -70,7 +76,10 @@
                            Threading.Thread.Sleep(timeoutInterval)
                        End Sub)
 
-        tmpWindow.Close()
+        tmpWindow.Dispatcher.Invoke(Threading.DispatcherPriority.Normal,
+                                    Sub()
+                                        tmpWindow.Close()
+                                    End Sub)
 
     End Sub
 
@@ -107,7 +116,10 @@
                            Threading.Thread.Sleep(timeoutInterval)
                        End Sub)
 
-        tmpWindow.Close()
+        tmpWindow.Dispatcher.Invoke(Threading.DispatcherPriority.Normal,
+                                    Sub()
+                                        tmpWindow.Close()
+                                    End Sub)
 
     End Sub
 
@@ -120,8 +132,8 @@
     End Sub
 
     Public Shared Async Sub ShowError(parent As Window,
-                                  message As String,
-                                  Optional timeoutInterval As Integer = 1500)
+                                      message As String,
+                                      Optional timeoutInterval As Integer = 1500)
 
         Dim tmpWindow As New ToastWindow With {
             .ShowActivated = False
@@ -144,7 +156,10 @@
                            Threading.Thread.Sleep(timeoutInterval)
                        End Sub)
 
-        tmpWindow.Close()
+        tmpWindow.Dispatcher.Invoke(Threading.DispatcherPriority.Normal,
+                                    Sub()
+                                        tmpWindow.Close()
+                                    End Sub)
 
     End Sub
 
