@@ -19,6 +19,7 @@ Public Class Toast
         }
 
         If parent Is Nothing Then
+            tmpWindow.Topmost = True
             tmpWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen
         Else
             tmpWindow.Owner = parent
@@ -60,6 +61,7 @@ Public Class Toast
         }
 
         If parent Is Nothing Then
+            tmpWindow.Topmost = True
             tmpWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen
         Else
             tmpWindow.Owner = parent
@@ -100,6 +102,7 @@ Public Class Toast
         }
 
         If parent Is Nothing Then
+            tmpWindow.Topmost = True
             tmpWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen
         Else
             tmpWindow.Owner = parent
@@ -125,7 +128,7 @@ Public Class Toast
 
     Public Shared Sub ShowError(parent As DependencyObject,
                                 message As String,
-                                Optional timeoutInterval As Integer = 1500)
+                                Optional timeoutInterval As Integer = 2000)
 
         ShowError(Window.GetWindow(parent), message, timeoutInterval)
 
@@ -133,13 +136,14 @@ Public Class Toast
 
     Public Shared Async Sub ShowError(parent As Window,
                                       message As String,
-                                      Optional timeoutInterval As Integer = 1500)
+                                      Optional timeoutInterval As Integer = 2000)
 
         Dim tmpWindow As New ToastWindow With {
             .ShowActivated = False
         }
 
         If parent Is Nothing Then
+            tmpWindow.Topmost = True
             tmpWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen
         Else
             tmpWindow.Owner = parent
