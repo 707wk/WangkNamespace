@@ -194,6 +194,27 @@ ToastWindow
 InitializeComponent
 </summary>
 </member>
+<member name="T:Wangk.ResourceWPF.WPFVisualTreeHelper">
+ <summary>
+ VisualTreeHelper辅助模块
+ </summary>
+</member>
+<member name="M:Wangk.ResourceWPF.WPFVisualTreeHelper.FindVisualChild``1(System.Windows.DependencyObject)">
+ <summary>
+ 查找子节点
+ </summary>
+ <typeparam name="ChildT">子节点类型</typeparam>
+ <param name="parent">父对象</param>
+ <returns>子节点列表</returns>
+</member>
+<member name="M:Wangk.ResourceWPF.WPFVisualTreeHelper.GetVisualChild``1(System.Windows.DependencyObject)">
+ <summary>
+ 查找子节点
+ </summary>
+ <typeparam name="ChildT">子节点类型</typeparam>
+ <param name="parent">父对象</param>
+ <returns>子节点</returns>
+</member>
 <member name="T:Wangk.ResourceWPF.XamlGeneratedNamespace.GeneratedInternalTypeHelper">
 <summary>
 GeneratedInternalTypeHelper
