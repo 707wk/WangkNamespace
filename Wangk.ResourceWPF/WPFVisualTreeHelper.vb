@@ -9,7 +9,7 @@ Public Class WPFVisualTreeHelper
     ''' <typeparam name="ChildT">子节点类型</typeparam>
     ''' <param name="parent">父对象</param>
     ''' <returns>子节点列表</returns>
-    Public Shared Function FindVisualChild(Of ChildT As DependencyObject)(parent As DependencyObject) As List(Of ChildT)
+    Public Shared Function GetChildren(Of ChildT As DependencyObject)(parent As DependencyObject) As List(Of ChildT)
         Dim tmpList As New List(Of ChildT)
 
         For childindex = 0 To VisualTreeHelper.GetChildrenCount(parent) - 1
@@ -19,7 +19,7 @@ Public Class WPFVisualTreeHelper
                 tmpList.Add(childItem)
             End If
 
-            tmpList.AddRange(FindVisualChild(Of ChildT)(childItem))
+            tmpList.AddRange(GetChildren(Of ChildT)(childItem))
 
         Next
 
@@ -32,7 +32,7 @@ Public Class WPFVisualTreeHelper
     ''' <typeparam name="ChildT">子节点类型</typeparam>
     ''' <param name="parent">父对象</param>
     ''' <returns>子节点</returns>
-    Public Shared Function GetVisualChild(Of ChildT As DependencyObject)(parent As DependencyObject) As ChildT
+    Public Shared Function GetChild(Of ChildT As DependencyObject)(parent As DependencyObject) As ChildT
 
         For childindex = 0 To VisualTreeHelper.GetChildrenCount(parent) - 1
             Dim childItem As DependencyObject = VisualTreeHelper.GetChild(parent, childindex)
@@ -41,7 +41,7 @@ Public Class WPFVisualTreeHelper
                 Return childItem
             End If
 
-            Dim tmpChildT = GetVisualChild(Of ChildT)(childItem)
+            Dim tmpChildT = GetChild(Of ChildT)(childItem)
             If tmpChildT IsNot Nothing Then
                 Return tmpChildT
             End If
