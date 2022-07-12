@@ -184,6 +184,32 @@ InitializeComponent
  关闭终端
  </summary>
 </member>
+<member name="T:Wangk.ResourceWPF.FolderNameEditor">
+ <summary>FolderBrowser 的设计器基类</summary>
+</member>
+<member name="T:Wangk.ResourceWPF.FolderBrowserDialog">
+ <summary>Vista 样式的选择文件对话框的基类</summary>
+</member>
+<member name="M:Wangk.ResourceWPF.FolderBrowserDialog.#ctor">
+ <summary>初始化 FolderBrowser 的新实例</summary>
+</member>
+<member name="M:Wangk.ResourceWPF.FolderBrowserDialog.#ctor(System.Windows.Forms.Form)">
+ <summary>初始化 FolderBrowser 的新实例</summary>
+ <param name="frm">依附的主窗体</param>
+</member>
+<member name="P:Wangk.ResourceWPF.FolderBrowserDialog.MainForm">
+ <summary>依附的主窗体</summary>
+</member>
+<member name="P:Wangk.ResourceWPF.FolderBrowserDialog.DirectoryPath">
+ <summary>获取在 FolderBrowser 中选择的文件夹路径</summary>
+</member>
+<member name="M:Wangk.ResourceWPF.FolderBrowserDialog.ShowDialog">
+ <summary>向用户显示 FolderBrowser 的对话框</summary>
+</member>
+<member name="M:Wangk.ResourceWPF.FolderBrowserDialog.ShowDialog(System.Windows.Forms.IWin32Window)">
+ <summary>向用户显示 FolderBrowser 的对话框</summary>
+ <param name="owner">任何实现 System.Windows.Forms.IWin32Window（表示将拥有模式对话框的顶级窗口）的对象。</param>
+</member>
 <member name="T:Wangk.ResourceWPF.ToastWindow">
 <summary>
 ToastWindow

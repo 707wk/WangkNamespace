@@ -68,6 +68,7 @@
   <ItemGroup>
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System" />
@@ -111,6 +112,7 @@
     </Compile>
     <Compile Include="CodeHelper.vb" />
     <Compile Include="ConsoleDebug.vb" />
+    <Compile Include="FolderBrowserDialog.vb" />
     <Compile Include="My Project\AssemblyInfo.vb">
       <SubType>Code</SubType>
     </Compile>
