@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Wangk.ResourceWPF"
         mc:Ignorable="d"
         Title="BackgroundWorkWindow"
-        Height="180"
+        Height="160"
         Width="600"
         ShowInTaskbar="False"
         WindowStartupLocation="CenterOwner"
@@ -45,6 +45,20 @@
                            TextWrapping="Wrap"
                            VerticalAlignment="Center"
                            Text="加载中" />
+
+                <Button Grid.Column="1"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Right"
+                        Margin="4"
+                        Padding="5"
+                        Click="CancelButton_Click"
+                        Background="Transparent"
+                        BorderThickness="0">
+
+                    <Image Source="/Wangk.ResourceWPF;component/Resources/no_16px.png"
+                           Stretch="None" />
+
+                </Button>
             </Grid>
 
             <ProgressBar x:Name="MessageProgressBar"
@@ -64,8 +78,8 @@
 
             <Border Grid.Row="4"
                     CornerRadius="0,0,8,8"
-                    Background="#575757">
-                <Button VerticalAlignment="Center"
+                    Background="#575757" Height="22">
+                <!--<Button VerticalAlignment="Center"
                         HorizontalAlignment="Right"
                         Margin="8"
                         Padding="5"
@@ -88,7 +102,7 @@
                                    Margin="3,0,0,0" />
                     </Grid>
 
-                </Button>
+                </Button>-->
             </Border>
 
         </Grid>
