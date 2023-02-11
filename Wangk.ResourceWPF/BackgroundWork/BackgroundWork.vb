@@ -14,9 +14,20 @@
 
     Private ShowWindow As BackgroundWorkWindow
 
+    Public Sub New()
+        ShowWindow = New BackgroundWorkWindow
+
+        ShowWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen
+
+    End Sub
     Public Sub New(parent As Window)
         ShowWindow = New BackgroundWorkWindow
         ShowWindow.Owner = parent
+
+        If ShowWindow.Owner Is Nothing Then
+            ShowWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen
+        End If
+
     End Sub
 
     Public Sub New(parent As DependencyObject)
