@@ -1,15 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29613.14
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33424.131
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Wangk.Resource", "Wangk.Resource\Wangk.Resource.vbproj", "{04C22BE8-FFAB-4267-945B-282F72F4FC63}"
-EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Wangk.Hash", "Wangk.Hash\Wangk.Hash.vbproj", "{482D7800-C663-476E-9744-60D5D592ADA5}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Wangk.ResourceWPF", "Wangk.ResourceWPF\Wangk.ResourceWPF.vbproj", "{7D4CE795-D8E9-426F-80B6-D3399E5D8D9A}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DownloadUpdate", "DownloadUpdate\DownloadUpdate.vbproj", "{8C3B485E-B3D9-4286-939A-13B68FFD8F27}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Wangk.Hash", "Wangk.Hash\Wangk.Hash.vbproj", "{93A3D809-A891-4CF0-BAEA-1EBA4933E19B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,14 +27,6 @@ Global
 		{04C22BE8-FFAB-4267-945B-282F72F4FC63}.Release|Any CPU.Build.0 = Release|Any CPU
 		{04C22BE8-FFAB-4267-945B-282F72F4FC63}.Release|x86.ActiveCfg = Release|x86
 		{04C22BE8-FFAB-4267-945B-282F72F4FC63}.Release|x86.Build.0 = Release|x86
-		{482D7800-C663-476E-9744-60D5D592ADA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{482D7800-C663-476E-9744-60D5D592ADA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{482D7800-C663-476E-9744-60D5D592ADA5}.Debug|x86.ActiveCfg = Debug|x86
-		{482D7800-C663-476E-9744-60D5D592ADA5}.Debug|x86.Build.0 = Debug|x86
-		{482D7800-C663-476E-9744-60D5D592ADA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{482D7800-C663-476E-9744-60D5D592ADA5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{482D7800-C663-476E-9744-60D5D592ADA5}.Release|x86.ActiveCfg = Release|x86
-		{482D7800-C663-476E-9744-60D5D592ADA5}.Release|x86.Build.0 = Release|x86
 		{7D4CE795-D8E9-426F-80B6-D3399E5D8D9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7D4CE795-D8E9-426F-80B6-D3399E5D8D9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D4CE795-D8E9-426F-80B6-D3399E5D8D9A}.Debug|x86.ActiveCfg = Debug|x86
@@ -51,6 +43,14 @@ Global
 		{8C3B485E-B3D9-4286-939A-13B68FFD8F27}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8C3B485E-B3D9-4286-939A-13B68FFD8F27}.Release|x86.ActiveCfg = Release|x86
 		{8C3B485E-B3D9-4286-939A-13B68FFD8F27}.Release|x86.Build.0 = Release|x86
+		{93A3D809-A891-4CF0-BAEA-1EBA4933E19B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93A3D809-A891-4CF0-BAEA-1EBA4933E19B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93A3D809-A891-4CF0-BAEA-1EBA4933E19B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{93A3D809-A891-4CF0-BAEA-1EBA4933E19B}.Debug|x86.Build.0 = Debug|Any CPU
+		{93A3D809-A891-4CF0-BAEA-1EBA4933E19B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93A3D809-A891-4CF0-BAEA-1EBA4933E19B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93A3D809-A891-4CF0-BAEA-1EBA4933E19B}.Release|x86.ActiveCfg = Release|Any CPU
+		{93A3D809-A891-4CF0-BAEA-1EBA4933E19B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

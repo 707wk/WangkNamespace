@@ -1,5 +1,5 @@
 ﻿''' <summary>
-''' ID辅助类
+''' ID辅助模块
 ''' </summary>
 Public Class IDHelper
 
@@ -8,7 +8,8 @@ Public Class IDHelper
     ''' </summary>
     Public Shared ReadOnly Property NewID As String
         Get
-            Return $"{DateTime.Now:yyyyMMddHHmmssff}{Guid.NewGuid().ToString().Replace("-", "")}"
+            Return $"{Date.Now:yyyyMMddHHmmssff}{Guid.NewGuid().ToString().Replace("-", "")}"
         End Get
     End Property
+
 End Class

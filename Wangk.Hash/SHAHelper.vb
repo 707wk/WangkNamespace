@@ -1,6 +1,8 @@
 ﻿Imports System.IO
 Imports System.Security.Cryptography
-
+''' <summary>
+''' 哈希计算辅助模块
+''' </summary>
 Public Class SHAHelper
 
     ''' <summary>
