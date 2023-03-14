@@ -1,5 +1,8 @@
 ﻿Imports System.Runtime.CompilerServices
 
+''' <summary>
+''' 代码辅助模块
+''' </summary>
 Public Class CodeHelper
 
 #Region "获取代码位置"

@@ -110,7 +110,6 @@
     <Compile Include="BackgroundWork\ucSpinnerDotCircle.xaml.vb">
       <DependentUpon>ucSpinnerDotCircle.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CodeHelper.vb" />
     <Compile Include="ConsoleDebug.vb" />
     <Compile Include="FolderBrowserDialog.vb" />
     <Compile Include="My Project\AssemblyInfo.vb">
