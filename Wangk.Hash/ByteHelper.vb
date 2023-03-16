@@ -8,6 +8,8 @@ Public Class ByteHelper
     ''' </summary>
     Public Shared Function Hex2Byte(ByVal HexStr As String) As Byte()
 
+        HexStr = HexStr.Replace(" ", "")
+
         Dim tmpArray(HexStr.Length \ 2 - 1) As Byte
 
         For i As Integer = 0 To tmpArray.Length - 1
