@@ -114,16 +114,34 @@ Public Class CRCHelper
     ''' </summary>
     Public Shared Function GetCRC16Modbus(ByVal array As Byte()) As Byte()
 
-        Dim hight As UShort = &HFF
-        Dim low As UShort = &HFF
+        Return GetCRC16Modbus(array, array.Length)
 
-        For Each i In array
-            Dim Index As Byte = low Xor i
-            low = hight Xor CRC16TABLE_HI(Index)
-            hight = CRC16TABLE_LO(Index)
-        Next
+    End Function
 
-        Return BitConverter.GetBytes(hight << 8 Or low)
+    ''' <summary>
+    ''' 校验CRC16校验码
+    ''' </summary>
+    Public Shared Function CheckCRC16Modbus(ByVal array As Byte(), ByVal length As Integer) As Boolean
+
+        ' 校验回复结果
+        Dim CRCCode = Wangk.Hash.CRCHelper.GetCRC16Modbus(array, length - 2)
+
+        If array(length - 2) <> CRCCode(0) OrElse
+            array(length - 1) <> CRCCode(1) Then
+            ' 校验失败
+            Return False
+        End If
+
+        Return True
+
+    End Function
+
+    ''' <summary>
+    ''' 校验CRC16校验码
+    ''' </summary>
+    Public Shared Function CheckCRC16Modbus(ByVal array As Byte()) As Boolean
+
+        Return CheckCRC16Modbus(array, array.Length)
 
     End Function
 
