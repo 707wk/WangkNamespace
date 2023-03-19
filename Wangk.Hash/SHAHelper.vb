@@ -32,7 +32,7 @@ Public Class SHAHelper
 
         Using fs As New FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)
 
-            Dim Sha512 As SHA512Managed = New SHA512Managed()
+            Dim Sha512 As New SHA512Managed()
             Dim bytes = Sha512.ComputeHash(fs)
 
             Return BitConverter.ToString(bytes).Replace("-", "").ToLower

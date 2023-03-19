@@ -1,7 +1,7 @@
 ﻿''' <summary>
 ''' 为运行事件提供数据
 ''' </summary>
-Public Interface WorkEventArgs
+Public Interface IWorkEventArgs
 
     ''' <summary>
     ''' 传递的参数

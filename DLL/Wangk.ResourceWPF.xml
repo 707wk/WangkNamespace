@@ -149,12 +149,12 @@ InitializeComponent
  输出的信息
  </summary>
 </member>
-<member name="T:Wangk.ResourceWPF.ucSpinnerDotCircle">
+<member name="T:Wangk.ResourceWPF.UcSpinnerDotCircle">
 <summary>
-ucSpinnerDotCircle
+UcSpinnerDotCircle
 </summary>
 </member>
-<member name="M:Wangk.ResourceWPF.ucSpinnerDotCircle.InitializeComponent">
+<member name="M:Wangk.ResourceWPF.UcSpinnerDotCircle.InitializeComponent">
 <summary>
 InitializeComponent
 </summary>
@@ -177,6 +177,16 @@ InitializeComponent
 <member name="M:Wangk.ResourceWPF.ConsoleDebug.Close">
  <summary>
  关闭终端
+ </summary>
+</member>
+<member name="T:Wangk.ResourceWPF.FileHelper">
+ <summary>
+ 文件操作辅助模块
+ </summary>
+</member>
+<member name="M:Wangk.ResourceWPF.FileHelper.Open(System.String)">
+ <summary>
+ 调用系统方式打开文件
  </summary>
 </member>
 <member name="T:Wangk.ResourceWPF.FolderNameEditor">
@@ -235,36 +245,6 @@ InitializeComponent
  <typeparam name="ChildT">子节点类型</typeparam>
  <param name="parent">父对象</param>
  <returns>子节点</returns>
-</member>
-<member name="T:Wangk.ResourceWPF.XamlGeneratedNamespace.GeneratedInternalTypeHelper">
-<summary>
-GeneratedInternalTypeHelper
-</summary>
-</member>
-<member name="M:Wangk.ResourceWPF.XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
-<summary>
-CreateInstance
-</summary>
-</member>
-<member name="M:Wangk.ResourceWPF.XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
-<summary>
-GetPropertyValue
-</summary>
-</member>
-<member name="M:Wangk.ResourceWPF.XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
-<summary>
-SetPropertyValue
-</summary>
-</member>
-<member name="M:Wangk.ResourceWPF.XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
-<summary>
-CreateDelegate
-</summary>
-</member>
-<member name="M:Wangk.ResourceWPF.XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
-<summary>
-AddEventHandler
-</summary>
 </member>
 </members>
 </doc>

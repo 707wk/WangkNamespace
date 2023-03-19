@@ -38,7 +38,7 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
-                <local:ucSpinnerDotCircle Margin="15,0,10,0" />
+                <local:UcSpinnerDotCircle Margin="15,0,10,0" />
                 <TextBlock x:Name="MessageText"
                            Grid.Column="1"
                            TextWrapping="Wrap"

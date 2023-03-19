@@ -44,7 +44,7 @@ Public Class FolderBrowserDialog
     Public Sub New()
     End Sub
 
-    Private mainFrm As Form
+    Private ReadOnly mainFrm As Form
     ''' <summary>初始化 FolderBrowser 的新实例</summary>
     ''' <param name="frm">依附的主窗体</param>
     Public Sub New(ByVal frm As Form)
@@ -67,7 +67,7 @@ Public Class FolderBrowserDialog
         Dim hwndOwner As IntPtr = If(owner IsNot Nothing, owner.Handle, GetActiveWindow())
         Dim dialog As IFileOpenDialog = CType(New FileOpenDialog(), IFileOpenDialog)
         Try
-            Dim item As IShellItem
+            Dim item As IShellItem = Nothing
             If Not String.IsNullOrEmpty(DirectoryPath) Then
                 Dim idl As IntPtr
                 Dim atts As UInteger = 0
@@ -87,7 +87,7 @@ Public Class FolderBrowserDialog
                 Return DialogResult.Abort
             End If
             dialog.GetResult(item)
-            Dim path As String
+            Dim path As String = Nothing
             item.GetDisplayName(SIGDN.SIGDN_FILESYSPATH, path)
             DirectoryPath = path
             Return DialogResult.OK

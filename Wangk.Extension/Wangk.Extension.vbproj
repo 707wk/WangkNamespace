@@ -1,14 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <RootNamespace>Wangk.Hash</RootNamespace>
+        <RootNamespace>Wangk.Extension</RootNamespace>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <FileVersion>1.0.2303.28</FileVersion>
-        <Copyright>Copyright © GT-Soft Studio</Copyright>
         <Company>GT-Soft Studio</Company>
+        <Copyright>Copyright © GT-Soft Studio</Copyright>
         <OutputPath>..\DLL\</OutputPath>
+        <FileVersion>1.0.2303.6</FileVersion>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'" />
+
+    <ItemGroup>
+        <PackageReference Include="EPPlus" Version="*" />
+    </ItemGroup>
 
 </Project>

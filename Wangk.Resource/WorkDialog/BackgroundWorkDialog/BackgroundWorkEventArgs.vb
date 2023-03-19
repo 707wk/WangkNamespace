@@ -2,7 +2,7 @@
 ''' 为后台运行提供数据
 ''' </summary>
 Public Interface BackgroundWorkEventArgs
-    Inherits WorkEventArgs
+    Inherits IWorkEventArgs
 
     ''' <summary>
     ''' 是否取消

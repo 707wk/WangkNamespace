@@ -107,10 +107,11 @@
       <DependentUpon>BackgroundWorkWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="BackgroundWork\IBackgroundWorkEventArgs.vb" />
-    <Compile Include="BackgroundWork\ucSpinnerDotCircle.xaml.vb">
-      <DependentUpon>ucSpinnerDotCircle.xaml</DependentUpon>
+    <Compile Include="BackgroundWork\UcSpinnerDotCircle.xaml.vb">
+      <DependentUpon>UcSpinnerDotCircle.xaml</DependentUpon>
     </Compile>
     <Compile Include="ConsoleDebug.vb" />
+    <Compile Include="FileHelper.vb" />
     <Compile Include="FolderBrowserDialog.vb" />
     <Compile Include="My Project\AssemblyInfo.vb">
       <SubType>Code</SubType>
@@ -125,6 +126,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="StringHelper.vb" />
     <Compile Include="Toast\Toast.vb" />
     <Compile Include="Toast\ToastWindow.xaml.vb">
       <DependentUpon>ToastWindow.xaml</DependentUpon>
@@ -154,7 +156,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BackgroundWork\ucSpinnerDotCircle.xaml">
+    <Page Include="BackgroundWork\UcSpinnerDotCircle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -354,7 +354,7 @@ Wangk.Resource
  窗口图标
  </summary>
 </member>
-<member name="M:Wangk.Resource.UIWorkDialog.Start(System.Action{Wangk.Resource.UIWorkEventArgs},System.Object)">
+<member name="M:Wangk.Resource.UIWorkDialog.Start(System.Action{Wangk.Resource.IUIWorkEventArgs},System.Object)">
  <summary>
  开始执行后台事件
  </summary>
@@ -371,7 +371,7 @@ Wangk.Resource
  发生的错误
  </summary>
 </member>
-<member name="T:Wangk.Resource.UIWorkEventArgs">
+<member name="T:Wangk.Resource.IUIWorkEventArgs">
  <summary>
  为前台运行提供数据
  </summary>
@@ -396,7 +396,7 @@ Wangk.Resource
  发生的错误
  </summary>
 </member>
-<member name="M:Wangk.Resource.WB7CA71228C7CFDE3C7297F7A4667F01D.Start(System.Action{Wangk.Resource.UIWorkEventArgs})">
+<member name="M:Wangk.Resource.WB7CA71228C7CFDE3C7297F7A4667F01D.Start(System.Action{Wangk.Resource.IUIWorkEventArgs})">
  <summary>
  开始执行后台事件
  </summary>
@@ -408,22 +408,22 @@ Wangk.Resource
  </summary>
  <param name="msg">输出信息</param>
 </member>
-<member name="T:Wangk.Resource.WorkEventArgs">
+<member name="T:Wangk.Resource.IWorkEventArgs">
  <summary>
  为运行事件提供数据
  </summary>
 </member>
-<member name="P:Wangk.Resource.WorkEventArgs.Args">
+<member name="P:Wangk.Resource.IWorkEventArgs.Args">
  <summary>
  传递的参数
  </summary>
 </member>
-<member name="P:Wangk.Resource.WorkEventArgs.Result">
+<member name="P:Wangk.Resource.IWorkEventArgs.Result">
  <summary>
  操作结果
  </summary>
 </member>
-<member name="M:Wangk.Resource.WorkEventArgs.Write(System.String)">
+<member name="M:Wangk.Resource.IWorkEventArgs.Write(System.String)">
  <summary>
  输出提示
  </summary>

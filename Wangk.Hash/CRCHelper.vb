@@ -56,10 +56,10 @@ Public Class CRCHelper
             crc = crc Xor array(i)
             For j As Integer = 0 To 7 Step 1
                 If (crc And &H1) > 0 Then
-                    crc = crc >> 1
+                    crc >>= 1
                     crc = crc Xor &HA001
                 Else
-                    crc = crc >> 1
+                    crc >>= 1
                 End If
             Next j
         Next i
@@ -79,10 +79,10 @@ Public Class CRCHelper
             crc = crc Xor array(i)
             For j As Integer = 0 To 7 Step 1
                 If (crc And &H1) > 0 Then
-                    crc = crc >> 1
+                    crc >>= 1
                     crc = crc Xor &HA001
                 Else
-                    crc = crc >> 1
+                    crc >>= 1
                 End If
             Next j
         Next i

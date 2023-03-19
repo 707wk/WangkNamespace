@@ -12,17 +12,18 @@
         End Set
     End Property
 
-    Private ShowWindow As BackgroundWorkWindow
+    Private ReadOnly ShowWindow As BackgroundWorkWindow
 
     Public Sub New()
-        ShowWindow = New BackgroundWorkWindow
-
-        ShowWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen
+        ShowWindow = New BackgroundWorkWindow With {
+            .WindowStartupLocation = WindowStartupLocation.CenterScreen
+        }
 
     End Sub
     Public Sub New(parent As Window)
-        ShowWindow = New BackgroundWorkWindow
-        ShowWindow.Owner = parent
+        ShowWindow = New BackgroundWorkWindow With {
+            .Owner = parent
+        }
 
         If ShowWindow.Owner Is Nothing Then
             ShowWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen
@@ -31,8 +32,9 @@
     End Sub
 
     Public Sub New(parent As DependencyObject)
-        ShowWindow = New BackgroundWorkWindow
-        ShowWindow.Owner = Window.GetWindow(parent)
+        ShowWindow = New BackgroundWorkWindow With {
+            .Owner = Window.GetWindow(parent)
+        }
 
         If ShowWindow.Owner Is Nothing Then
             ShowWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen

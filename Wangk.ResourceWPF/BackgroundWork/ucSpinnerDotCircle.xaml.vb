@@ -1,3 +1,3 @@
-﻿Public Class ucSpinnerDotCircle
+﻿Public Class UcSpinnerDotCircle
 
 End Class
