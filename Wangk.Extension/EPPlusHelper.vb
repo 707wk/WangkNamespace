@@ -2,7 +2,7 @@
 Imports System.Runtime.CompilerServices
 Imports OfficeOpenXml
 
-Module EPPlusHelper
+Public Module EPPlusHelper
 
 #Region "将数据导入表格"
     ''' <summary>
@@ -93,6 +93,9 @@ Module EPPlusHelper
                     Else
                         workSheet.Column(i001).Style.Numberformat.Format = "#,##0.00"
                     End If
+
+                Case GetType(DateTime)
+                    workSheet.Column(i001).Style.Numberformat.Format = "yyyy/MM/dd hh:mm:ss;@"
 
                 Case Else
                     workSheet.Column(i001).Style.Numberformat.Format = "@"
