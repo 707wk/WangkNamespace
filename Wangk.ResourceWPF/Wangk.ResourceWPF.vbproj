@@ -131,6 +131,7 @@
     <Compile Include="Toast\ToastWindow.xaml.vb">
       <DependentUpon>ToastWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WindowHelper.vb" />
     <Compile Include="WPFVisualTreeHelper.vb" />
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
