@@ -23,9 +23,9 @@
         <Style x:Key="NormalBorderStyle"
                TargetType="Border">
             <Setter Property="Background"
-                    Value="#FF1296DB" />
+                    Value="#FF177cb0" />
             <Setter  Property="BorderBrush"
-                     Value="#7F1296DB" />
+                     Value="#7F177cb0" />
         </Style>
         <Style x:Key="NormalImageStyle"
                TargetType="Image">
@@ -37,9 +37,9 @@
         <Style x:Key="SuccessBorderStyle"
                TargetType="Border">
             <Setter Property="Background"
-                    Value="#FF7FBB42" />
+                    Value="#FF0aa344" />
             <Setter  Property="BorderBrush"
-                     Value="#7F7FBB42" />
+                     Value="#7F0aa344" />
         </Style>
         <Style x:Key="SuccessImageStyle"
                TargetType="Image">
@@ -51,9 +51,9 @@
         <Style x:Key="WarningBorderStyle"
                TargetType="Border">
             <Setter Property="Background"
-                    Value="#FFFDB813" />
+                    Value="#FFff7500" />
             <Setter  Property="BorderBrush"
-                     Value="#7FFDB813" />
+                     Value="#7Fff7500" />
         </Style>
         <Style x:Key="WarningImageStyle"
                TargetType="Image">
@@ -65,9 +65,9 @@
         <Style x:Key="ErrorBorderStyle"
                TargetType="Border">
             <Setter Property="Background"
-                    Value="#FFF05113" />
+                    Value="#FFed5736" />
             <Setter  Property="BorderBrush"
-                     Value="#7FF05113" />
+                     Value="#7Fed5736" />
         </Style>
         <Style x:Key="ErrorImageStyle"
                TargetType="Image">
