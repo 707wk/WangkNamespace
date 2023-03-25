@@ -71,4 +71,20 @@ Public Class ByteHelper
 
     End Function
 
+    ''' <summary>
+    ''' 设置字节的位状态
+    ''' </summary>
+    ''' <param name="byteData">字节数据</param>
+    ''' <param name="index">位序号</param>
+    ''' <param name="BitValue">位的值</param>
+    Public Shared Function SetBitValue(byteData As Byte, index As Integer, BitValue As Boolean) As Byte
+
+        If BitValue Then
+            Return byteData Or (&H1 << (index Mod 8))
+        Else
+            Return byteData And Not (&H1 << (index Mod 8))
+        End If
+
+    End Function
+
 End Class
