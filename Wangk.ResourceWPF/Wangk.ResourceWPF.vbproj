@@ -110,9 +110,11 @@
     <Compile Include="BackgroundWork\UcSpinnerDotCircle.xaml.vb">
       <DependentUpon>UcSpinnerDotCircle.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ConsoleDebug.vb" />
     <Compile Include="FileHelper.vb" />
     <Compile Include="FolderBrowserDialog.vb" />
+    <Compile Include="InputBox\InputBox.xaml.vb">
+      <DependentUpon>InputBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb">
       <SubType>Code</SubType>
     </Compile>
@@ -161,6 +163,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="InputBox\InputBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Toast\ToastWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -168,6 +174,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\no_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\TestCoveredFailing_16x.png" />
+    <Resource Include="Resources\TestCoveredPassing_16x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

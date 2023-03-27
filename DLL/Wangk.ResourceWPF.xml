@@ -159,26 +159,6 @@ UcSpinnerDotCircle
 InitializeComponent
 </summary>
 </member>
-<member name="T:Wangk.ResourceWPF.ConsoleDebug">
- <summary>
- 终端调试
- </summary>
-</member>
-<member name="M:Wangk.ResourceWPF.ConsoleDebug.FreeConsole">
- <summary>
- 释放控制台窗口
- </summary>
-</member>
-<member name="M:Wangk.ResourceWPF.ConsoleDebug.Open">
- <summary>
- 打开终端
- </summary>
-</member>
-<member name="M:Wangk.ResourceWPF.ConsoleDebug.Close">
- <summary>
- 关闭终端
- </summary>
-</member>
 <member name="T:Wangk.ResourceWPF.FileHelper">
  <summary>
  文件操作辅助模块
@@ -214,6 +194,16 @@ InitializeComponent
 <member name="M:Wangk.ResourceWPF.FolderBrowserDialog.ShowDialog(System.Windows.Forms.IWin32Window)">
  <summary>向用户显示 FolderBrowser 的对话框</summary>
  <param name="owner">任何实现 System.Windows.Forms.IWin32Window（表示将拥有模式对话框的顶级窗口）的对象。</param>
+</member>
+<member name="T:Wangk.ResourceWPF.InputBox">
+<summary>
+InputBox
+</summary>
+</member>
+<member name="M:Wangk.ResourceWPF.InputBox.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
 </member>
 <member name="T:Wangk.ResourceWPF.ToastWindow">
 <summary>
