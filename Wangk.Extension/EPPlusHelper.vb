@@ -8,17 +8,40 @@ Public Module EPPlusHelper
     ''' <summary>
     ''' 将数据导入表格
     ''' </summary>
+    ''' <param name="worksheets">表格集合</param>
+    ''' <param name="Name">表格名称</param>
+    ''' <param name="reader">数据源</param>
+    ''' <param name="descriptions">数据说明</param>
     <Extension()>
     Public Function Add(ByRef worksheets As ExcelWorksheets,
                         Name As String,
-                        reader As IDataReader) As ExcelWorksheet
+                        reader As IDataReader,
+                        Optional descriptions As String() = Nothing) As ExcelWorksheet
 
         Dim tmpWorkSheet = worksheets.Add(Name)
 
-        CreateSheetColumns(tmpWorkSheet, reader)
+        Dim rowIndex = 1
+
+        ' 数据说明
+        If descriptions IsNot Nothing AndAlso
+            descriptions.Count > 0 Then
+
+            rowIndex = descriptions.Count + 1
+
+            For i001 = 1 To descriptions.Count
+                tmpWorkSheet.Row(i001).Merged = True
+                tmpWorkSheet.Cells(i001, 1).Value = descriptions(i001 - 1)
+
+                tmpWorkSheet.Row(i001).Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid
+                tmpWorkSheet.Row(i001).Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.FromArgb(255, 192, 0))
+
+            Next
+
+        End If
+
+        CreateSheetColumns(tmpWorkSheet, rowIndex, reader)
 
         ' 循环读取
-        Dim rowIndex = 1
         While reader.Read
 
             ' 填充数据
@@ -56,7 +79,8 @@ Public Module EPPlusHelper
     ''' 创建表格列
     ''' </summary>
     Private Sub CreateSheetColumns(workSheet As ExcelWorksheet,
-                                  reader As IDataReader)
+                                   startRowIndex As Integer,
+                                   reader As IDataReader)
 
         Dim headNameItems As New List(Of String)
         For i001 = 0 To reader.FieldCount - 1
@@ -64,18 +88,18 @@ Public Module EPPlusHelper
         Next
 
         For i001 = 1 To headNameItems.Count
-            workSheet.Cells(1, i001).Value = headNameItems(i001 - 1)
+            workSheet.Cells(startRowIndex, i001).Value = headNameItems(i001 - 1)
         Next
 
         ' 列标题筛选
-        workSheet.Cells($"1:1").AutoFilter = True
+        workSheet.Cells($"{startRowIndex}:{startRowIndex}").AutoFilter = True
 
         ' 设置标题背景色
-        workSheet.Cells($"1:1").Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid
-        workSheet.Cells($"1:1").Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.YellowGreen)
+        workSheet.Cells($"{startRowIndex}:{startRowIndex}").Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid
+        workSheet.Cells($"{startRowIndex}:{startRowIndex}").Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.YellowGreen)
 
         ' 首行冻结
-        workSheet.View.FreezePanes(2, 1)
+        workSheet.View.FreezePanes(startRowIndex + 1, 1)
 
         ' 设置列格式
         For i001 = 1 To reader.FieldCount
