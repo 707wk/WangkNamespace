@@ -1,4 +1,5 @@
 ﻿Imports System.Data
+Imports System.Data.Common
 Imports System.Runtime.CompilerServices
 Imports OfficeOpenXml
 
@@ -13,7 +14,7 @@ Public Module EPPlusHelper
     ''' <param name="reader">数据源</param>
     ''' <param name="descriptions">数据说明</param>
     <Extension()>
-    Public Function Add(ByRef worksheets As ExcelWorksheets,
+    Public Function Add(worksheets As ExcelWorksheets,
                         Name As String,
                         reader As IDataReader,
                         Optional descriptions As String() = Nothing) As ExcelWorksheet
