@@ -23,9 +23,9 @@
         <Style x:Key="NormalBorderStyle"
                TargetType="Border">
             <Setter Property="Background"
-                    Value="#FF177cb0" />
-            <Setter  Property="BorderBrush"
-                     Value="#7F177cb0" />
+                    Value="#FF32a0da" />
+            <!--<Setter  Property="BorderBrush"
+                     Value="#7F177cb0" />-->
         </Style>
         <Style x:Key="NormalImageStyle"
                TargetType="Image">
@@ -37,9 +37,9 @@
         <Style x:Key="SuccessBorderStyle"
                TargetType="Border">
             <Setter Property="Background"
-                    Value="#FF0aa344" />
-            <Setter  Property="BorderBrush"
-                     Value="#7F0aa344" />
+                    Value="#FF7fbb42" />
+            <!--<Setter  Property="BorderBrush"
+                     Value="#7F0aa344" />-->
         </Style>
         <Style x:Key="SuccessImageStyle"
                TargetType="Image">
@@ -51,9 +51,9 @@
         <Style x:Key="WarningBorderStyle"
                TargetType="Border">
             <Setter Property="Background"
-                    Value="#FFff7500" />
-            <Setter  Property="BorderBrush"
-                     Value="#7Fff7500" />
+                    Value="#FFfdb813" />
+            <!--<Setter  Property="BorderBrush"
+                     Value="#7Fff7500" />-->
         </Style>
         <Style x:Key="WarningImageStyle"
                TargetType="Image">
@@ -65,9 +65,9 @@
         <Style x:Key="ErrorBorderStyle"
                TargetType="Border">
             <Setter Property="Background"
-                    Value="#FFed5736" />
-            <Setter  Property="BorderBrush"
-                     Value="#7Fed5736" />
+                    Value="#FFf05125" />
+            <!--<Setter  Property="BorderBrush"
+                     Value="#7Fed5736" />-->
         </Style>
         <Style x:Key="ErrorImageStyle"
                TargetType="Image">
@@ -78,7 +78,7 @@
     </Window.Resources>
 
     <Border x:Name="ToastBorder"
-            BorderThickness="1"
+            BorderThickness="0"
             CornerRadius="8"
             Style="{StaticResource NormalBorderStyle}">
         <Grid>
@@ -96,12 +96,19 @@
                    Margin="8"
                    VerticalAlignment="Top"
                    Style="{StaticResource NormalImageStyle}" />
-            <TextBlock x:Name="ToastText"
-                       Grid.Column="1"
-                       VerticalAlignment="Center"
-                       TextWrapping="Wrap"
-                       Foreground="White"
-                       Margin="8" />
+
+            <Border Grid.Column="1"
+                    Background="White"
+                    Margin="1"
+                    CornerRadius="0,8,8,0">
+                <TextBlock x:Name="ToastText"
+                           d:Text="提示内容"
+                           Foreground="#ff252525"
+                           VerticalAlignment="Center"
+                           TextWrapping="Wrap"
+                           Margin="8" />
+            </Border>
+
         </Grid>
     </Border>
 
