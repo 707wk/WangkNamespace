@@ -132,4 +132,175 @@ Public Module EPPlusHelper
     End Sub
 #End Region
 
+
+
+#Region "将BOM导入表格"
+    ''' <summary>
+    ''' 将BOM导入表格
+    ''' </summary>
+    ''' <param name="worksheets">表格集合</param>
+    ''' <param name="rootNode">BOM根节点</param>
+    <Extension()>
+    Public Function Add(worksheets As ExcelWorksheets,
+                        rootNode As BOMNodeInfo) As ExcelWorksheet
+
+        Dim tmpWorkSheet = worksheets.Add(rootNode.PH)
+
+        Dim levelColumnID = 2
+        Dim LevelMaximum = GetBOMMaxLevel(rootNode)
+        Dim PHColumnID = levelColumnID + LevelMaximum
+        Dim PMColumnID = PHColumnID + 1
+        Dim GGColumnID = PHColumnID + 2
+        Dim UnitColumnID = PHColumnID + 3
+        Dim CountColumnID = PHColumnID + 4
+        Dim PriceColumnID = PHColumnID + 5
+        Dim LocationColumnID = PHColumnID + 6
+        Dim RemarkColumnID = PHColumnID + 7
+
+        Dim MaterialFirstRowID = 4
+
+        ' 表头
+        tmpWorkSheet.Cells(1, 1).Value = "规格"
+        tmpWorkSheet.Cells(1, 2).Value = $"{rootNode.PM} / {rootNode.GG}"
+        tmpWorkSheet.Cells(1, 2, 1, RemarkColumnID).Merge = True
+
+        ' 列标题
+        tmpWorkSheet.Cells(2, 1).Value = "序号"
+        tmpWorkSheet.Cells(2, 1, 3, 1).Merge = True
+
+        tmpWorkSheet.Cells(2, levelColumnID).Value = "阶层"
+        tmpWorkSheet.Cells(2, levelColumnID, 2, PHColumnID - 1).Merge = True
+
+        For levelID = 1 To LevelMaximum
+            tmpWorkSheet.Cells(3, levelColumnID + levelID - 1).Value = levelID
+        Next
+
+        tmpWorkSheet.Cells(2, PHColumnID).Value = "品号"
+        tmpWorkSheet.Cells(2, PHColumnID, 3, PHColumnID).Merge = True
+
+        tmpWorkSheet.Cells(2, PMColumnID).Value = "品名"
+        tmpWorkSheet.Cells(2, PMColumnID, 3, PMColumnID).Merge = True
+
+        tmpWorkSheet.Cells(2, GGColumnID).Value = "规格"
+        tmpWorkSheet.Cells(2, GGColumnID, 3, GGColumnID).Merge = True
+
+        tmpWorkSheet.Cells(2, UnitColumnID).Value = "库存单位"
+        tmpWorkSheet.Cells(2, UnitColumnID, 3, UnitColumnID).Merge = True
+
+        tmpWorkSheet.Cells(2, CountColumnID).Value = "数量"
+        tmpWorkSheet.Cells(2, CountColumnID, 3, CountColumnID).Merge = True
+
+        tmpWorkSheet.Cells(2, PriceColumnID).Value = "单价"
+        tmpWorkSheet.Cells(2, PriceColumnID, 3, PriceColumnID).Merge = True
+
+        tmpWorkSheet.Cells(2, LocationColumnID).Value = "安装位置"
+        tmpWorkSheet.Cells(2, LocationColumnID, 3, LocationColumnID).Merge = True
+
+        tmpWorkSheet.Cells(2, RemarkColumnID).Value = "备注"
+        tmpWorkSheet.Cells(2, RemarkColumnID, 3, RemarkColumnID).Merge = True
+
+        ' 设置标题背景色
+        tmpWorkSheet.Cells(1, 1, 3, RemarkColumnID).Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid
+        tmpWorkSheet.Cells(1, 1, 3, RemarkColumnID).Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.YellowGreen)
+
+        ' 反向生成节点树
+        Dim TreeNodeStack As New Stack(Of BOMNodeInfo)
+        TreeNodeStack.Push(rootNode)
+
+        Dim rID = 0
+        Do While TreeNodeStack.Count > 0
+
+            Dim tmpNode = TreeNodeStack.Pop
+
+            tmpWorkSheet.Cells(MaterialFirstRowID + rID, 1).Value = rID + 1
+
+            tmpWorkSheet.Cells(MaterialFirstRowID + rID, levelColumnID + tmpNode.Level - 1).Value = "●"
+
+            tmpWorkSheet.Cells(MaterialFirstRowID + rID, PHColumnID).Value = tmpNode.PH
+            tmpWorkSheet.Cells(MaterialFirstRowID + rID, PMColumnID).Value = tmpNode.PM
+            tmpWorkSheet.Cells(MaterialFirstRowID + rID, GGColumnID).Value = tmpNode.GG
+            tmpWorkSheet.Cells(MaterialFirstRowID + rID, UnitColumnID).Value = tmpNode.Unit
+            tmpWorkSheet.Cells(MaterialFirstRowID + rID, CountColumnID).Value = tmpNode.Count
+            tmpWorkSheet.Cells(MaterialFirstRowID + rID, PriceColumnID).Value = String.Empty
+            tmpWorkSheet.Cells(MaterialFirstRowID + rID, LocationColumnID).Value = tmpNode.Location
+            tmpWorkSheet.Cells(MaterialFirstRowID + rID, RemarkColumnID).Value = tmpNode.Remark
+
+            Dim tmpList As New List(Of BOMNodeInfo)
+            For Each item In tmpNode.Nodes
+                tmpList.Insert(0, item)
+            Next
+
+            For Each item In tmpList
+                TreeNodeStack.Push(item)
+            Next
+
+            rID += 1
+        Loop
+        Dim MaterialLastRowID = MaterialFirstRowID + rID - 1
+
+        ' 对齐方式
+        tmpWorkSheet.Cells(1, 1, 3, RemarkColumnID).Style.VerticalAlignment = Style.ExcelVerticalAlignment.Center
+        tmpWorkSheet.Cells(1, 1, 3, RemarkColumnID).Style.HorizontalAlignment = Style.ExcelHorizontalAlignment.Center
+
+        tmpWorkSheet.Cells("A:A").Style.VerticalAlignment = Style.ExcelVerticalAlignment.Center
+        tmpWorkSheet.Cells("A:A").Style.HorizontalAlignment = Style.ExcelHorizontalAlignment.Center
+
+        ' 单元格值格式
+        tmpWorkSheet.Cells(1, PHColumnID, MaterialLastRowID, PHColumnID).Style.Numberformat.Format = "@"
+        tmpWorkSheet.Cells(1, CountColumnID, MaterialLastRowID, CountColumnID).Style.Numberformat.Format = "#,##0.00"
+        tmpWorkSheet.Cells(1, PriceColumnID, MaterialLastRowID, PriceColumnID).Style.Numberformat.Format = "#,##0.0000"
+
+        ' 单元格边框
+        tmpWorkSheet.Cells(1, 1, MaterialLastRowID, RemarkColumnID).Style.Border.Top.Style = Style.ExcelBorderStyle.Thin
+        tmpWorkSheet.Cells(1, 1, MaterialLastRowID, RemarkColumnID).Style.Border.Left.Style = Style.ExcelBorderStyle.Thin
+        tmpWorkSheet.Cells(1, 1, MaterialLastRowID, RemarkColumnID).Style.Border.Right.Style = Style.ExcelBorderStyle.Thin
+        tmpWorkSheet.Cells(1, 1, MaterialLastRowID, RemarkColumnID).Style.Border.Bottom.Style = Style.ExcelBorderStyle.Thin
+
+        ' 显示字体
+        tmpWorkSheet.Cells(1, 1, tmpWorkSheet.Dimension.End.Row, tmpWorkSheet.Dimension.End.Column).Style.Font.Name = "宋体"
+
+        ' 自动列宽
+        tmpWorkSheet.Cells.AutoFitColumns()
+        ' 阶层固定列宽
+        For colID = levelColumnID To PHColumnID - 1
+            tmpWorkSheet.Column(colID).Width = 3
+        Next
+
+        ' 自动行高
+        For i001 = 1 To tmpWorkSheet.Dimension.End.Row
+            tmpWorkSheet.Row(i001).CustomHeight = True
+        Next
+        ' 首行两倍高度
+        tmpWorkSheet.Row(1).Height *= 2
+
+        Return tmpWorkSheet
+    End Function
+#End Region
+
+
+#Region "获取BOM最大阶层数"
+    ''' <summary>
+    ''' 获取BOM最大阶层数
+    ''' </summary>
+    Public Function GetBOMMaxLevel(value As BOMNodeInfo) As Integer
+
+        If value.Nodes.Count = 0 Then
+            Return value.Level
+        End If
+
+        Dim childLevel = 1
+
+        For Each item In value.Nodes
+            Dim itemLevel = GetBOMMaxLevel(item)
+
+            If itemLevel > childLevel Then
+                childLevel = itemLevel
+            End If
+        Next
+
+        Return childLevel
+
+    End Function
+#End Region
+
 End Module
