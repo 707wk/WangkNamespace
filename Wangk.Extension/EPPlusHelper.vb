@@ -99,6 +99,11 @@ Public Module EPPlusHelper
         workSheet.Cells($"{startRowIndex}:{startRowIndex}").Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid
         workSheet.Cells($"{startRowIndex}:{startRowIndex}").Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.YellowGreen)
 
+        ' 列标题自动换行并居中
+        workSheet.Row(1).Style.HorizontalAlignment = Style.ExcelHorizontalAlignment.Center
+        workSheet.Row(1).Style.VerticalAlignment = Style.ExcelVerticalAlignment.Center
+        workSheet.Row(1).Style.WrapText = True
+
         ' 首行冻结
         workSheet.View.FreezePanes(startRowIndex + 1, 1)
 
