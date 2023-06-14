@@ -1,5 +1,4 @@
 ﻿Imports System.Data
-Imports System.Data.Common
 Imports System.Runtime.CompilerServices
 Imports OfficeOpenXml
 
@@ -137,8 +136,6 @@ Public Module EPPlusHelper
     End Sub
 #End Region
 
-
-
 #Region "将BOM导入表格"
     ''' <summary>
     ''' 将BOM导入表格
@@ -161,13 +158,14 @@ Public Module EPPlusHelper
         Dim PriceColumnID = PHColumnID + 5
         Dim LocationColumnID = PHColumnID + 6
         Dim RemarkColumnID = PHColumnID + 7
+        Dim BOMModiCountColumnID = PHColumnID + 8
 
         Dim MaterialFirstRowID = 4
 
         ' 表头
         tmpWorkSheet.Cells(1, 1).Value = "规格"
         tmpWorkSheet.Cells(1, 2).Value = $"{rootNode.PM} / {rootNode.GG}"
-        tmpWorkSheet.Cells(1, 2, 1, RemarkColumnID).Merge = True
+        tmpWorkSheet.Cells(1, 2, 1, BOMModiCountColumnID).Merge = True
 
         ' 列标题
         tmpWorkSheet.Cells(2, 1).Value = "序号"
@@ -204,9 +202,12 @@ Public Module EPPlusHelper
         tmpWorkSheet.Cells(2, RemarkColumnID).Value = "备注"
         tmpWorkSheet.Cells(2, RemarkColumnID, 3, RemarkColumnID).Merge = True
 
+        tmpWorkSheet.Cells(2, BOMModiCountColumnID).Value = "BOM变更次数"
+        tmpWorkSheet.Cells(2, BOMModiCountColumnID, 3, BOMModiCountColumnID).Merge = True
+
         ' 设置标题背景色
-        tmpWorkSheet.Cells(1, 1, 3, RemarkColumnID).Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid
-        tmpWorkSheet.Cells(1, 1, 3, RemarkColumnID).Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.YellowGreen)
+        tmpWorkSheet.Cells(1, 1, 3, BOMModiCountColumnID).Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid
+        tmpWorkSheet.Cells(1, 1, 3, BOMModiCountColumnID).Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.YellowGreen)
 
         ' 反向生成节点树
         Dim TreeNodeStack As New Stack(Of BOMNodeInfo)
@@ -229,6 +230,7 @@ Public Module EPPlusHelper
             tmpWorkSheet.Cells(MaterialFirstRowID + rID, PriceColumnID).Value = String.Empty
             tmpWorkSheet.Cells(MaterialFirstRowID + rID, LocationColumnID).Value = tmpNode.Location
             tmpWorkSheet.Cells(MaterialFirstRowID + rID, RemarkColumnID).Value = tmpNode.Remark
+            tmpWorkSheet.Cells(MaterialFirstRowID + rID, BOMModiCountColumnID).Value = tmpNode.BOMModiCount
 
             Dim tmpList As New List(Of BOMNodeInfo)
             For Each item In tmpNode.Nodes
@@ -244,8 +246,8 @@ Public Module EPPlusHelper
         Dim MaterialLastRowID = MaterialFirstRowID + rID - 1
 
         ' 对齐方式
-        tmpWorkSheet.Cells(1, 1, 3, RemarkColumnID).Style.VerticalAlignment = Style.ExcelVerticalAlignment.Center
-        tmpWorkSheet.Cells(1, 1, 3, RemarkColumnID).Style.HorizontalAlignment = Style.ExcelHorizontalAlignment.Center
+        tmpWorkSheet.Cells(1, 1, 3, BOMModiCountColumnID).Style.VerticalAlignment = Style.ExcelVerticalAlignment.Center
+        tmpWorkSheet.Cells(1, 1, 3, BOMModiCountColumnID).Style.HorizontalAlignment = Style.ExcelHorizontalAlignment.Center
 
         tmpWorkSheet.Cells("A:A").Style.VerticalAlignment = Style.ExcelVerticalAlignment.Center
         tmpWorkSheet.Cells("A:A").Style.HorizontalAlignment = Style.ExcelHorizontalAlignment.Center
@@ -254,12 +256,13 @@ Public Module EPPlusHelper
         tmpWorkSheet.Cells(1, PHColumnID, MaterialLastRowID, PHColumnID).Style.Numberformat.Format = "@"
         tmpWorkSheet.Cells(1, CountColumnID, MaterialLastRowID, CountColumnID).Style.Numberformat.Format = "#,##0.00"
         tmpWorkSheet.Cells(1, PriceColumnID, MaterialLastRowID, PriceColumnID).Style.Numberformat.Format = "#,##0.0000"
+        tmpWorkSheet.Cells(1, CountColumnID, BOMModiCountColumnID, CountColumnID).Style.Numberformat.Format = "#,##0"
 
         ' 单元格边框
-        tmpWorkSheet.Cells(1, 1, MaterialLastRowID, RemarkColumnID).Style.Border.Top.Style = Style.ExcelBorderStyle.Thin
-        tmpWorkSheet.Cells(1, 1, MaterialLastRowID, RemarkColumnID).Style.Border.Left.Style = Style.ExcelBorderStyle.Thin
-        tmpWorkSheet.Cells(1, 1, MaterialLastRowID, RemarkColumnID).Style.Border.Right.Style = Style.ExcelBorderStyle.Thin
-        tmpWorkSheet.Cells(1, 1, MaterialLastRowID, RemarkColumnID).Style.Border.Bottom.Style = Style.ExcelBorderStyle.Thin
+        tmpWorkSheet.Cells(1, 1, MaterialLastRowID, BOMModiCountColumnID).Style.Border.Top.Style = Style.ExcelBorderStyle.Thin
+        tmpWorkSheet.Cells(1, 1, MaterialLastRowID, BOMModiCountColumnID).Style.Border.Left.Style = Style.ExcelBorderStyle.Thin
+        tmpWorkSheet.Cells(1, 1, MaterialLastRowID, BOMModiCountColumnID).Style.Border.Right.Style = Style.ExcelBorderStyle.Thin
+        tmpWorkSheet.Cells(1, 1, MaterialLastRowID, BOMModiCountColumnID).Style.Border.Bottom.Style = Style.ExcelBorderStyle.Thin
 
         ' 显示字体
         tmpWorkSheet.Cells(1, 1, tmpWorkSheet.Dimension.End.Row, tmpWorkSheet.Dimension.End.Column).Style.Font.Name = "宋体"
@@ -269,6 +272,13 @@ Public Module EPPlusHelper
         ' 阶层固定列宽
         For colID = levelColumnID To PHColumnID - 1
             tmpWorkSheet.Column(colID).Width = 3
+        Next
+        ' BOM变更次数字段
+        tmpWorkSheet.Column(BOMModiCountColumnID).Width = 14
+
+        ' 限制最大宽度
+        For i001 = 1 To BOMModiCountColumnID
+            tmpWorkSheet.Column(i001).Width = Math.Min(tmpWorkSheet.Column(i001).Width, 50)
         Next
 
         ' 自动行高

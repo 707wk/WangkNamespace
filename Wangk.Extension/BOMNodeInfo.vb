@@ -48,4 +48,9 @@ Public Class BOMNodeInfo
     ''' </summary>
     Public Property Remark As String
 
+    ''' <summary>
+    ''' BOM变更次数
+    ''' </summary>
+    Public Property BOMModiCount As Integer
+
 End Class
