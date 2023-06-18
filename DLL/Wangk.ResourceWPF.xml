@@ -220,6 +220,11 @@ InitializeComponent
  初始化子窗口样式
  </summary>
 </member>
+<member name="M:Wangk.ResourceWPF.WindowHelper.IsWindowMini(System.IntPtr)">
+ <summary>
+ 窗口是否最小化
+ </summary>
+</member>
 <member name="T:Wangk.ResourceWPF.WPFVisualTreeHelper">
  <summary>
  VisualTreeHelper辅助模块
@@ -240,6 +245,36 @@ InitializeComponent
  <typeparam name="ChildT">子节点类型</typeparam>
  <param name="parent">父对象</param>
  <returns>子节点</returns>
+</member>
+<member name="T:Wangk.ResourceWPF.XamlGeneratedNamespace.GeneratedInternalTypeHelper">
+<summary>
+GeneratedInternalTypeHelper
+</summary>
+</member>
+<member name="M:Wangk.ResourceWPF.XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
+<summary>
+CreateInstance
+</summary>
+</member>
+<member name="M:Wangk.ResourceWPF.XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
+<summary>
+GetPropertyValue
+</summary>
+</member>
+<member name="M:Wangk.ResourceWPF.XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
+<summary>
+SetPropertyValue
+</summary>
+</member>
+<member name="M:Wangk.ResourceWPF.XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
+<summary>
+CreateDelegate
+</summary>
+</member>
+<member name="M:Wangk.ResourceWPF.XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
+<summary>
+AddEventHandler
+</summary>
 </member>
 </members>
 </doc>

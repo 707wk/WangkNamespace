@@ -3,7 +3,7 @@
     <PropertyGroup>
         <RootNamespace>Wangk.Hash</RootNamespace>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <FileVersion>1.0.2306.47</FileVersion>
+        <FileVersion>1.0.2306.48</FileVersion>
         <Copyright>Copyright © GT-Soft Studio</Copyright>
         <Company>GT-Soft Studio</Company>
         <OutputPath>..\DLL\</OutputPath>

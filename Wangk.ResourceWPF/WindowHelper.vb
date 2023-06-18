@@ -7,14 +7,16 @@ Public Class WindowHelper
     Private Shared Function GetWindowLong(hWnd As IntPtr, nIndex As Integer) As Integer
 
     End Function
+
     <DllImport("user32.dll")>
     Private Shared Function SetWindowLong(hWnd As IntPtr, nIndex As Integer, dwNewLong As Integer) As Integer
 
     End Function
 
     Private Const GWL_STYLE = -16
-    Private Const WS_MAXIMIZEBOX = &H10000
+    'Private Const WS_MAXIMIZEBOX = &H10000
     Private Const WS_MINIMIZEBOX = &H20000
+    Private Const WS_MINIMIZE = &H20000000L
 
     ''' <summary>
     ''' 初始化子窗口样式
@@ -30,5 +32,15 @@ Public Class WindowHelper
         win.ShowInTaskbar = False
 
     End Sub
+
+    ''' <summary>
+    ''' 窗口是否最小化
+    ''' </summary>
+    Public Shared Function IsWindowMini(hWnd As IntPtr) As Boolean
+        Dim value = GetWindowLong(hWnd, GWL_STYLE)
+
+        Return (value And WS_MINIMIZE) = WS_MINIMIZE
+
+    End Function
 
 End Class
