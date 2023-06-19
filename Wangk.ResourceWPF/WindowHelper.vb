@@ -49,7 +49,7 @@ Public Class WindowHelper
     End Function
 
     ''' <summary>
-    ''' 窗口是否激活
+    ''' 窗口是否激活, 需要UI线程调用
     ''' </summary>
     Public Shared Function IsActiveWindow(hWnd As IntPtr) As Boolean
 

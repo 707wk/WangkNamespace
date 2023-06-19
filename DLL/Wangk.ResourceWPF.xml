@@ -227,7 +227,7 @@ InitializeComponent
 </member>
 <member name="M:Wangk.ResourceWPF.WindowHelper.IsActiveWindow(System.IntPtr)">
  <summary>
- 窗口是否激活
+ 窗口是否激活, 需要UI线程调用
  </summary>
 </member>
 <member name="T:Wangk.ResourceWPF.WPFVisualTreeHelper">
