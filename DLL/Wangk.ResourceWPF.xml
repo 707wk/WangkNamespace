@@ -225,6 +225,11 @@ InitializeComponent
  窗口是否最小化
  </summary>
 </member>
+<member name="M:Wangk.ResourceWPF.WindowHelper.IsActiveWindow(System.IntPtr)">
+ <summary>
+ 窗口是否激活
+ </summary>
+</member>
 <member name="T:Wangk.ResourceWPF.WPFVisualTreeHelper">
  <summary>
  VisualTreeHelper辅助模块

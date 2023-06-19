@@ -13,6 +13,11 @@ Public Class WindowHelper
 
     End Function
 
+    <DllImport("user32.dll")>
+    Private Shared Function GetActiveWindow() As IntPtr
+
+    End Function
+
     Private Const GWL_STYLE = -16
     'Private Const WS_MAXIMIZEBOX = &H10000
     Private Const WS_MINIMIZEBOX = &H20000
@@ -40,6 +45,15 @@ Public Class WindowHelper
         Dim value = GetWindowLong(hWnd, GWL_STYLE)
 
         Return (value And WS_MINIMIZE) = WS_MINIMIZE
+
+    End Function
+
+    ''' <summary>
+    ''' 窗口是否激活
+    ''' </summary>
+    Public Shared Function IsActiveWindow(hWnd As IntPtr) As Boolean
+
+        Return GetActiveWindow() = hWnd
 
     End Function
 
