@@ -129,6 +129,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="StringHelper.vb" />
+    <Compile Include="SystemSleepManagement.vb" />
     <Compile Include="Toast\Toast.vb" />
     <Compile Include="Toast\ToastWindow.xaml.vb">
       <DependentUpon>ToastWindow.xaml</DependentUpon>

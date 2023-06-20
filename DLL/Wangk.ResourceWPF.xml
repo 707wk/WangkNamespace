@@ -205,6 +205,28 @@ InputBox
 InitializeComponent
 </summary>
 </member>
+<member name="T:Wangk.ResourceWPF.SystemSleepManagement">
+ <summary>
+ 系统睡眠管理
+ </summary>
+</member>
+<member name="M:Wangk.ResourceWPF.SystemSleepManagement.PreventSleep(System.Boolean)">
+ <summary>
+ 阻止系统睡眠，直到线程结束恢复睡眠策略
+ </summary>
+ <param name="includeDisplay">是否阻止关闭显示器</param>
+</member>
+<member name="M:Wangk.ResourceWPF.SystemSleepManagement.RestoreSleep">
+ <summary>
+ 恢复系统睡眠策略
+ </summary>
+</member>
+<member name="M:Wangk.ResourceWPF.SystemSleepManagement.ResetSleepTimer(System.Boolean)">
+ <summary>
+ 重置系统睡眠计时器
+ </summary>
+ <param name="includeDisplay">是否阻止关闭显示器</param>
+</member>
 <member name="T:Wangk.ResourceWPF.ToastWindow">
 <summary>
 ToastWindow
