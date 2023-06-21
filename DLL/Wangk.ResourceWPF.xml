@@ -69,6 +69,33 @@ Wangk.ResourceWPF
  是否取消
  </summary>
 </member>
+<member name="T:Wangk.ResourceWPF.BackgroundWorkLayer">
+<summary>
+BackgroundWorkLayer
+</summary>
+</member>
+<member name="F:Wangk.ResourceWPF.BackgroundWorkLayer.BackgroundWorkAction">
+ <summary>
+ 后台触发事件
+ </summary>
+</member>
+<member name="P:Wangk.ResourceWPF.BackgroundWorkLayer.Error">
+ <summary>
+ 发生的错误
+ </summary>
+</member>
+<member name="M:Wangk.ResourceWPF.BackgroundWorkLayer.Run(System.Action{Wangk.ResourceWPF.IBackgroundWorkEventArgs},System.Object)">
+ <summary>
+ 开始执行后台事件
+ </summary>
+ <param name="backgroundWorkAction">后台事件</param>
+ <param name="args">传入的参数</param>
+</member>
+<member name="M:Wangk.ResourceWPF.BackgroundWorkLayer.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
 <member name="T:Wangk.ResourceWPF.BackgroundWorkWindow">
 <summary>
 BackgroundWorkWindow

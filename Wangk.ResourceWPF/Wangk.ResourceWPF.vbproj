@@ -103,6 +103,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BackgroundWork\BackgroundWork.vb" />
+    <Compile Include="BackgroundWork\BackgroundWorkLayer.xaml.vb">
+      <DependentUpon>BackgroundWorkLayer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BackgroundWork\BackgroundWorkWindow.xaml.vb">
       <DependentUpon>BackgroundWorkWindow.xaml</DependentUpon>
     </Compile>
@@ -156,6 +159,10 @@
     <Resource Include="Resources\toastInfo_32px.png" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="BackgroundWork\BackgroundWorkLayer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="BackgroundWork\BackgroundWorkWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
