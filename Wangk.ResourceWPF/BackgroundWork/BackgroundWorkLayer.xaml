@@ -6,68 +6,71 @@
              xmlns:local="clr-namespace:Wangk.ResourceWPF"
              mc:Ignorable="d"
              d:DesignHeight="450"
-             d:DesignWidth="800"
-             Background="#10000000">
+             d:DesignWidth="800">
     <Grid x:Name="ContentGrid">
-        <Border Background="#FF3D3D3D"
-                BorderThickness="1"
-                BorderBrush="#FF707070"
-                CornerRadius="8"
-                Height="120"
-                Width="600">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="15" />
-                    <RowDefinition Height="auto" />
-                </Grid.RowDefinitions>
 
+        <Grid Background="#40000000">
+            <Border Background="#FF3D3D3D"
+                    BorderThickness="1"
+                    BorderBrush="#FF707070"
+                    CornerRadius="8"
+                    Height="120"
+                    Width="600">
                 <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto" />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="15" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
 
-                    <local:UcSpinnerDotCircle Margin="15,0,10,0" />
-                    <TextBlock x:Name="MessageText"
-                               Grid.Column="1"
-                               TextWrapping="Wrap"
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <local:UcSpinnerDotCircle Margin="15,0,10,0" />
+                        <TextBlock x:Name="MessageText"
+                                   Grid.Column="1"
+                                   TextWrapping="Wrap"
+                                   VerticalAlignment="Center"
+                                   Text="加载中"
+                                   Foreground="White" />
+
+                        <Button Grid.Column="1"
+                                VerticalAlignment="Top"
+                                HorizontalAlignment="Right"
+                                Margin="4"
+                                Padding="5"
+                                Click="CancelButton_Click"
+                                Background="Transparent"
+                                BorderThickness="0">
+
+                            <Image Source="/Wangk.ResourceWPF;component/Resources/no_16px.png"
+                                   Stretch="None" />
+
+                        </Button>
+                    </Grid>
+
+                    <ProgressBar x:Name="MessageProgressBar"
+                                 Grid.Row="1"
+                                 Margin="20,0,20,0"
+                                 Height="20"
+                                 Minimum="0"
+                                 Maximum="100"
+                                 IsIndeterminate="True" />
+                    <TextBlock x:Name="MessageProgressText"
+                               Grid.Row="1"
                                VerticalAlignment="Center"
-                               Text="加载中"
-                               Foreground="White" />
+                               HorizontalAlignment="Center"
+                               Text="0%"
+                               Foreground="Black"
+                               Visibility="Hidden" />
 
-                    <Button Grid.Column="1"
-                            VerticalAlignment="Top"
-                            HorizontalAlignment="Right"
-                            Margin="4"
-                            Padding="5"
-                            Click="CancelButton_Click"
-                            Background="Transparent"
-                            BorderThickness="0">
-
-                        <Image Source="/Wangk.ResourceWPF;component/Resources/no_16px.png"
-                               Stretch="None" />
-
-                    </Button>
                 </Grid>
+            </Border>
+        </Grid>
 
-                <ProgressBar x:Name="MessageProgressBar"
-                             Grid.Row="1"
-                             Margin="20,0,20,0"
-                             Height="20"
-                             Minimum="0"
-                             Maximum="100"
-                             IsIndeterminate="True" />
-                <TextBlock x:Name="MessageProgressText"
-                           Grid.Row="1"
-                           VerticalAlignment="Center"
-                           HorizontalAlignment="Center"
-                           Text="0%"
-                           Foreground="Black"
-                           Visibility="Hidden" />
-
-            </Grid>
-        </Border>
     </Grid>
 </UserControl>
