@@ -13,8 +13,30 @@ Public Class WindowHelper
 
     End Function
 
+    ''' <summary>
+    ''' 获取程序当前活动的窗口句柄
+    ''' </summary>
     <DllImport("user32.dll")>
-    Private Shared Function GetActiveWindow() As IntPtr
+    Public Shared Function GetActiveWindow() As IntPtr
+
+    End Function
+
+    ''' <summary>
+    ''' 获取系统当前活动的窗口句柄
+    ''' </summary>
+    <DllImport("user32.dll")>
+    Public Shared Function GetForegroundWindow() As IntPtr
+
+    End Function
+
+    ''' <summary>
+    ''' 获取窗口所在进程
+    ''' </summary>
+    ''' <param name="hWnd"></param>
+    ''' <param name="lpdwProcessId">进程标识</param>
+    ''' <returns>线程标识</returns>
+    <DllImport("user32.dll")>
+    Public Shared Function GetWindowThreadProcessId(hWnd As IntPtr, <Out> ByRef lpdwProcessId As IntPtr) As Long
 
     End Function
 
