@@ -6,7 +6,7 @@ Public Module EPPlusHelper
 
 #Region "将数据导入表格"
     ''' <summary>
-    ''' 将数据导入表格
+    ''' 将数据导入表格, 标题包含 % 则按百分比显示, 包含 明细 则设置换行
     ''' </summary>
     ''' <param name="worksheets">表格集合</param>
     ''' <param name="Name">表格名称</param>
@@ -112,6 +112,10 @@ Public Module EPPlusHelper
             Select Case reader.GetFieldType(i001 - 1)
                 Case GetType(String)
                     workSheet.Column(i001).Style.Numberformat.Format = "@"
+
+                    If headNameItems(i001 - 1).Contains("明细") Then
+                        workSheet.Column(i001).Style.WrapText = True
+                    End If
 
                 Case GetType(Int32)
                     workSheet.Column(i001).Style.Numberformat.Format = "#,##0"
