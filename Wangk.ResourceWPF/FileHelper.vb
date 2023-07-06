@@ -34,8 +34,8 @@ Public Class FileHelper
     ''' <summary>
     ''' 调用系统方式打开文件
     ''' </summary>
-    Public Shared Sub Open(filePath As String)
-        ShellExecute(IntPtr.Zero, "open", filePath, "", "", ShowCommands.SW_SHOWNORMAL)
-    End Sub
+    Public Shared Function Open(filePath As String) As IntPtr
+        Return ShellExecute(IntPtr.Zero, "open", filePath, Nothing, Nothing, ShowCommands.SW_SHOWNORMAL)
+    End Function
 
 End Class
