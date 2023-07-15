@@ -301,11 +301,6 @@ ToastWindow
 InitializeComponent
 </summary>
 </member>
-<member name="M:Wangk.ResourceWPF.WindowExtension.SetOwner(System.Windows.Window,System.IntPtr)">
- <summary>
- 设置WPF窗口的所有者
- </summary>
-</member>
 <member name="M:Wangk.ResourceWPF.WindowHelper.GetActiveWindow">
  <summary>
  获取程序当前活动的窗口句柄
@@ -332,6 +327,11 @@ InitializeComponent
 <member name="M:Wangk.ResourceWPF.WindowHelper.IsWindowMini(System.IntPtr)">
  <summary>
  窗口是否最小化
+ </summary>
+</member>
+<member name="M:Wangk.ResourceWPF.WindowHelper.SetOwner(System.Windows.Window,System.IntPtr)">
+ <summary>
+ 设置WPF窗口的所有者
  </summary>
 </member>
 <member name="T:Wangk.ResourceWPF.WPFVisualTreeHelper">

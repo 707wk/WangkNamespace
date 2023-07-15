@@ -143,7 +143,6 @@
     <Compile Include="Toast\ToastWindow.xaml.vb">
       <DependentUpon>ToastWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WindowExtension.vb" />
     <Compile Include="WindowHelper.vb" />
     <Compile Include="WPFVisualTreeHelper.vb" />
     <EmbeddedResource Include="My Project\Resources.resx">

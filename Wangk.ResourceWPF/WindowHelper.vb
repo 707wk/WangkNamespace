@@ -1,4 +1,5 @@
-﻿Imports System.Runtime.InteropServices
+﻿Imports System.Runtime.CompilerServices
+Imports System.Runtime.InteropServices
 Imports System.Windows.Interop
 
 Public Class WindowHelper
@@ -69,5 +70,16 @@ Public Class WindowHelper
         Return (value And WS_MINIMIZE) = WS_MINIMIZE
 
     End Function
+
+    ''' <summary>
+    ''' 设置WPF窗口的所有者
+    ''' </summary>
+    Public Shared Sub SetOwner(windowInstance As Window, parentIntPtr As IntPtr)
+
+        Dim tmpWindowHelper = New WindowInteropHelper(windowInstance) With {
+            .Owner = parentIntPtr
+        }
+
+    End Sub
 
 End Class

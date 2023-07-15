@@ -47,7 +47,7 @@ Public Class BackgroundWork
     Public Sub New(parentIntPtr As IntPtr)
         ShowWindow = New BackgroundWorkWindow
 
-        ShowWindow.SetOwner(parentIntPtr)
+        WindowHelper.SetOwner(ShowWindow, parentIntPtr)
 
         If parentIntPtr = Nothing Then
             ShowWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen
