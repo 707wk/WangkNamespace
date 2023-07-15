@@ -96,6 +96,33 @@ BackgroundWorkLayer
 InitializeComponent
 </summary>
 </member>
+<member name="T:Wangk.ResourceWPF.BackgroundWorkLayerLite">
+<summary>
+BackgroundWorkLayerLite
+</summary>
+</member>
+<member name="F:Wangk.ResourceWPF.BackgroundWorkLayerLite.BackgroundWorkAction">
+ <summary>
+ 后台触发事件
+ </summary>
+</member>
+<member name="P:Wangk.ResourceWPF.BackgroundWorkLayerLite.Error">
+ <summary>
+ 发生的错误
+ </summary>
+</member>
+<member name="M:Wangk.ResourceWPF.BackgroundWorkLayerLite.Run(System.Action{Wangk.ResourceWPF.IBackgroundWorkEventArgs},System.Object)">
+ <summary>
+ 开始执行后台事件
+ </summary>
+ <param name="backgroundWorkAction">后台事件</param>
+ <param name="args">传入的参数</param>
+</member>
+<member name="M:Wangk.ResourceWPF.BackgroundWorkLayerLite.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
 <member name="T:Wangk.ResourceWPF.BackgroundWorkWindow">
 <summary>
 BackgroundWorkWindow
@@ -186,6 +213,16 @@ UcSpinnerDotCircle
 InitializeComponent
 </summary>
 </member>
+<member name="T:Wangk.ResourceWPF.UcSpinnerDotCircle2">
+<summary>
+UcSpinnerDotCircle2
+</summary>
+</member>
+<member name="M:Wangk.ResourceWPF.UcSpinnerDotCircle2.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
 <member name="T:Wangk.ResourceWPF.FileHelper">
  <summary>
  文件操作辅助模块
@@ -264,6 +301,11 @@ ToastWindow
 InitializeComponent
 </summary>
 </member>
+<member name="M:Wangk.ResourceWPF.WindowExtension.SetOwner(System.Windows.Window,System.IntPtr)">
+ <summary>
+ 设置WPF窗口的所有者
+ </summary>
+</member>
 <member name="M:Wangk.ResourceWPF.WindowHelper.GetActiveWindow">
  <summary>
  获取程序当前活动的窗口句柄
@@ -312,6 +354,36 @@ InitializeComponent
  <typeparam name="ChildT">子节点类型</typeparam>
  <param name="parent">父对象</param>
  <returns>子节点</returns>
+</member>
+<member name="T:Wangk.ResourceWPF.XamlGeneratedNamespace.GeneratedInternalTypeHelper">
+<summary>
+GeneratedInternalTypeHelper
+</summary>
+</member>
+<member name="M:Wangk.ResourceWPF.XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
+<summary>
+CreateInstance
+</summary>
+</member>
+<member name="M:Wangk.ResourceWPF.XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
+<summary>
+GetPropertyValue
+</summary>
+</member>
+<member name="M:Wangk.ResourceWPF.XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
+<summary>
+SetPropertyValue
+</summary>
+</member>
+<member name="M:Wangk.ResourceWPF.XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
+<summary>
+CreateDelegate
+</summary>
+</member>
+<member name="M:Wangk.ResourceWPF.XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
+<summary>
+AddEventHandler
+</summary>
 </member>
 </members>
 </doc>

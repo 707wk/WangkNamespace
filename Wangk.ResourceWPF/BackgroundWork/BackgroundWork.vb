@@ -1,4 +1,6 @@
-﻿Public Class BackgroundWork
+﻿Imports System.Windows.Interop
+
+Public Class BackgroundWork
 
     ''' <summary>
     ''' 窗口标题
@@ -37,6 +39,17 @@
         }
 
         If ShowWindow.Owner Is Nothing Then
+            ShowWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen
+        End If
+
+    End Sub
+
+    Public Sub New(parentIntPtr As IntPtr)
+        ShowWindow = New BackgroundWorkWindow
+
+        ShowWindow.SetOwner(parentIntPtr)
+
+        If parentIntPtr = Nothing Then
             ShowWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen
         End If
 

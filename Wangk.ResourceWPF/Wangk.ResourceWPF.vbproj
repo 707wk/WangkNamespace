@@ -106,12 +106,18 @@
     <Compile Include="BackgroundWork\BackgroundWorkLayer.xaml.vb">
       <DependentUpon>BackgroundWorkLayer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BackgroundWork\BackgroundWorkLayerLite.xaml.vb">
+      <DependentUpon>BackgroundWorkLayerLite.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BackgroundWork\BackgroundWorkWindow.xaml.vb">
       <DependentUpon>BackgroundWorkWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="BackgroundWork\IBackgroundWorkEventArgs.vb" />
     <Compile Include="BackgroundWork\UcSpinnerDotCircle.xaml.vb">
       <DependentUpon>UcSpinnerDotCircle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BackgroundWork\UcSpinnerDotCircle2.xaml.vb">
+      <DependentUpon>UcSpinnerDotCircle2.xaml</DependentUpon>
     </Compile>
     <Compile Include="FileHelper.vb" />
     <Compile Include="FolderBrowserDialog.vb" />
@@ -137,6 +143,7 @@
     <Compile Include="Toast\ToastWindow.xaml.vb">
       <DependentUpon>ToastWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WindowExtension.vb" />
     <Compile Include="WindowHelper.vb" />
     <Compile Include="WPFVisualTreeHelper.vb" />
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -163,11 +170,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="BackgroundWork\BackgroundWorkLayerLite.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="BackgroundWork\BackgroundWorkWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="BackgroundWork\UcSpinnerDotCircle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BackgroundWork\UcSpinnerDotCircle2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
