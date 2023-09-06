@@ -68,7 +68,7 @@ Public Class FolderBrowserDialog
         Dim dialog As IFileOpenDialog = CType(New FileOpenDialog(), IFileOpenDialog)
         Try
             Dim item As IShellItem = Nothing
-            If Not String.IsNullOrEmpty(DirectoryPath) Then
+            If Not String.IsNullOrWhiteSpace(DirectoryPath) Then
                 Dim idl As IntPtr
                 Dim atts As UInteger = 0
                 If SHILCreateFromPath(DirectoryPath, idl, atts) = 0 Then

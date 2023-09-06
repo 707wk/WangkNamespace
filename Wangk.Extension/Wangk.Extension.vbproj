@@ -6,7 +6,7 @@
         <Company>GT-Soft Studio</Company>
         <Copyright>Copyright © GT-Soft Studio</Copyright>
         <OutputPath>..\DLL\</OutputPath>
-        <FileVersion>1.0.2308.52</FileVersion>
+        <FileVersion>1.0.2309.53</FileVersion>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'" />
