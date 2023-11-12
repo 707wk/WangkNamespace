@@ -120,7 +120,6 @@
       <DependentUpon>UcSpinnerDotCircle2.xaml</DependentUpon>
     </Compile>
     <Compile Include="FileHelper.vb" />
-    <Compile Include="FolderBrowserDialog.vb" />
     <Compile Include="InputBox\InputBox.xaml.vb">
       <DependentUpon>InputBox.xaml</DependentUpon>
     </Compile>
