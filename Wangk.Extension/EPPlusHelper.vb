@@ -12,11 +12,13 @@ Public Module EPPlusHelper
     ''' <param name="Name">表格名称</param>
     ''' <param name="reader">数据源</param>
     ''' <param name="descriptions">数据说明</param>
+    ''' <param name="autoSize">自动调整行列尺寸</param>
     <Extension()>
     Public Function Add(worksheets As ExcelWorksheets,
                         Name As String,
                         reader As IDataReader,
-                        Optional descriptions As String() = Nothing) As ExcelWorksheet
+                        Optional descriptions As String() = Nothing,
+                        Optional autoSize As Boolean = False) As ExcelWorksheet
 
         Dim tmpWorkSheet = worksheets.Add(Name)
 
@@ -57,18 +59,29 @@ Public Module EPPlusHelper
 
         End While
 
-        ' 自动列宽
-        tmpWorkSheet.Cells.AutoFitColumns()
+        If autoSize Then
 
-        ' 限制最大宽度
-        For i001 = 1 To reader.FieldCount
-            tmpWorkSheet.Column(i001).Width = Math.Min(tmpWorkSheet.Column(i001).Width, 20)
-        Next
+            ' 自动列宽
+            tmpWorkSheet.Cells.AutoFitColumns()
 
-        ' 自动行高
-        For i001 = 1 To tmpWorkSheet.Dimension.End.Row
-            tmpWorkSheet.Row(i001).CustomHeight = True
-        Next
+            ' 限制最大宽度
+            For i001 = 1 To reader.FieldCount
+                tmpWorkSheet.Column(i001).Width = Math.Min(tmpWorkSheet.Column(i001).Width, 20)
+            Next
+
+            ' 自动行高
+            For i001 = 1 To tmpWorkSheet.Dimension.End.Row
+                tmpWorkSheet.Row(i001).CustomHeight = True
+            Next
+
+        Else
+
+            ' 固定宽度
+            For i001 = 1 To reader.FieldCount
+                tmpWorkSheet.Column(i001).Width = 15
+            Next
+
+        End If
 
         Return tmpWorkSheet
     End Function
