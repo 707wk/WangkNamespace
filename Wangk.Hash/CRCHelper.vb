@@ -94,6 +94,24 @@ Public Class CRCHelper
     ''' <summary>
     ''' 获取字节数组的CRC16校验
     ''' </summary>
+    Public Shared Function GetCRC16Modbus(ByVal array As Byte(), ByVal startIndex As Integer, ByVal length As Integer) As Byte()
+
+        Dim hight As UShort = &HFF
+        Dim low As UShort = &HFF
+
+        For i As Integer = startIndex To length - 1
+            Dim Index As Byte = low Xor array(i)
+            low = hight Xor CRC16TABLE_HI(Index)
+            hight = CRC16TABLE_LO(Index)
+        Next
+
+        Return BitConverter.GetBytes(hight << 8 Or low)
+
+    End Function
+
+    ''' <summary>
+    ''' 获取字节数组的CRC16校验
+    ''' </summary>
     Public Shared Function GetCRC16Modbus(ByVal array As Byte(), ByVal length As Integer) As Byte()
 
         Dim hight As UShort = &HFF
@@ -115,6 +133,24 @@ Public Class CRCHelper
     Public Shared Function GetCRC16Modbus(ByVal array As Byte()) As Byte()
 
         Return GetCRC16Modbus(array, array.Length)
+
+    End Function
+
+    ''' <summary>
+    ''' 校验CRC16校验码
+    ''' </summary>
+    Public Shared Function CheckCRC16Modbus(ByVal array As Byte(), ByVal startIndex As Integer, ByVal length As Integer) As Boolean
+
+        ' 校验回复结果
+        Dim CRCCode = Wangk.Hash.CRCHelper.GetCRC16Modbus(array, startIndex, length - 2)
+
+        If array(length - 2) <> CRCCode(0) OrElse
+            array(length - 1) <> CRCCode(1) Then
+            ' 校验失败
+            Return False
+        End If
+
+        Return True
 
     End Function
 
