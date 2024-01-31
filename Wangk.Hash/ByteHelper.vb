@@ -61,6 +61,17 @@ Public Class ByteHelper
     End Function
 
     ''' <summary>
+    ''' 字节数组转十六进制字符串
+    ''' </summary>
+    Public Shared Function Byte2Hex(ByVal bytes As Byte(), ByVal startIndex As Integer, ByVal length As Integer) As String
+
+        Return BitConverter.ToString(bytes,
+                                     startIndex,
+                                     If((length + startIndex) > bytes.Length, bytes.Length - startIndex, length)).Replace("-", "")
+
+    End Function
+
+    ''' <summary>
     ''' 获取字节的位状态
     ''' </summary>
     ''' <param name="byteData">字节数据</param>

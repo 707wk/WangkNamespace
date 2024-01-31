@@ -99,8 +99,8 @@ Public Class CRCHelper
         Dim hight As UShort = &HFF
         Dim low As UShort = &HFF
 
-        For i As Integer = startIndex To length - 1
-            Dim Index As Byte = low Xor array(i)
+        For i As Integer = 0 To length - 1
+            Dim Index As Byte = low Xor array(i + startIndex)
             low = hight Xor CRC16TABLE_HI(Index)
             hight = CRC16TABLE_LO(Index)
         Next
@@ -144,8 +144,8 @@ Public Class CRCHelper
         ' 校验回复结果
         Dim CRCCode = Wangk.Hash.CRCHelper.GetCRC16Modbus(array, startIndex, length - 2)
 
-        If array(length - 2) <> CRCCode(0) OrElse
-            array(length - 1) <> CRCCode(1) Then
+        If array(startIndex + length - 2) <> CRCCode(0) OrElse
+            array(startIndex + length - 1) <> CRCCode(1) Then
             ' 校验失败
             Return False
         End If
