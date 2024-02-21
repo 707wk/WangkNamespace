@@ -56,4 +56,4 @@ Imports System.Windows
 ' <Assembly: AssemblyVersion("1.0.*")>
 
 <Assembly: AssemblyVersion("1.0.0.0")>
-<Assembly: AssemblyFileVersion("1.0.2402.234")>
+<Assembly: AssemblyFileVersion("1.0.2402.235")>
