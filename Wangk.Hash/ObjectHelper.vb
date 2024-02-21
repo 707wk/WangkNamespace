@@ -13,8 +13,9 @@
             Dim key = item.Name
             Dim value As Object = item.GetValue(obj)
 
-            If value IsNot Nothing Then
-                tmpMap.Add(key, value)
+            If value IsNot Nothing AndAlso
+                Not String.IsNullOrWhiteSpace($"{value}") Then
+                tmpMap.Add(key, $"{value}")
             End If
 
         Next
