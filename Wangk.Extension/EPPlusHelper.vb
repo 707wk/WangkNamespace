@@ -141,7 +141,7 @@ Public Module EPPlusHelper
                     End If
 
                 Case GetType(DateTime)
-                    workSheet.Column(i001).Style.Numberformat.Format = "yyyy/MM/dd hh:mm:ss;@"
+                    workSheet.Column(i001).Style.Numberformat.Format = "yyyy-MM-dd hh:mm:ss;@"
 
                 Case Else
                     workSheet.Column(i001).Style.Numberformat.Format = "@"
