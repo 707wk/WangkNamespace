@@ -69,19 +69,15 @@ Public Module EPPlusHelper
                 tmpWorkSheet.Column(i001).Width = Math.Min(tmpWorkSheet.Column(i001).Width, 20)
             Next
 
-            ' 自动行高
-            For i001 = 1 To tmpWorkSheet.Dimension.End.Row
-                tmpWorkSheet.Row(i001).CustomHeight = True
-            Next
-
         Else
 
-            ' 固定宽度
-            For i001 = 1 To reader.FieldCount
-                tmpWorkSheet.Column(i001).Width = 15
-            Next
+            ' 固定列宽
+            tmpWorkSheet.Columns.Width = 15
 
         End If
+
+        ' 自动行高
+        tmpWorkSheet.Rows.CustomHeight = True
 
         Return tmpWorkSheet
     End Function
@@ -299,16 +295,13 @@ Public Module EPPlusHelper
         Next
 
         ' 自动行高
-        For i001 = 1 To tmpWorkSheet.Dimension.End.Row
-            tmpWorkSheet.Row(i001).CustomHeight = True
-        Next
+        tmpWorkSheet.Rows.CustomHeight = True
         ' 首行两倍高度
         tmpWorkSheet.Row(1).Height *= 2
 
         Return tmpWorkSheet
     End Function
 #End Region
-
 
 #Region "获取BOM最大阶层数"
     ''' <summary>
