@@ -77,7 +77,9 @@ Public Module EPPlusHelper
         End If
 
         ' 自动行高
-        tmpWorkSheet.Rows.CustomHeight = True
+        For i001 = 1 To tmpWorkSheet.Dimension.End.Row
+            tmpWorkSheet.Row(i001).CustomHeight = True
+        Next
 
         Return tmpWorkSheet
     End Function
@@ -295,7 +297,10 @@ Public Module EPPlusHelper
         Next
 
         ' 自动行高
-        tmpWorkSheet.Rows.CustomHeight = True
+        For i001 = 1 To tmpWorkSheet.Dimension.End.Row
+            tmpWorkSheet.Row(i001).CustomHeight = True
+        Next
+
         ' 首行两倍高度
         tmpWorkSheet.Row(1).Height *= 2
 
