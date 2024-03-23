@@ -98,4 +98,32 @@ Public Class ByteHelper
 
     End Function
 
+    ''' <summary>
+    ''' 获取字节数组的求和校验
+    ''' </summary>
+    Public Shared Function GetSumCheckCode(ByVal array As Byte()) As Byte()
+        Return GetSumCheckCode(array, 0, array.Length)
+    End Function
+
+    ''' <summary>
+    ''' 获取字节数组的求和校验
+    ''' </summary>
+    Public Shared Function GetSumCheckCode(ByVal array As Byte(), ByVal length As Integer) As Byte()
+        Return GetSumCheckCode(array, 0, length)
+    End Function
+
+    ''' <summary>
+    ''' 获取字节数组的求和校验
+    ''' </summary>
+    Public Shared Function GetSumCheckCode(ByVal array As Byte(), ByVal startIndex As Integer, ByVal length As Integer) As Byte()
+
+        Dim sum As Integer = 0
+        For i001 = startIndex To length - 1
+            sum = (sum + array(i001)) Mod &H1_00_00
+        Next
+
+        Return BitConverter.GetBytes(sum)
+
+    End Function
+
 End Class
