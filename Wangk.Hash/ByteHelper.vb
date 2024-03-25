@@ -118,8 +118,8 @@ Public Class ByteHelper
     Public Shared Function GetSumCheckCode(ByVal array As Byte(), ByVal startIndex As Integer, ByVal length As Integer) As Byte()
 
         Dim sum As Integer = 0
-        For i001 = startIndex To length - 1
-            sum = (sum + array(i001)) Mod &H1_00_00
+        For i001 = 0 To length - 1
+            sum = (sum + array(i001 + startIndex)) Mod &H1_00_00
         Next
 
         Return BitConverter.GetBytes(sum)
