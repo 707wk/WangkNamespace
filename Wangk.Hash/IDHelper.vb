@@ -8,7 +8,7 @@ Public Class IDHelper
     ''' </summary>
     Public Shared ReadOnly Property NewID As String
         Get
-            Return $"{Date.Now:yyyyMMddHHmmssff}{Guid.NewGuid().ToString().Replace("-", "")}"
+            Return $"{Date.Now.ToBinary():x16}{Guid.NewGuid():N}"
         End Get
     End Property
 
