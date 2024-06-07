@@ -1,0 +1,92 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+Wangk.Extension
+</name>
+</assembly>
+<members>
+<member name="T:Wangk.Extension.BOMNodeInfo">
+ <summary>
+ BOM节点信息
+ </summary>
+</member>
+<member name="P:Wangk.Extension.BOMNodeInfo.PH">
+ <summary>
+ 品号
+ </summary>
+</member>
+<member name="P:Wangk.Extension.BOMNodeInfo.PM">
+ <summary>
+ 品名
+ </summary>
+</member>
+<member name="P:Wangk.Extension.BOMNodeInfo.GG">
+ <summary>
+ 规格
+ </summary>
+</member>
+<member name="P:Wangk.Extension.BOMNodeInfo.Unit">
+ <summary>
+ 库存单位
+ </summary>
+</member>
+<member name="P:Wangk.Extension.BOMNodeInfo.Level">
+ <summary>
+ 阶层编号
+ </summary>
+</member>
+<member name="P:Wangk.Extension.BOMNodeInfo.Nodes">
+ <summary>
+ 子节点集合
+ </summary>
+</member>
+<member name="P:Wangk.Extension.BOMNodeInfo.Count">
+ <summary>
+ 数量
+ </summary>
+</member>
+<member name="P:Wangk.Extension.BOMNodeInfo.Location">
+ <summary>
+ 安装位置
+ </summary>
+</member>
+<member name="P:Wangk.Extension.BOMNodeInfo.Remark">
+ <summary>
+ 备注
+ </summary>
+</member>
+<member name="P:Wangk.Extension.BOMNodeInfo.BOMModiCount">
+ <summary>
+ BOM变更次数
+ </summary>
+</member>
+<member name="M:Wangk.Extension.EPPlusHelper.Add(OfficeOpenXml.ExcelWorksheets,System.String,System.Data.IDataReader,System.String[],System.Boolean)">
+ <summary>
+ 将数据导入表格, 标题包含 % 则按百分比显示, 包含 明细 则设置换行
+ </summary>
+ <param name="worksheets">表格集合</param>
+ <param name="Name">表格名称</param>
+ <param name="reader">数据源</param>
+ <param name="descriptions">数据说明</param>
+ <param name="autoSize">自动调整行列尺寸</param>
+</member>
+<member name="M:Wangk.Extension.EPPlusHelper.CreateSheetColumns(OfficeOpenXml.ExcelWorksheet,System.Int32,System.Data.IDataReader)">
+ <summary>
+ 创建表格列
+ </summary>
+</member>
+<member name="M:Wangk.Extension.EPPlusHelper.Add(OfficeOpenXml.ExcelWorksheets,Wangk.Extension.BOMNodeInfo)">
+ <summary>
+ 将BOM导入表格
+ </summary>
+ <param name="worksheets">表格集合</param>
+ <param name="rootNode">BOM根节点</param>
+</member>
+<member name="M:Wangk.Extension.EPPlusHelper.GetBOMMaxLevel(Wangk.Extension.BOMNodeInfo)">
+ <summary>
+ 获取BOM最大阶层数
+ </summary>
+</member>
+</members>
+</doc>

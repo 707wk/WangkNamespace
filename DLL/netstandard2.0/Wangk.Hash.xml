@@ -1,0 +1,184 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+Wangk.Hash
+</name>
+</assembly>
+<members>
+<member name="T:Wangk.Hash.BinHelper">
+ <summary>
+ Bin文件辅助模块
+ </summary>
+</member>
+<member name="M:Wangk.Hash.BinHelper.Bin2HexFile(System.String,System.String,System.UInt32,System.Int32)">
+ <summary>
+ Bin文件转Hex文件
+ </summary>
+ <param name="BinFilePath">Bin文件路径</param>
+ <param name="HexFilePath">保存的Hex文件路径</param>
+ <param name="MCUStartAddress">单片机起始地址</param>
+ <param name="RowByteCount">每行字节数</param>
+</member>
+<member name="T:Wangk.Hash.ByteHelper">
+ <summary>
+ Byte辅助模块
+ </summary>
+</member>
+<member name="M:Wangk.Hash.ByteHelper.Hex2Byte(System.String)">
+ <summary>
+ 十六进制字符串转字节数组
+ </summary>
+</member>
+<member name="M:Wangk.Hash.ByteHelper.Hex2ByteByCRC16Modbus(System.String)">
+ <summary>
+ 十六进制字符串转字节数组, 最后2字节为CRC校验码
+ </summary>
+</member>
+<member name="M:Wangk.Hash.ByteHelper.Byte2Hex(System.Byte[])">
+ <summary>
+ 字节数组转十六进制字符串
+ </summary>
+</member>
+<member name="M:Wangk.Hash.ByteHelper.Byte2Hex(System.Byte[],System.Int32)">
+ <summary>
+ 字节数组转十六进制字符串
+ </summary>
+</member>
+<member name="M:Wangk.Hash.ByteHelper.Byte2Hex(System.Byte[],System.Int32,System.Int32)">
+ <summary>
+ 字节数组转十六进制字符串
+ </summary>
+</member>
+<member name="M:Wangk.Hash.ByteHelper.GetBitValue(System.Byte,System.Int32)">
+ <summary>
+ 获取字节的位状态
+ </summary>
+ <param name="byteData">字节数据</param>
+ <param name="index">位序号</param>
+</member>
+<member name="M:Wangk.Hash.ByteHelper.SetBitValue(System.Byte,System.Int32,System.Boolean)">
+ <summary>
+ 设置字节的位状态
+ </summary>
+ <param name="byteData">字节数据</param>
+ <param name="index">位序号</param>
+ <param name="BitValue">位的值</param>
+</member>
+<member name="M:Wangk.Hash.ByteHelper.GetSumCheckCode(System.Byte[])">
+ <summary>
+ 获取字节数组的求和校验
+ </summary>
+</member>
+<member name="M:Wangk.Hash.ByteHelper.GetSumCheckCode(System.Byte[],System.Int32)">
+ <summary>
+ 获取字节数组的求和校验
+ </summary>
+</member>
+<member name="M:Wangk.Hash.ByteHelper.GetSumCheckCode(System.Byte[],System.Int32,System.Int32)">
+ <summary>
+ 获取字节数组的求和校验
+ </summary>
+</member>
+<member name="T:Wangk.Hash.CodeHelper">
+ <summary>
+ 代码辅助模块
+ </summary>
+</member>
+<member name="M:Wangk.Hash.CodeHelper.GetLocation(System.String,System.String)">
+ <summary>
+ 获取代码位置
+ </summary>
+</member>
+<member name="T:Wangk.Hash.CRCHelper">
+ <summary>
+ CRC校验辅助模块
+ </summary>
+</member>
+<member name="F:Wangk.Hash.CRCHelper.CRC16TABLE_HI">
+ <summary>
+ CRC16查找表高字节
+ </summary>
+</member>
+<member name="F:Wangk.Hash.CRCHelper.CRC16TABLE_LO">
+ <summary>
+ CRC16查找表低字节
+ </summary>
+</member>
+<member name="M:Wangk.Hash.CRCHelper.GetCRC16ModbusOld(System.Byte[],System.Int32)">
+ <summary>
+ 获取字节数组的CRC16校验[旧]
+ </summary>
+</member>
+<member name="M:Wangk.Hash.CRCHelper.GetCRC16ModbusOld(System.Byte[])">
+ <summary>
+ 获取字节数组的CRC16校验[旧]
+ </summary>
+</member>
+<member name="M:Wangk.Hash.CRCHelper.GetCRC16Modbus(System.Byte[],System.Int32,System.Int32)">
+ <summary>
+ 获取字节数组的CRC16校验
+ </summary>
+</member>
+<member name="M:Wangk.Hash.CRCHelper.GetCRC16Modbus(System.Byte[],System.Int32)">
+ <summary>
+ 获取字节数组的CRC16校验
+ </summary>
+</member>
+<member name="M:Wangk.Hash.CRCHelper.GetCRC16Modbus(System.Byte[])">
+ <summary>
+ 获取字节数组的CRC16校验
+ </summary>
+</member>
+<member name="M:Wangk.Hash.CRCHelper.CheckCRC16Modbus(System.Byte[],System.Int32,System.Int32)">
+ <summary>
+ 校验CRC16校验码
+ </summary>
+</member>
+<member name="M:Wangk.Hash.CRCHelper.CheckCRC16Modbus(System.Byte[],System.Int32)">
+ <summary>
+ 校验CRC16校验码
+ </summary>
+</member>
+<member name="M:Wangk.Hash.CRCHelper.CheckCRC16Modbus(System.Byte[])">
+ <summary>
+ 校验CRC16校验码
+ </summary>
+</member>
+<member name="T:Wangk.Hash.IDHelper">
+ <summary>
+ ID辅助模块
+ </summary>
+</member>
+<member name="P:Wangk.Hash.IDHelper.NewID">
+ <summary>
+ 创建192位ID, 64位时间戳 + 128位GUID, Base64格式的32字节, 区分大小写
+ </summary>
+</member>
+<member name="M:Wangk.Hash.MD5Helper.GetStr128MD5(System.String)">
+ <summary>
+ 获取字符串128位MD5值
+ </summary>
+</member>
+<member name="M:Wangk.Hash.MD5Helper.GetFile128MD5(System.String)">
+ <summary>
+ 获取文件128位MD5值
+ </summary>
+</member>
+<member name="T:Wangk.Hash.SHAHelper">
+ <summary>
+ 哈希计算辅助模块
+ </summary>
+</member>
+<member name="M:Wangk.Hash.SHAHelper.GetStrSHA512(System.String)">
+ <summary>
+ 获取字符串512位SHA值
+ </summary>
+</member>
+<member name="M:Wangk.Hash.SHAHelper.GetFileSHA512(System.String)">
+ <summary>
+ 获取文件512位SHA值
+ </summary>
+</member>
+</members>
+</doc>
