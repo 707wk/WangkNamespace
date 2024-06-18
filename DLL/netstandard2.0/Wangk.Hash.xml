@@ -152,7 +152,7 @@ Wangk.Hash
 </member>
 <member name="P:Wangk.Hash.IDHelper.NewID">
  <summary>
- 创建192位ID, 64位时间戳 + 128位GUID, Base64格式的32字节, 区分大小写
+ 创建192位ID, 64位时间戳 + 128位GUID, Base64Url格式的32字节, 区分大小写
  </summary>
 </member>
 <member name="M:Wangk.Hash.MD5Helper.GetStr128MD5(System.String)">
