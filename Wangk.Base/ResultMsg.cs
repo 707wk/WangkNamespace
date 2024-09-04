@@ -11,29 +11,12 @@ namespace Wangk.Base
     {
 
         /// <summary>
-        /// 执行成功
-        /// </summary>
-        public static int SUCCESSCode = 200;
-
-        /// <summary>
-        /// 执行失败
-        /// </summary>
-        public static int FAILCode = 404;
-
-        /// <summary>
-        /// 请求处理状态
-        /// 200: 请求处理成功
-        /// 404: 请求处理失败
-        /// </summary>
-        public int Code { get; set; }
-
-        /// <summary>
         /// 请求处理是否成功
         /// </summary>
         public bool Success { get; set; }
 
         /// <summary>
-        /// 请求处理消息
+        /// 请求处理失败时的消息提示
         /// </summary>
         public string Message { get; set; }
 
@@ -60,7 +43,6 @@ namespace Wangk.Base
         /// <param name="value">返回的结果</param>
         public ResultMsg(T value)
         {
-            Code = SUCCESSCode;
             Success = true;
 
             Data = value;
@@ -73,7 +55,6 @@ namespace Wangk.Base
         /// <param name="count">总记录数</param>
         public ResultMsg(T value, int count)
         {
-            Code = SUCCESSCode;
             Success = true;
 
             Data = value;
@@ -86,7 +67,6 @@ namespace Wangk.Base
         /// </summary>
         public ResultMsg(Exception e)
         {
-            Code = FAILCode;
             Success = false;
 
             Message = e.Message;
@@ -98,6 +78,14 @@ namespace Wangk.Base
         public static implicit operator ResultMsg<T>(T value)
         {
             return new ResultMsg<T>(value);
+        }
+
+        /// <summary>
+        /// 自动包装异常返回结果
+        /// </summary>
+        public static implicit operator ResultMsg<T>(Exception e)
+        {
+            return new ResultMsg<T>(e);
         }
 
     }

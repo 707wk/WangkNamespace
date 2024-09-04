@@ -97,7 +97,6 @@
     <Compile Include="ConsoleDebug.vb" />
     <Compile Include="InputBox\InputTextDialog.vb" />
     <Compile Include="MultiLanguage\MultiLanguageHelper.vb" />
-    <Compile Include="Result\ResultMsg.vb" />
     <Compile Include="WaterTextBox.vb">
       <SubType>Component</SubType>
     </Compile>
