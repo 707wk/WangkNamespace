@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <GenerateDocumentationFile>True</GenerateDocumentationFile>
+        <Copyright>Copyright © GT-Soft Studio</Copyright>
+        <Company>GT-Soft Studio</Company>
+        <OutputPath>..\DLL\</OutputPath>
+        <BaseOutputPath></BaseOutputPath>
+        <FileVersion>1.0.2409.16</FileVersion>
+        <PackageOutputPath></PackageOutputPath>
+    </PropertyGroup>
+
+</Project>
