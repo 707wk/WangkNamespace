@@ -10,29 +10,31 @@ namespace Wangk.Base
     /// </summary>
     public static class StringHelper
     {
-        #region 获取安全的文件名
+        #region 获取安全的文件/文件夹名
         /// <summary>
-        /// 获取安全的文件名
+        /// 获取安全的文件/文件夹名
         /// </summary>
-        /// <param name="fileName">文件名</param>
-        public static string GetSafeFileName(this string fileName)
+        /// <param name="name">文件/文件夹名</param>
+        public static string GetSafeFileOrFolderName(this string name)
         {
+            name= name.Trim();
+
             foreach (char s in Path.GetInvalidFileNameChars())
             {
-                fileName = fileName.Replace(s, '_');
+                name = name.Replace(s, '_');
             }
 
             foreach (char s in Path.GetInvalidPathChars())
             {
-                fileName = fileName.Replace(s, '_');
+                name = name.Replace(s, '_');
             }
 
-            if (fileName.EndsWith("."))
+            while (name.EndsWith("."))
             {
-                fileName = fileName.Replace('.', '_');
+                name = name.Remove(name.Length - 1);
             }
 
-            return fileName;
+            return name;
         }
         #endregion
 
