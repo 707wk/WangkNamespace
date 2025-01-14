@@ -1,4 +1,7 @@
-﻿Public Class Pagination
+﻿Imports System.Data
+Imports System.Runtime.InteropServices
+
+Public Class Pagination
     Private _TotalCount As Integer
     Private _PageIndex As Integer = 1
     Private _PageSize As Integer = 1
@@ -182,5 +185,70 @@
         End If
 
     End Sub
+
+#Region "修复在 VSTO 侧边栏无法选中下拉列表项的问题"
+    <DllImport("user32.dll")>
+    Public Shared Function GetAsyncKeyState(virtualKeyCode As Integer) As Short
+
+    End Function
+    Private Const VK_LBUTTON As Integer = 1
+
+    Private Async Sub ComboBox_DropDownOpened(ByVal sender As Object, ByVal e As EventArgs)
+        Dim combo = CType(sender, System.Windows.Controls.ComboBox)
+
+        If Mouse.Captured Is combo Then
+
+            While combo.IsDropDownOpen AndAlso Mouse.Captured Is combo
+
+                If Mouse.LeftButton = MouseButtonState.Released Then
+                    AddHandler combo.LostMouseCapture, AddressOf Combo_LostMouseCapture
+                    Return
+                End If
+
+                Await Task.Delay(1)
+            End While
+        End If
+    End Sub
+
+    Private Sub Combo_LostMouseCapture(ByVal sender As Object, ByVal e As MouseEventArgs)
+        Dim combo = CType(sender, ComboBox)
+        RemoveHandler combo.LostMouseCapture, AddressOf Combo_LostMouseCapture
+
+        If Mouse.Captured IsNot Nothing Then
+            Return
+        End If
+
+        Dim esckey = (GetAsyncKeyState(System.Windows.Input.KeyInterop.VirtualKeyFromKey(Key.Escape)) And &H8000) = &H8000
+        Dim lbutton = (GetAsyncKeyState(VK_LBUTTON) And &H8000) = &H8000
+
+        If esckey OrElse Not lbutton Then
+            Return
+        End If
+
+        Dim d = TryCast(e.MouseDevice.Target, DependencyObject)
+
+        While d IsNot Nothing
+            Dim comboItem = TryCast(d, ComboBoxItem)
+
+            If comboItem IsNot Nothing Then
+                Dim index = combo.ItemContainerGenerator.IndexFromContainer(comboItem)
+
+                If index >= 0 Then
+
+                    If comboItem.IsEnabled AndAlso comboItem.IsHitTestVisible AndAlso comboItem.IsMouseOver Then
+
+                        If combo.SelectedIndex <> index Then
+                            combo.SelectedIndex = index
+                        End If
+
+                        Return
+                    End If
+                End If
+            End If
+
+            d = VisualTreeHelper.GetParent(d)
+        End While
+    End Sub
+#End Region
 
 End Class

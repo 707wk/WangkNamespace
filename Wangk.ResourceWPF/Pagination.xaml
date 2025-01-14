@@ -74,6 +74,7 @@
                   Margin="4"
                   VerticalContentAlignment="Center"
                   SelectionChanged="PageSizeChanged"
+                  DropDownOpened="ComboBox_DropDownOpened"
                   ItemsSource="{Binding PageSizeList}">
         </ComboBox>
 
