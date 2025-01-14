@@ -166,12 +166,19 @@
     ''' <summary>
     ''' 重新加载数据
     ''' </summary>
-    Public Sub Reload()
+    ''' <param name="onlyCurrentPage">仅重新加载当前页数据</param>
+    Public Sub Reload(Optional onlyCurrentPage As Boolean = False)
 
-        If PageIndex <> 1 Then
-            PageIndex = 1
-        Else
+        If onlyCurrentPage Then
             RaiseEvent OnChange(PageIndex - 1, PageSize)
+        Else
+
+            If PageIndex <> 1 Then
+                PageIndex = 1
+            Else
+                RaiseEvent OnChange(PageIndex - 1, PageSize)
+            End If
+
         End If
 
     End Sub
