@@ -163,4 +163,17 @@
 
     End Sub
 
+    ''' <summary>
+    ''' 重新加载数据
+    ''' </summary>
+    Public Sub Reload()
+
+        If PageIndex <> 1 Then
+            PageIndex = 1
+        Else
+            RaiseEvent OnChange(PageIndex - 1, PageSize)
+        End If
+
+    End Sub
+
 End Class
