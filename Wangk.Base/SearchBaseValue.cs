@@ -5,9 +5,9 @@ using System.Text;
 namespace Wangk.Base
 {
     /// <summary>
-    /// 基础搜索值信息
+    /// 基础搜索信息
     /// </summary>
-    public class BaseSearchValue
+    public class SearchBaseValue
     {
         /// <summary>
         /// 关键字
