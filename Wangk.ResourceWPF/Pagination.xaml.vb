@@ -87,7 +87,7 @@ Public Class Pagination
     ''' <summary>
     ''' 页码/分页改变
     ''' </summary>
-    ''' <param name="pageIndex">页码, 从1开始</param>
+    ''' <param name="pageIndex">页码, 从0开始</param>
     ''' <param name="pageSize">分页大小</param>
     Public Delegate Sub OnChangeHandle(pageIndex As Integer,
                                        pageSize As Integer)
