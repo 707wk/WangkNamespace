@@ -148,17 +148,22 @@ Public Class Pagination
     End Sub
 #End Region
 
-    Public Property PageSizeList As List(Of String)
-
-    Private Sub Pagination_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
-        DataContext = Me
-
-        PageSizeList = New List(Of String) From {
+    Public Property PageSizeList As List(Of String) = New List(Of String) From {
         "10 条/页",
         "20 条/页",
         "50 条/页",
         "100 条/页"
         }
+
+    Private Sub Pagination_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
+        DataContext = Me
+
+        'PageSizeList = New List(Of String) From {
+        '"10 条/页",
+        '"20 条/页",
+        '"50 条/页",
+        '"100 条/页"
+        '}
 
         TotalCount = 0
 

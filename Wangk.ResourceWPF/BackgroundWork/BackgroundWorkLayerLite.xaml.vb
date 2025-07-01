@@ -30,7 +30,7 @@
     ''' <summary>
     ''' 发生的错误
     ''' </summary>
-    Public ReadOnly Property [Error] As Object
+    Public ReadOnly Property [Error] As Exception
         Get
             Return _Error
         End Get
