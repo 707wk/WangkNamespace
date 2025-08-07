@@ -7,7 +7,7 @@
         <Company>GT-Soft Studio</Company>
         <OutputPath>..\DLL\</OutputPath>
         <BaseOutputPath></BaseOutputPath>
-        <FileVersion>1.0.2506.50</FileVersion>
+        <FileVersion>1.0.2508.52</FileVersion>
         <PackageOutputPath></PackageOutputPath>
     </PropertyGroup>
 
