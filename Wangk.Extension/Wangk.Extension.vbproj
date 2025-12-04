@@ -6,7 +6,7 @@
         <Company>GT-Soft Studio</Company>
         <Copyright>Copyright © GT-Soft Studio</Copyright>
         <OutputPath>..\DLL\</OutputPath>
-        <FileVersion>1.0.2508.95</FileVersion>
+        <FileVersion>1.0.2512.98</FileVersion>
         <GenerateDocumentationFile>True</GenerateDocumentationFile>
     </PropertyGroup>
 

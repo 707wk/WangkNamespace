@@ -128,10 +128,12 @@ Public Module EPPlusHelper
                         workSheet.Column(i001).Style.WrapText = True
                     End If
 
-                Case GetType(Int32)
+                Case GetType(Int32), GetType(Int64), GetType(Int16),
+                     GetType(UInt32), GetType(UInt64), GetType(UInt16),
+                     GetType(Byte), GetType(SByte)
                     workSheet.Column(i001).Style.Numberformat.Format = "#,##0"
 
-                Case GetType(Decimal)
+                Case GetType(Decimal), GetType(Double), GetType(Single)
                     If headNameItems(i001 - 1).Contains("%") Then
                         workSheet.Column(i001).Style.Numberformat.Format = "0.0%"
                     Else
