@@ -7,8 +7,7 @@ namespace Wangk.Base
     /// <summary>
     /// 请求结果, 泛型版本
     /// </summary>
-    [Obsolete("请使用 ResultData 类替代 ResultMsg 类")]
-    public class ResultMsg<T>
+    public class ResultData<T>
     {
 
         /// <summary>
@@ -34,7 +33,7 @@ namespace Wangk.Base
         /// <summary>
         /// 无参构造, 用于序列化
         /// </summary>
-        public ResultMsg()
+        public ResultData()
         {
         }
 
@@ -42,7 +41,7 @@ namespace Wangk.Base
         /// 执行成功
         /// </summary>
         /// <param name="value">返回的结果</param>
-        public ResultMsg(T value)
+        public ResultData(T value)
         {
             Success = true;
 
@@ -54,7 +53,7 @@ namespace Wangk.Base
         /// </summary>
         /// <param name="value">返回的结果</param>
         /// <param name="count">总记录数</param>
-        public ResultMsg(T value, int count)
+        public ResultData(T value, int count)
         {
             Success = true;
 
@@ -66,7 +65,7 @@ namespace Wangk.Base
         /// <summary>
         /// 执行失败
         /// </summary>
-        public ResultMsg(Exception e)
+        public ResultData(Exception e)
         {
             Success = false;
 
@@ -76,17 +75,17 @@ namespace Wangk.Base
         /// <summary>
         /// 自动包装返回结果
         /// </summary>
-        public static implicit operator ResultMsg<T>(T value)
+        public static implicit operator ResultData<T>(T value)
         {
-            return new ResultMsg<T>(value);
+            return new ResultData<T>(value);
         }
 
         /// <summary>
         /// 自动包装异常返回结果
         /// </summary>
-        public static implicit operator ResultMsg<T>(Exception e)
+        public static implicit operator ResultData<T>(Exception e)
         {
-            return new ResultMsg<T>(e);
+            return new ResultData<T>(e);
         }
 
     }
@@ -94,8 +93,7 @@ namespace Wangk.Base
     /// <summary>
     /// 请求结果, 非泛型版本
     /// </summary>
-    [Obsolete("请使用 ResultData 类替代 ResultMsg 类")]
-    public class ResultMsg
+    public class ResultData
     {
 
         /// <summary>
@@ -111,7 +109,7 @@ namespace Wangk.Base
         /// <summary>
         /// 无参构造, 用于序列化
         /// </summary>
-        public ResultMsg()
+        public ResultData()
         {
         }
 
@@ -119,7 +117,7 @@ namespace Wangk.Base
         /// 执行成功
         /// </summary>
         /// <param name="value">语法要求必须返回一个明确的值, 只能传入 true</param>
-        public ResultMsg(bool value)
+        public ResultData(bool value)
         {
             if (!value)
             {
@@ -132,7 +130,7 @@ namespace Wangk.Base
         /// <summary>
         /// 执行失败
         /// </summary>
-        public ResultMsg(Exception e)
+        public ResultData(Exception e)
         {
             Success = false;
 
@@ -142,17 +140,17 @@ namespace Wangk.Base
         /// <summary>
         /// 自动包装返回结果, 语法要求必须返回一个明确的值, 只能传入 true
         /// </summary>
-        public static implicit operator ResultMsg(bool value)
+        public static implicit operator ResultData(bool value)
         {
-            return new ResultMsg(value);
+            return new ResultData(value);
         }
 
         /// <summary>
         /// 自动包装异常返回结果
         /// </summary>
-        public static implicit operator ResultMsg(Exception e)
+        public static implicit operator ResultData(Exception e)
         {
-            return new ResultMsg(e);
+            return new ResultData(e);
         }
 
     }
