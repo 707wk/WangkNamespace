@@ -8,7 +8,7 @@ Public Class IDHelper
     ''' </summary>
     Public Shared ReadOnly Property NewID As String
         Get
-            Return Convert.ToBase64String(BitConverter.GetBytes(DateTime.Now.ToBinary()).Reverse().Concat(Guid.NewGuid().ToByteArray()).ToArray()).Replace("+", "-").Replace("/", "_")
+            Return Convert.ToBase64String(BitConverter.GetBytes(DateTime.UtcNow.ToBinary()).Reverse().Concat(Guid.NewGuid().ToByteArray()).ToArray()).Replace("+", "-").Replace("/", "_")
         End Get
     End Property
 
