@@ -10,15 +10,15 @@ using static Wangk.Base.SearchFilter;
 namespace Wangk.Base
 {
     /// <summary>
-    /// SQL 帮助类
+    /// Oracle SQL 帮助类
     /// </summary>
-    public class SQLHelper
+    public class OracleSQLHelper
     {
         #region Oracle SQL 安全性验证
         /// <summary>
         /// Oracle SQL 安全性验证
         /// </summary>
-        public static void ValidateOracleSqlSafety(string sql)
+        public static void ValidateSQLSafety(string sql)
         {
             if (sql.Length > 10000)
             {
@@ -48,7 +48,7 @@ namespace Wangk.Base
         /// 创建 Oracle where 子句和参数, 不含 where
         /// </summary>
         /// <param name="filter">搜索过滤器</param>
-        public static (string WhereClause, Dictionary<string, object> Parameters) BuildOracleWhereClauseAndParameters(SearchFilter filter)
+        public static (string WhereClause, Dictionary<string, object> Parameters) BuildWhereClauseAndParameters(SearchFilter filter)
         {
             if (filter?.Filters is null || !filter.Filters.Any())
             {
@@ -155,7 +155,7 @@ namespace Wangk.Base
                 case SearchFilter.SearchFilterCompareOperator.StartsWith:
                     return $"{fieldName} LIKE :{paramName} || '%' ESCAPE '\\'";
                 case SearchFilter.SearchFilterCompareOperator.EndsWith:
-                    return $"{fieldName} LIKE '%' || :{paramName}";
+                    return $"{fieldName} LIKE '%' || :{paramName} ESCAPE '\\'";
                 case SearchFilter.SearchFilterCompareOperator.GreaterThan:
                     return $"{fieldName} > :{paramName}";
                 case SearchFilter.SearchFilterCompareOperator.LessThan:
