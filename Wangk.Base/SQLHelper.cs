@@ -94,8 +94,38 @@ namespace Wangk.Base
             return (paramList.Any() ? " and " + string.Join(" and ", paramList) : string.Empty, parameters);
         }
 
+        private static readonly HashSet<string> OracleKeywords = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+{
+    "ACCESS", "ADD", "ALL", "ALTER", "AND", "ANY", "AS", "ASC", "AUDIT", "BETWEEN", "BY", "CHAR", "CHECK", "CLUSTER", "COLUMN", "COMMENT", "COMPRESS", "CONNECT", "CREATE", "CURRENT", "DATE", "DECIMAL", "DEFAULT", "DELETE", "DESC", "DISTINCT", "DROP", "ELSE", "EXCLUSIVE", "EXISTS", "FILE", "FLOAT", "FOR", "FROM", "GRANT", "GROUP", "HAVING", "IDENTIFIED", "IMMEDIATE", "IN", "INCREMENT", "INDEX", "INITIAL", "INSERT", "INTEGER", "INTERSECT", "INTO", "IS", "LEVEL", "LIKE", "LOCK", "LONG", "MAXEXTENTS", "MINUS", "MLSLABEL", "MODE", "MODIFY", "NOAUDIT", "NOCOMPRESS", "NOT", "NOWAIT", "NULL", "NUMBER", "OF", "OFFLINE", "ON", "ONLINE", "OPTION", "OR", "ORDER", "PCTFREE", "PRIOR", "PRIVILEGES", "PUBLIC", "RAW", "RENAME", "RESOURCE", "REVOKE", "ROW", "ROWID", "ROWNUM", "ROWS", "SELECT", "SESSION", "SET", "SHARE", "SIZE", "SMALLINT", "START", "SUCCESSFUL", "SYNONYM", "SYSDATE", "TABLE", "THEN", "TO", "TRIGGER", "UID", "UNION", "UNIQUE", "UPDATE", "USER", "VALIDATE", "VALUES", "VARCHAR", "VARCHAR2", "VIEW", "WHENEVER", "WHERE", "WITH"
+};
+
+        /// <summary>
+        /// 转义 Oracle 关键字
+        /// </summary>
+        private static string EscapeOracleIdentifier(string fieldName)
+        {
+            if (fieldName.Contains('"'))
+                return fieldName;
+
+            var parts = fieldName.Split('.');
+            for (int i = 0; i < parts.Length; i++)
+            {
+                string part = parts[i];
+                if (string.IsNullOrWhiteSpace(part))
+                    continue;
+
+                if (OracleKeywords.Contains(part))
+                {
+                    parts[i] = "\"" + part + "\"";
+                }
+            }
+            return string.Join(".", parts);
+        }
+
         private static string BuildFieldFilterItemExpression(string fieldName, string dataType, SearchFilter.FieldFilterItem item, ref int paramIndex, Dictionary<string, object> parameters)
         {
+            fieldName = EscapeOracleIdentifier(fieldName);
+
             if (item.CompareOperator == SearchFilterCompareOperator.IsNull)
             {
                 return $"{fieldName} is null";
@@ -105,6 +135,13 @@ namespace Wangk.Base
                 return $"{fieldName} is not null";
             }
 
+            if (dataType.Equals("string", StringComparison.OrdinalIgnoreCase) && string.IsNullOrWhiteSpace(item.Value))
+            {
+                if (item.CompareOperator == SearchFilterCompareOperator.Equals)
+                    return $"{fieldName} is null";
+                if (item.CompareOperator == SearchFilterCompareOperator.NotEquals)
+                    return $"{fieldName} is not null";
+            }
 
             string paramName = $"wp{paramIndex++}";
             parameters.Add(paramName, ConvertValue(dataType, item.Value));
@@ -138,7 +175,7 @@ namespace Wangk.Base
 
         private static object ConvertValue(string dataType, string value)
         {
-            if (string.IsNullOrEmpty(value))
+            if (string.IsNullOrWhiteSpace(value))
                 return value;
 
             switch (dataType?.ToLower())

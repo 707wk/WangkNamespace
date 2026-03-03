@@ -70,7 +70,7 @@ namespace Wangk.Base
         /// <returns>转义后的字符串</returns>
         public static string EscapeMarkdown(this string input, bool escapeHtml = true)
         {
-            if (string.IsNullOrEmpty(input))
+            if (string.IsNullOrWhiteSpace(input))
             {
                 return input;
             }
