@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.Design;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
@@ -198,5 +200,169 @@ namespace Wangk.Base
 
         #endregion
 
+        /// <summary>
+        /// 生成 SELECT 语句
+        /// </summary>
+        public static string BuildSelectSql(object entity, string schema = null)
+        {
+            if (entity == null)
+                throw new ArgumentNullException(nameof(entity));
+
+            Type type = entity.GetType();
+            string tableName = type.Name;
+
+            // 获取所有公共实例属性（排除索引器）
+            var allProperties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .Where(p => p.GetIndexParameters().Length == 0)
+                .ToList();
+
+            // 找出带有 [Key] 特性的属性（主键）
+            var keyProperties = allProperties
+                .Where(p => p.IsDefined(typeof(KeyAttribute), inherit: true))
+                .ToList();
+
+            if (keyProperties.Count == 0)
+                throw new InvalidOperationException("实体类型没有使用 [Key] 特性标记的主键属性，无法生成 SELECT 语句。");
+
+            string fullTableName = string.IsNullOrWhiteSpace(schema) ? tableName : $"{schema}.{tableName}";
+
+            var sql = new StringBuilder();
+            sql.Append($"SELECT * FROM {fullTableName} WHERE ");
+
+            var whereClauses = keyProperties.Select(p => $"{p.Name} = :{p.Name}");
+            sql.Append(string.Join(" AND ", whereClauses));
+
+            return sql.ToString();
+        }
+
+        /// <summary>
+        /// 生成 INSERT 语句
+        /// </summary>
+        public static string BuildInsertSql(object entity, string schema = null)
+        {
+            if (entity == null)
+                throw new ArgumentNullException(nameof(entity));
+
+            Type type = entity.GetType();
+            string tableName = type.Name; // 类名作为表名
+
+            // 获取所有可写的公共实例属性（排除索引器）
+            var properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .Where(p => p.CanWrite && p.GetIndexParameters().Length == 0)
+                .ToList();
+
+            if (properties.Count == 0)
+                throw new InvalidOperationException("类型没有可写的属性，无法生成INSERT语句。");
+
+            // 构建字段列表和参数列表（不加引号）
+            var columnNames = properties.Select(p => p.Name).ToList();
+            var paramNames = properties.Select(p => $":{p.Name}").ToList();
+
+            var sql = new StringBuilder();
+
+            if (!string.IsNullOrWhiteSpace(schema))
+            {
+                sql.Append($"INSERT INTO {schema}.{tableName} (");
+            }
+            else
+            {
+                sql.Append($"INSERT INTO {tableName} (");
+            }
+
+            sql.Append(string.Join(",", columnNames));
+            sql.Append(") VALUES (");
+            sql.Append(string.Join(",", paramNames));
+            sql.Append(")");
+
+            return sql.ToString();
+        }
+
+        /// <summary>
+        /// 生成 UPDATE 语句
+        /// </summary>
+        public static string BuildUpdateSql(object entity, string schema = null)
+        {
+            if (entity == null)
+                throw new ArgumentNullException(nameof(entity));
+
+            Type type = entity.GetType();
+            string tableName = type.Name; // 类名作为表名
+
+            // 获取所有公共实例属性（包括只读，用于查找主键）
+            var allProperties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .Where(p => p.GetIndexParameters().Length == 0) // 排除索引器
+                .ToList();
+
+            // 找出带有 [Key] 特性的属性（主键）
+            var keyProperties = allProperties
+                .Where(p => p.IsDefined(typeof(KeyAttribute), inherit: true))
+                .ToList();
+
+            if (keyProperties.Count == 0)
+                throw new InvalidOperationException("实体类型没有使用 [Key] 特性标记的主键属性，无法生成 UPDATE 语句。");
+
+            // 获取可写的属性（用于 SET 子句）
+            var writableProperties = allProperties
+                .Where(p => p.CanWrite)
+                .ToList();
+
+            // 用于 SET 的属性 = 可写属性 - 主键属性（通常不更新主键）
+            var setProperties = writableProperties
+                .Except(keyProperties)
+                .ToList();
+
+            if (setProperties.Count == 0)
+                throw new InvalidOperationException("没有可更新的非主键属性，无法生成 UPDATE 语句。");
+
+            var sql = new StringBuilder();
+
+            // 构建表名（带可选的 schema）
+            string fullTableName = string.IsNullOrWhiteSpace(schema) ? tableName : $"{schema}.{tableName}";
+            sql.Append($"UPDATE {fullTableName} SET ");
+
+            // 构建 SET 子句：column = :column
+            var setClauses = setProperties.Select(p => $"{p.Name} = :{p.Name}");
+            sql.Append(string.Join(", ", setClauses));
+
+            // 构建 WHERE 子句：主键条件用 AND 连接
+            var whereClauses = keyProperties.Select(p => $"{p.Name} = :{p.Name}");
+            sql.Append(" WHERE ");
+            sql.Append(string.Join(" AND ", whereClauses));
+
+            return sql.ToString();
+        }
+
+        /// <summary>
+        /// 生成 DELETE 语句
+        /// </summary>
+        public static string BuildDeleteSql(object entity, string schema = null)
+        {
+            if (entity == null)
+                throw new ArgumentNullException(nameof(entity));
+
+            Type type = entity.GetType();
+            string tableName = type.Name;
+
+            var allProperties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .Where(p => p.GetIndexParameters().Length == 0)
+                .ToList();
+
+            var keyProperties = allProperties
+                .Where(p => p.IsDefined(typeof(KeyAttribute), inherit: true))
+                .ToList();
+
+            if (keyProperties.Count == 0)
+                throw new InvalidOperationException("实体类型没有使用 [Key] 特性标记的主键属性，无法生成 DELETE 语句。");
+
+            string fullTableName = string.IsNullOrWhiteSpace(schema) ? tableName : $"{schema}.{tableName}";
+
+            var sql = new StringBuilder();
+            sql.Append($"DELETE FROM {fullTableName} WHERE ");
+
+            var whereClauses = keyProperties.Select(p => $"{p.Name} = :{p.Name}");
+            sql.Append(string.Join(" AND ", whereClauses));
+
+            return sql.ToString();
+        }
     }
 }

@@ -7,11 +7,12 @@
         <Company>GT-Soft Studio</Company>
         <OutputPath>..\DLL\</OutputPath>
         <BaseOutputPath></BaseOutputPath>
-        <FileVersion>1.0.2603.74</FileVersion>
+        <FileVersion>1.0.2603.79</FileVersion>
         <PackageOutputPath></PackageOutputPath>
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
       <PackageReference Include="System.Text.Json" Version="10.0.3" />
     </ItemGroup>
 
