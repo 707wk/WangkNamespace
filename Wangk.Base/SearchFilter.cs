@@ -126,6 +126,22 @@ namespace Wangk.Base
         }
 
         /// <summary>
+        /// 字段历史值过滤条件
+        /// </summary>
+        public class FieldHistoryFilter
+        {
+            /// <summary>
+            /// 字段名称
+            /// </summary>
+            public string FieldName { get; set; }
+
+            /// <summary>
+            /// 关键字
+            /// </summary>
+            public string Keyword { get; set; }
+        }
+
+        /// <summary>
         /// 字段过滤条件集合
         /// </summary>
         public List<FieldFilter> Filters { get; set; } = new List<FieldFilter>();
