@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
-using System.Text.Json;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace Wangk.Base
 {
@@ -20,50 +17,62 @@ namespace Wangk.Base
             /// <summary>
             /// 等于
             /// </summary>
+            [Description("等于")]
             Equals,
             /// <summary>
             /// 包含
             /// </summary>
+            [Description("包含")]
             Contains,
             /// <summary>
             /// 开头匹配
             /// </summary>
+            [Description("开头匹配")]
             StartsWith,
             /// <summary>
             /// 结尾匹配
             /// </summary>
+            [Description("结尾匹配")]
             EndsWith,
             /// <summary>
             /// 大于
             /// </summary>
+            [Description("大于")]
             GreaterThan,
             /// <summary>
             /// 小于
             /// </summary>
+            [Description("小于")]
             LessThan,
             /// <summary>
             /// 大于等于
             /// </summary>
+            [Description("大于等于")]
             GreaterThanOrEquals,
             /// <summary>
             /// 小于等于
             /// </summary>
+            [Description("小于等于")]
             LessThanOrEquals,
             /// <summary>
             /// 不等于
             /// </summary>
+            [Description("不等于")]
             NotEquals,
             /// <summary>
             /// 为空
             /// </summary>
+            [Description("为空")]
             IsNull,
             /// <summary>
             /// 不为空
             /// </summary>
+            [Description("不为空")]
             IsNotNull,
             /// <summary>
             /// 不包含
             /// </summary>
+            [Description("不包含")]
             NotContains
         }
         #endregion
@@ -77,10 +86,12 @@ namespace Wangk.Base
             /// <summary>
             /// 或
             /// </summary>
+            [Description("或")]
             Or,
             /// <summary>
             /// 且
             /// </summary>
+            [Description("且")]
             And
         }
         #endregion
