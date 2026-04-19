@@ -50,7 +50,7 @@ namespace Wangk.Base
         {
             var parameters = new Dictionary<string, object>();
 
-            if (!string.IsNullOrWhiteSpace(filter.Id))
+            if (!string.IsNullOrWhiteSpace(filter?.Id))
             {
                 parameters.Add("@Id", filter.Id);
             }
