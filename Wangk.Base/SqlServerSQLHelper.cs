@@ -48,12 +48,17 @@ namespace Wangk.Base
         /// <param name="filter">搜索过滤器</param>
         public static (string WhereClause, Dictionary<string, object> Parameters) BuildWhereClauseAndParameters(SearchFilter filter)
         {
-            if (filter?.Filters is null || !filter.Filters.Any())
+            var parameters = new Dictionary<string, object>();
+
+            if (!string.IsNullOrWhiteSpace(filter.Id))
             {
-                return (string.Empty, new Dictionary<string, object>());
+                parameters.Add("@Id", filter.Id);
             }
 
-            var parameters = new Dictionary<string, object>();
+            if (filter?.Filters is null || !filter.Filters.Any())
+            {
+                return (string.Empty, parameters);
+            }
 
             var paramList = new List<string>();
             var paramIndex = 0;

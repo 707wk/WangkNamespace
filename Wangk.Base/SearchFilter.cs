@@ -153,9 +153,14 @@ namespace Wangk.Base
         }
 
         /// <summary>
-        /// 字段过滤条件集合
+        /// 字段过滤条件集合, 用于复杂查询
         /// </summary>
         public List<FieldFilter> Filters { get; set; } = new List<FieldFilter>();
+
+        /// <summary>
+        /// 记录主键, 用于简单查询
+        /// </summary>
+        public string Id { get; set; }
 
     }
 }
