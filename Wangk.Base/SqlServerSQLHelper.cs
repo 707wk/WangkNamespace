@@ -98,6 +98,27 @@ namespace Wangk.Base
         }
 
         /// <summary>
+        /// 将字段名转换为首字母大写（支持点号分隔的多段）
+        /// </summary>
+        private static string ToPascalCase(string fieldName)
+        {
+            if (string.IsNullOrWhiteSpace(fieldName))
+                return fieldName;
+
+            var parts = fieldName.Split('.');
+            for (int i = 0; i < parts.Length; i++)
+            {
+                if (!string.IsNullOrEmpty(parts[i]))
+                {
+                    char first = char.ToUpper(parts[i][0]);
+                    string rest = parts[i].Length > 1 ? parts[i].Substring(1) : "";
+                    parts[i] = first + rest;
+                }
+            }
+            return string.Join(".", parts);
+        }
+
+        /// <summary>
         /// 转义 SqlServer 关键字
         /// </summary>
         private static string EscapeSqlServerIdentifier(string fieldName)
@@ -119,6 +140,7 @@ namespace Wangk.Base
 
         private static string BuildFieldFilterItemExpression(string fieldName, string dataType, SearchFilter.FieldFilterItem item, ref int paramIndex, Dictionary<string, object> parameters)
         {
+            fieldName = ToPascalCase(fieldName);
             fieldName = EscapeSqlServerIdentifier(fieldName);
 
             if (item.CompareOperator == SearchFilterCompareOperator.IsNull)
