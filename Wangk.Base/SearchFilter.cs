@@ -158,7 +158,7 @@ namespace Wangk.Base
         public List<FieldFilter> Filters { get; set; } = new List<FieldFilter>();
 
         /// <summary>
-        /// 记录主键, 用于简单查询
+        /// 通用透传参数。绑定为数据库对应的参数（如 Oracle :Id、SQL Server @Id），仅加入参数集，不生成 WHERE 条件
         /// </summary>
         public string Id { get; set; }
 
