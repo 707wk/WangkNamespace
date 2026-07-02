@@ -59,6 +59,15 @@ namespace Wangk.Base
                 parameters.Add(":Id", filter.Id);
             }
 
+            if (filter?.Parameters != null)
+            {
+                foreach (var kvp in filter.Parameters)
+                {
+                    var paramName = kvp.Key.StartsWith(":") ? kvp.Key : ":" + kvp.Key;
+                    parameters[paramName] = kvp.Value;
+                }
+            }
+
             if (filter?.Filters is null || !filter.Filters.Any())
             {
                 return (string.Empty, parameters);
@@ -151,7 +160,7 @@ namespace Wangk.Base
             }
 
             string paramName = $"wp{paramIndex++}";
-            parameters.Add(paramName, ConvertValue(dataType, item.Value));
+            parameters.Add(paramName, SearchFilter.ConvertValue(dataType, item.Value));
 
             switch (item.CompareOperator)
             {
@@ -177,29 +186,6 @@ namespace Wangk.Base
                     return $"{fieldName} NOT LIKE '%' || :{paramName} || '%' ESCAPE '\\'";
                 default:
                     throw new NotSupportedException($"不支持的比较运算符: {item.CompareOperator}");
-            }
-        }
-
-        private static object ConvertValue(string dataType, string value)
-        {
-            if (string.IsNullOrWhiteSpace(value))
-                return value;
-
-            switch (dataType?.ToLower())
-            {
-                case "int":
-                case "integer":
-                    return int.Parse(value);
-                case "decimal":
-                    return decimal.Parse(value);
-                case "bool":
-                case "boolean":
-                    return value.Trim().ToLower() == "true" ? 1 : 0;
-                case "datetime":
-                    return DateTime.Parse(value);
-                case "string":
-                default:
-                    return value;
             }
         }
 

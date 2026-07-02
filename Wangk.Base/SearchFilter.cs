@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
+using System.Text.Json.Serialization;
 
 namespace Wangk.Base
 {
@@ -158,9 +161,60 @@ namespace Wangk.Base
         public List<FieldFilter> Filters { get; set; } = new List<FieldFilter>();
 
         /// <summary>
-        /// 通用透传参数。绑定为数据库对应的参数（如 Oracle :Id、SQL Server @Id），仅加入参数集，不生成 WHERE 条件
+        /// [已废弃] 通用透传参数（单值）。仅旧接口使用，2026-07月及之后的新接口请通过 Filters 传参。
+        /// 绑定为数据库对应的参数（如 Oracle :Id），仅加入参数集，不生成 WHERE 条件
         /// </summary>
+        [Obsolete("请改用 Parameters 字典传递多个透传参数", false)]
         public string Id { get; set; }
+
+        /// <summary>
+        /// 通用透传参数集合。所有键值对仅加入参数集，不生成 WHERE 条件。
+        /// 由后端从 Filters 提权填充，前端不应直接传递。
+        /// Key = 参数名, 框架自动添加 Oracle : 或 SQL Server @ 前缀。
+        /// </summary>
+        [JsonIgnore]
+        public Dictionary<string, object> Parameters { get; set; } = new Dictionary<string, object>();
+
+        /// <summary>
+        /// 将指定字段从 Filters 提权到 Parameters。提权后该字段仅绑参，不生成 WHERE 条件。
+        /// </summary>
+        /// <param name="fieldName">字段名</param>
+        /// <returns>提取的参数原始值（字符串），未找到则返回 null</returns>
+        public string PromoteFilterToParameter(string fieldName)
+        {
+            var filter = Filters.FirstOrDefault(f => f.FieldName == fieldName);
+            var value = filter?.Items?.FirstOrDefault()?.Value;
+            if (filter != null)
+                Filters.Remove(filter);
+            if (value != null)
+                Parameters[fieldName] = ConvertValue(filter.DataType, value);
+            return value;
+        }
+
+        /// <summary>
+        /// 按数据类型转换字符串值
+        /// </summary>
+        internal static object ConvertValue(string dataType, string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+                return value;
+
+            switch (dataType?.ToLower())
+            {
+                case "int":
+                case "integer":
+                    return int.Parse(value);
+                case "decimal":
+                    return decimal.Parse(value);
+                case "bool":
+                case "boolean":
+                    return value.Trim().ToLower() == "true" ? 1 : 0;
+                case "datetime":
+                    return DateTime.Parse(value);
+                default:
+                    return value;
+            }
+        }
 
     }
 }
