@@ -18,7 +18,7 @@ namespace Wangk.Base
         /// </summary>
         public static void ValidateSQLSafety(string sql)
         {
-            if (sql.Length > 10000)
+            if (sql.Length > 64 * 1024)
             {
                 throw new System.Exception("SQL语句过长");
             }
