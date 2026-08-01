@@ -45,4 +45,23 @@ Public Class IDHelper
         Return sb.ToString()
     End Function
 
+    ''' <summary>
+    ''' 单据编号: UTC毫秒时间戳(17位) + 工号后N位(默认4, 不足补0)
+    ''' 唯一性: 毫秒级时间戳主导, 工号后几位作附加区分
+    ''' </summary>
+    Public Shared Function NewDocNumber(jobNumber As String,
+                                        Optional suffixLength As Integer = 4) As String
+
+        Dim timestamp As String = DateTime.UtcNow.ToString("yyyyMMddHHmmssfff")
+
+        Dim suffix As String = If(jobNumber, String.Empty)
+        If suffix.Length < suffixLength Then
+            suffix = suffix.PadLeft(suffixLength, "0"c)      ' 不足补 0
+        Else
+            suffix = suffix.Substring(suffix.Length - suffixLength)  ' 超长取后 N 位
+        End If
+
+        Return timestamp & suffix
+    End Function
+
 End Class
