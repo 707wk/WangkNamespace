@@ -202,18 +202,10 @@ namespace Wangk.Base
             Type type = entity.GetType();
             string tableName = type.Name;
 
-            // 获取所有公共实例属性（排除索引器）
-            var allProperties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                .Where(p => p.GetIndexParameters().Length == 0)
-                .ToList();
-
-            // 找出带有 [Key] 特性的属性（主键）
-            var keyProperties = allProperties
-                .Where(p => p.IsDefined(typeof(KeyAttribute), inherit: true))
-                .ToList();
+            var keyProperties = ResolveKeyProperties(type);
 
             if (keyProperties.Count == 0)
-                throw new InvalidOperationException("实体类型没有使用 [Key] 特性标记的主键属性，无法生成 SELECT 语句。");
+                throw new InvalidOperationException("实体类型缺少主键属性([Key] 或 Id)，无法生成 SELECT 语句。");
 
             string fullTableName = string.IsNullOrWhiteSpace(schema) ? tableName : $"{schema}.{tableName}";
 
@@ -279,22 +271,14 @@ namespace Wangk.Base
             Type type = entity.GetType();
             string tableName = type.Name; // 类名作为表名
 
-            // 获取所有公共实例属性（包括只读，用于查找主键）
-            var allProperties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                .Where(p => p.GetIndexParameters().Length == 0) // 排除索引器
-                .ToList();
-
-            // 找出带有 [Key] 特性的属性（主键）
-            var keyProperties = allProperties
-                .Where(p => p.IsDefined(typeof(KeyAttribute), inherit: true))
-                .ToList();
+            var keyProperties = ResolveKeyProperties(type);
 
             if (keyProperties.Count == 0)
-                throw new InvalidOperationException("实体类型没有使用 [Key] 特性标记的主键属性，无法生成 UPDATE 语句。");
+                throw new InvalidOperationException("实体类型缺少主键属性([Key] 或 Id)，无法生成 UPDATE 语句。");
 
             // 获取可写的属性（用于 SET 子句）
-            var writableProperties = allProperties
-                .Where(p => p.CanWrite)
+            var writableProperties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .Where(p => p.GetIndexParameters().Length == 0 && p.CanWrite)
                 .ToList();
 
             // 用于 SET 的属性 = 可写属性 - 主键属性（通常不更新主键）
@@ -334,16 +318,10 @@ namespace Wangk.Base
             Type type = entity.GetType();
             string tableName = type.Name;
 
-            var allProperties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                .Where(p => p.GetIndexParameters().Length == 0)
-                .ToList();
-
-            var keyProperties = allProperties
-                .Where(p => p.IsDefined(typeof(KeyAttribute), inherit: true))
-                .ToList();
+            var keyProperties = ResolveKeyProperties(type);
 
             if (keyProperties.Count == 0)
-                throw new InvalidOperationException("实体类型没有使用 [Key] 特性标记的主键属性，无法生成 DELETE 语句。");
+                throw new InvalidOperationException("实体类型缺少主键属性([Key] 或 Id)，无法生成 DELETE 语句。");
 
             string fullTableName = string.IsNullOrWhiteSpace(schema) ? tableName : $"{schema}.{tableName}";
 
@@ -354,6 +332,46 @@ namespace Wangk.Base
             sql.Append(string.Join(" AND ", whereClauses));
 
             return sql.ToString();
+        }
+
+        /// <summary>
+        /// 解析实体主键属性: [Key] 特性优先(支持复合主键); 无 [Key] 时回退 Id 属性。
+        /// 两者同时存在时, 若 [Key] 标记包含 Id 属性(如 [Key] public string Id)视为一致声明, 否则判为冲突报异常。
+        /// </summary>
+        private static List<PropertyInfo> ResolveKeyProperties(Type type)
+        {
+            var allProperties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .Where(p => p.GetIndexParameters().Length == 0)
+                .ToList();
+
+            var keyProps = allProperties
+                .Where(p => p.IsDefined(typeof(KeyAttribute), inherit: true))
+                .ToList();
+
+            var idProp = allProperties.FirstOrDefault(p => p.Name.Equals("Id", StringComparison.OrdinalIgnoreCase));
+
+            bool hasKey = keyProps.Count > 0;
+            bool hasId = idProp != null;
+
+            if (hasKey && hasId)
+            {
+                // [Key] 与 Id 同时存在: 仅当 Id 已在 [Key] 标记内(如 [Key] public string Id)视为一致, 否则歧义
+                bool idCoveredByKey = keyProps.Any(p => p.Name.Equals(idProp.Name, StringComparison.OrdinalIgnoreCase));
+                if (!idCoveredByKey)
+                {
+                    throw new InvalidOperationException(
+                        $"实体 {type.FullName} 主键声明冲突: [Key] 标记的属性未包含 Id 属性, 两者只能二选一");
+                }
+                return keyProps;
+            }
+
+            if (!hasKey && !hasId)
+            {
+                throw new InvalidOperationException(
+                    $"实体 {type.FullName} 缺少主键声明: 请使用 [Key] 特性或 Id 属性");
+            }
+
+            return hasKey ? keyProps : new List<PropertyInfo> { idProp };
         }
     }
 }
