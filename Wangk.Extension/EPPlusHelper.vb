@@ -1,239 +1,152 @@
 ﻿Imports System.Data
+Imports System.Drawing
 Imports System.Runtime.CompilerServices
 Imports OfficeOpenXml
+Imports OfficeOpenXml.Style
 
+''' <summary>EPPlus 导出扩展</summary>
 Public Module EPPlusHelper
 
-#Region "辅助方法"
-
-    ''' <summary>获取 IDataReader 的字段名列表</summary>
-    Private Function GetReaderFieldNames(reader As IDataReader) As List(Of String)
-        Dim names As New List(Of String)
-        For i = 0 To reader.FieldCount - 1
-            names.Add(reader.GetName(i))
-        Next
-        Return names
-    End Function
-
-    ''' <summary>设置标题单元格样式（黄绿背景、居中、换行）</summary>
-    Private Sub SetHeaderCellStyle(cell As ExcelRangeBase)   ' 改为 ExcelRangeBase
-        cell.Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid
-        cell.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.YellowGreen)
-        cell.Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center
-        cell.Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center
-        cell.Style.WrapText = True
-    End Sub
-
-    ''' <summary>写入空值单元格（显示 "/" 并居中）</summary>
-    Private Sub WriteEmptyCell(cell As ExcelRangeBase)       ' 改为 ExcelRangeBase
-        cell.Value = "/"
-        cell.Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center
-    End Sub
-
-    ''' <summary>自动调整列宽并限制最大宽度</summary>
-    Private Sub ApplyAutoFitAndMaxWidth(sheet As ExcelWorksheet, fieldCount As Integer, maxWidth As Double)
-        sheet.Cells.AutoFitColumns()
-        For i = 1 To fieldCount
-            sheet.Column(i).Width = Math.Min(sheet.Column(i).Width, maxWidth)
-        Next
-    End Sub
-
-    ''' <summary>为所有有数据的行设置自定义行高</summary>
-    Private Sub SetCustomHeightForAllRows(sheet As ExcelWorksheet)
-        If sheet.Dimension Is Nothing Then Return
-        For i = 1 To sheet.Dimension.End.Row
-            sheet.Row(i).CustomHeight = True
-        Next
-    End Sub
-
-#End Region
+    Private Const MaxColumnWidth As Double = 20
+    Private Const DefaultColumnWidth As Double = 15
+    Private Const EmptyCellText As String = "/"
+    Private Const DefaultFontName As String = "Calibri"
 
 #Region "将数据导入表格"
-
+    ''' <summary>将数据读取器导入新建工作表</summary>
+    ''' <param name="worksheets">工作表集合</param>
+    ''' <param name="Name">新建工作表名称</param>
+    ''' <param name="reader">数据源</param>
+    ''' <param name="descriptions">数据说明行</param>
+    ''' <param name="autoSize">是否自动调整列宽</param>
+    ''' <param name="fontName">单元格显示字体名称, 为空时按默认字体显示</param>
+    ''' <remarks>
+    ''' 列标题包含 % 的浮点列按百分比格式显示, 包含 明细 的文本列自动换行.
+    ''' 空值单元格写入 / 并居中.
+    ''' 数据说明行按数据列合并, 用于横跨表格显示长文本.
+    ''' 列宽换算基准固定设为 Calibri, 与 EPPlus 7 的默认主题保持一致.
+    ''' 仅当 fontName 与基准字体不同时才额外设置单元格显示字体, 避免重复定义.
+    ''' 该基准作用于整个工作簿, 同一工作簿内的其它工作表列宽基准也会随之变化.
+    ''' reader 读取完成后不关闭, 由调用方负责.
+    ''' </remarks>
     <Extension()>
     Public Function Add(worksheets As ExcelWorksheets,
                         Name As String,
                         reader As IDataReader,
                         Optional descriptions As String() = Nothing,
-                        Optional autoSize As Boolean = False) As ExcelWorksheet
+                        Optional autoSize As Boolean = False,
+                        Optional fontName As String = DefaultFontName) As ExcelWorksheet
+
+        If reader Is Nothing Then Throw New ArgumentNullException(NameOf(reader))
 
         Dim sheet = worksheets.Add(Name)
-        Dim rowIndex = 1
 
-        ' 写入数据说明
-        If descriptions IsNot Nothing AndAlso descriptions.Length > 0 Then
-            rowIndex = descriptions.Length + 1
-            For i = 1 To descriptions.Length
-                sheet.Row(i).Merged = True
+        ' 列宽换算基准固定为 Calibri, 与 EPPlus 7 的默认主题保持一致
+        sheet.Workbook.Styles.Fonts(0).Name = DefaultFontName
+
+        ' 单元格显示字体, 与基准相同时无需重复定义
+        If Not String.IsNullOrWhiteSpace(fontName) AndAlso
+           Not String.Equals(fontName, DefaultFontName, StringComparison.OrdinalIgnoreCase) Then
+            sheet.Cells.Style.Font.Name = fontName
+        End If
+        Dim rowIndex = 1
+        Dim descriptionCount = If(descriptions?.Length, 0)
+
+        ' 数据说明行按数据列合并, 便于长文本横跨表格
+        If descriptionCount > 0 Then
+            rowIndex = descriptionCount + 1
+            For i = 1 To descriptionCount
                 sheet.Cells(i, 1).Value = descriptions(i - 1)
-                sheet.Row(i).Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid
-                sheet.Row(i).Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.FromArgb(255, 192, 0))
+                If reader.FieldCount > 0 Then
+                    Dim descriptionRange = sheet.Cells(i, 1, i, reader.FieldCount)
+                    descriptionRange.Merge = True
+                    descriptionRange.Style.Fill.PatternType = ExcelFillStyle.Solid
+                    descriptionRange.Style.Fill.BackgroundColor.SetColor(Color.FromArgb(255, 192, 0))
+                End If
             Next
         End If
 
-        ' 创建列标题并设置格式
         CreateSheetColumns(sheet, rowIndex, reader)
 
         ' 填充数据
         While reader.Read()
             rowIndex += 1
             For i = 1 To reader.FieldCount
-                Dim value = reader(i - 1)
                 Dim cell = sheet.Cells(rowIndex, i)
-                If value IsNot DBNull.Value AndAlso Not String.IsNullOrWhiteSpace(value.ToString()) Then
-                    cell.Value = value
+                Dim value = reader(i - 1)
+                If value Is Nothing OrElse value Is DBNull.Value OrElse
+                   String.IsNullOrWhiteSpace(value.ToString()) Then
+                    cell.Value = EmptyCellText
+                    cell.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center
                 Else
-                    WriteEmptyCell(cell)
+                    cell.Value = value
                 End If
             Next
         End While
 
-        ' 调整列宽
-        If autoSize Then
-            ApplyAutoFitAndMaxWidth(sheet, reader.FieldCount, 20)
-        Else
-            sheet.Columns.Width = 15
+        ' 自动列宽按整表计算一次, 再限制最大宽度
+        If autoSize AndAlso sheet.Dimension IsNot Nothing Then
+            sheet.Cells.AutoFitColumns()
         End If
 
-        SetCustomHeightForAllRows(sheet)
+        For i = 1 To reader.FieldCount
+            sheet.Column(i).Width = If(autoSize, Math.Min(sheet.Column(i).Width, MaxColumnWidth), DefaultColumnWidth)
+        Next
+
         Return sheet
     End Function
-
 #End Region
 
 #Region "创建表格列"
-
-    Private Sub CreateSheetColumns(workSheet As ExcelWorksheet,
+    ''' <summary>写入列标题并设置表头样式, 筛选与列格式</summary>
+    ''' <param name="worksheet">目标工作表</param>
+    ''' <param name="startRowIndex">列标题所在行号</param>
+    ''' <param name="reader">数据源</param>
+    ''' <remarks>
+    ''' 表头设置黄绿背景, 居中, 自动换行, 并启用自动筛选.
+    ''' 冻结列标题以下的窗格.
+    ''' </remarks>
+    Private Sub CreateSheetColumns(worksheet As ExcelWorksheet,
                                    startRowIndex As Integer,
                                    reader As IDataReader)
 
-        Dim fieldNames = GetReaderFieldNames(reader)
-        For i = 1 To fieldNames.Count
-            workSheet.Cells(startRowIndex, i).Value = fieldNames(i - 1)
-        Next
+        If reader.FieldCount = 0 Then Return
 
-        ' 标题行样式与筛选
-        Dim headerRange = workSheet.Cells(startRowIndex, 1, startRowIndex, fieldNames.Count)
-        headerRange.AutoFilter = True
-        For Each cell In headerRange
-            SetHeaderCellStyle(cell)
-        Next
-
-        ' 冻结首行
-        workSheet.View.FreezePanes(startRowIndex + 1, 1)
-
-        ' 设置列格式
         For i = 1 To reader.FieldCount
-            Dim fieldType = reader.GetFieldType(i - 1)
-            Dim fieldName = fieldNames(i - 1)
-            SetColumnFormat(workSheet, i, fieldType, fieldName)
+            Dim fieldName = reader.GetName(i - 1)
+            worksheet.Cells(startRowIndex, i).Value = fieldName
+            SetColumnFormat(worksheet, i, reader.GetFieldType(i - 1), fieldName)
         Next
+
+        ' 表头样式只作用于数据列范围, 避免影响右侧空白列
+        Dim headerRange = worksheet.Cells(startRowIndex, 1, startRowIndex, reader.FieldCount)
+        headerRange.AutoFilter = True
+        headerRange.Style.Fill.PatternType = ExcelFillStyle.Solid
+        headerRange.Style.Fill.BackgroundColor.SetColor(Color.YellowGreen)
+        headerRange.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center
+        headerRange.Style.VerticalAlignment = ExcelVerticalAlignment.Center
+        headerRange.Style.WrapText = True
+
+        worksheet.View.FreezePanes(startRowIndex + 1, 1)
 
     End Sub
 
-#End Region
-
-#Region "追加数据"
-
-    <Extension()>
-    Public Function Append(worksheet As ExcelWorksheet,
-                           reader As IDataReader) As ExcelWorksheet
-
-        ' 验证是否为 Add 创建的工作表（存在自动筛选）
-        If worksheet.AutoFilter Is Nothing Then
-            Throw New InvalidOperationException("当前工作表没有设置自动筛选，不是由 Add 方法创建。")
-        End If
-
-        Dim headerRow = worksheet.AutoFilter.Address.Start.Row
-
-        ' 获取现有列名 -> 列索引（不区分大小写）
-        Dim existingCols As New Dictionary(Of String, Integer)(StringComparer.OrdinalIgnoreCase)
-        Dim colIdx = 1
-        While True
-            Dim colName = worksheet.Cells(headerRow, colIdx).Text
-            If String.IsNullOrWhiteSpace(colName) Then Exit While
-            existingCols(colName) = colIdx
-            colIdx += 1
-        End While
-        Dim maxExistingCol = colIdx - 1
-
-        ' 获取 reader 字段
-        Dim readerFields = GetReaderFieldNames(reader)
-
-        ' 匹配列：现有列使用原索引，新列追加到右侧
-        Dim finalMap As New Dictionary(Of String, Integer)
-        Dim newFields As New List(Of String)
-        For Each field In readerFields
-            If existingCols.ContainsKey(field) Then
-                finalMap(field) = existingCols(field)
-            Else
-                finalMap(field) = maxExistingCol + newFields.Count + 1
-                newFields.Add(field)
-            End If
-        Next
-
-        ' 添加新列（标题、样式、格式、列宽）
-        If newFields.Count > 0 Then
-            Dim startNewCol = maxExistingCol + 1
-            For idx = 0 To newFields.Count - 1
-                Dim fieldName = newFields(idx)
-                Dim newColIdx = startNewCol + idx
-
-                ' 写入标题并应用样式
-                Dim headerCell = worksheet.Cells(headerRow, newColIdx)
-                headerCell.Value = fieldName
-                SetHeaderCellStyle(headerCell)
-
-                ' 设置列格式
-                Dim fieldType = reader.GetFieldType(Array.IndexOf(readerFields.ToArray(), fieldName))
-                SetColumnFormat(worksheet, newColIdx, fieldType, fieldName)
-
-                ' 列宽参考第一列
-                Dim widthRef = If(maxExistingCol >= 1, worksheet.Column(1).Width, 15.0)
-                worksheet.Column(newColIdx).Width = widthRef
-            Next
-
-            ' 更新自动筛选范围
-            Dim newMaxCol = maxExistingCol + newFields.Count
-            worksheet.Cells(headerRow, 1, headerRow, newMaxCol).AutoFilter = True
-        End If
-
-        ' 确定起始数据行
-        Dim startDataRow = headerRow + 1
-        Dim lastDataRow = headerRow
-        If worksheet.Dimension IsNot Nothing Then
-            lastDataRow = worksheet.Dimension.End.Row
-        End If
-        Dim currentRow = If(lastDataRow >= startDataRow, lastDataRow + 1, startDataRow)
-
-        ' 追加数据
-        While reader.Read()
-            For Each field In readerFields
-                Dim col = finalMap(field)
-                Dim rawValue = reader(field)
-                Dim cell = worksheet.Cells(currentRow, col)
-
-                If rawValue Is DBNull.Value OrElse rawValue Is Nothing OrElse String.IsNullOrWhiteSpace(rawValue.ToString()) Then
-                    WriteEmptyCell(cell)
-                Else
-                    cell.Value = rawValue
-                End If
-            Next
-            worksheet.Row(currentRow).CustomHeight = True
-            currentRow += 1
-        End While
-
-        Return worksheet
-    End Function
-
-#End Region
-
-#Region "列格式设置"
-
+    ''' <summary>按字段类型设置列格式</summary>
+    ''' <param name="worksheet">目标工作表</param>
+    ''' <param name="colIndex">列号</param>
+    ''' <param name="fieldType">字段类型</param>
+    ''' <param name="fieldName">字段名称</param>
+    ''' <remarks>
+    ''' 文本列使用文本格式, 字段名包含 明细 时自动换行.
+    ''' 整数列使用千分位格式.
+    ''' 浮点数列在字段名包含 % 时使用百分比格式, 否则保留两位小数.
+    ''' 日期列使用 yyyy-MM-dd hh:mm:ss 格式.
+    ''' </remarks>
     Private Sub SetColumnFormat(worksheet As ExcelWorksheet,
                                 colIndex As Integer,
                                 fieldType As Type,
                                 fieldName As String)
+
         Select Case fieldType
             Case GetType(String)
                 worksheet.Column(colIndex).Style.Numberformat.Format = "@"
@@ -258,9 +171,10 @@ Public Module EPPlusHelper
 
             Case Else
                 worksheet.Column(colIndex).Style.Numberformat.Format = "@"
-        End Select
-    End Sub
 
+        End Select
+
+    End Sub
 #End Region
 
 End Module

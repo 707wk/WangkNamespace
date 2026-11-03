@@ -6,14 +6,14 @@
         <Company>GT-Soft Studio</Company>
         <Copyright>Copyright © GT-Soft Studio</Copyright>
         <OutputPath>..\DLL\</OutputPath>
-        <FileVersion>1.0.2607.106</FileVersion>
+        <FileVersion>1.0.2611.114</FileVersion>
         <GenerateDocumentationFile>True</GenerateDocumentationFile>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'" />
 
     <ItemGroup>
-        <PackageReference Include="EPPlus" Version="7.7.3" />
+        <PackageReference Include="EPPlus" Version="8.7.2" />
     </ItemGroup>
 
 </Project>
