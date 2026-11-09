@@ -22,6 +22,7 @@ Public Module EPPlusHelper
     ''' <param name="fontName">单元格显示字体名称, 为空时按默认字体显示</param>
     ''' <remarks>
     ''' 列标题包含 % 的浮点列按百分比格式显示, 包含 明细 的文本列自动换行.
+    ''' 文本列内容包含换行符时, 该列自动换行.
     ''' 空值单元格写入 / 并居中.
     ''' 数据说明行按数据列合并, 用于横跨表格显示长文本.
     ''' 列宽换算基准固定设为 Calibri, 与 EPPlus 7 的默认主题保持一致.
@@ -69,6 +70,7 @@ Public Module EPPlusHelper
         CreateSheetColumns(sheet, rowIndex, reader)
 
         ' 填充数据
+        Dim hasLineBreak As Boolean() = If(reader.FieldCount > 0, New Boolean(reader.FieldCount - 1) {}, New Boolean() {})
         While reader.Read()
             rowIndex += 1
             For i = 1 To reader.FieldCount
@@ -80,9 +82,22 @@ Public Module EPPlusHelper
                     cell.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center
                 Else
                     cell.Value = value
+                    Dim textValue = TryCast(value, String)
+                    If textValue IsNot Nothing AndAlso
+                       (textValue.IndexOf(Convert.ToChar(10)) >= 0 OrElse
+                        textValue.IndexOf(Convert.ToChar(13)) >= 0) Then
+                        hasLineBreak(i - 1) = True
+                    End If
                 End If
             Next
         End While
+
+        ' 含换行符的文本列自动换行, 避免内容被固定列宽截断
+        For i = 1 To hasLineBreak.Length
+            If hasLineBreak(i - 1) Then
+                sheet.Column(i).Style.WrapText = True
+            End If
+        Next
 
         ' 自动列宽按整表计算一次, 再限制最大宽度
         If autoSize AndAlso sheet.Dimension IsNot Nothing Then
