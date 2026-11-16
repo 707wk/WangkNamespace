@@ -22,7 +22,7 @@ Public Module EPPlusHelper
     ''' <param name="fontName">单元格显示字体名称, 为空时按默认字体显示</param>
     ''' <remarks>
     ''' 列标题包含 % 的浮点列按百分比格式显示, 包含 明细 的文本列自动换行.
-    ''' 文本列内容包含换行符时, 该列自动换行.
+    ''' 文本列内容中换行符之后仍有非空白内容时, 该列自动换行.
     ''' 空值单元格写入 / 并居中.
     ''' 数据说明行按数据列合并, 用于横跨表格显示长文本.
     ''' 列宽换算基准固定设为 Calibri, 与 EPPlus 7 的默认主题保持一致.
@@ -82,17 +82,14 @@ Public Module EPPlusHelper
                     cell.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center
                 Else
                     cell.Value = value
-                    Dim textValue = TryCast(value, String)
-                    If textValue IsNot Nothing AndAlso
-                       (textValue.IndexOf(Convert.ToChar(10)) >= 0 OrElse
-                        textValue.IndexOf(Convert.ToChar(13)) >= 0) Then
+                    If HasContentAfterLineBreak(TryCast(value, String)) Then
                         hasLineBreak(i - 1) = True
                     End If
                 End If
             Next
         End While
 
-        ' 含换行符的文本列自动换行, 避免内容被固定列宽截断
+        ' 换行符后仍有内容的文本列自动换行, 避免内容被固定列宽截断
         For i = 1 To hasLineBreak.Length
             If hasLineBreak(i - 1) Then
                 sheet.Column(i).Style.WrapText = True
@@ -109,6 +106,33 @@ Public Module EPPlusHelper
         Next
 
         Return sheet
+    End Function
+
+    ''' <summary>判断换行符之后是否仍有内容</summary>
+    ''' <param name="text">待判断的文本</param>
+    ''' <returns>换行符之后存在非空白字符时为 True</returns>
+    ''' <remarks>
+    ''' CR 与 LF 均视为换行符, 兼容 CRLF 组合.
+    ''' 仅尾部换行或换行后全为空白时返回 False, 避免数据末尾多余的换行符触发整列自动换行.
+    ''' 只要存在一个换行符且其后有非空白字符, 即视为需要换行的多行文本.
+    ''' </remarks>
+    Private Function HasContentAfterLineBreak(text As String) As Boolean
+
+        If String.IsNullOrEmpty(text) Then Return False
+
+        Dim foundLineBreak = False
+        Dim carriageReturn = Convert.ToChar(13)
+        Dim lineFeed = Convert.ToChar(10)
+        For Each ch In text
+            If ch = carriageReturn OrElse ch = lineFeed Then
+                foundLineBreak = True
+            ElseIf foundLineBreak AndAlso Not Char.IsWhiteSpace(ch) Then
+                Return True
+            End If
+        Next
+
+        Return False
+
     End Function
 #End Region
 
